@@ -1,6 +1,6 @@
 package classes;
 
-public class Factory {
+public class FactoryDeposit {
 	
 	int factID;
 	int carCapacity;
@@ -11,7 +11,7 @@ public class Factory {
 	 * @param factID
 	 * @param carCapacity
 	 */
-	public Factory(int factID, int carCapacity) {
+	public FactoryDeposit(int factID, int carCapacity) {
 		super();
 		this.factID = factID;
 		this.carCapacity = carCapacity;

@@ -19,6 +19,7 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void createFactory() {
 		// TODO Auto-generated method stub
+//		Factory fact = new Factory();
 		
 	}
 
