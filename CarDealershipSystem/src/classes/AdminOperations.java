@@ -12,7 +12,7 @@ public interface AdminOperations {
 	/**
 	 * @param Factory
 	 */
-	public abstract void createFactory(Factory fact);
+	public abstract void createFactory();
 	/**
 	 * @param factID
 	 */
@@ -20,7 +20,7 @@ public interface AdminOperations {
 	/**
 	 * @param Concessionaire
 	 */
-	public abstract void createConcessionaire(Concessionaire con);
+	public abstract void createConcessionaire();
 	/**
 	 * @param conID
 	 */

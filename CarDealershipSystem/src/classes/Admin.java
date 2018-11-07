@@ -1,7 +1,5 @@
 package classes;
 
-import classes.Building.BuildingType;
-
 /**
  * --------------------------------------------------
  * @author Javier Soler, Borja González
@@ -18,27 +16,31 @@ public class Admin extends Agent implements AdminOperations {
 		super(agentID, firstName, lastName);
 	}
 
-	/* (non-Javadoc)
-	 * @see classes.AdminOperations#createBuilding(classes.Building.BuildingType)
-	 */
 	@Override
-	public void createBuilding(BuildingType buildingType) {
+	public void createFactory() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
-	/* (non-Javadoc)
-	 * @see classes.AdminOperations#deleteBuilding(int)
-	 */
 	@Override
-	public void deleteBuilding(int buildingID) {
+	public void deleteFactory(int factID) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
-	/* (non-Javadoc)
-	 * @see classes.AdminOperations#getSalesHistory(int)
-	 */
+	@Override
+	public void createConcessionaire() {
+		// TODO Auto-generated method stub
+//		Concessionaire con = new Concessionaire();
+		
+	}
+
+	@Override
+	public void deleteConcessionaire(int conID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public BookingDetails getSalesHistory(int sellerID) {
 		// TODO Auto-generated method stub

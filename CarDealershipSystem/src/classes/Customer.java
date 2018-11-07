@@ -32,27 +32,18 @@ public class Customer extends Agent implements CustomerOperation {
 		this.phone = phone;
 	}
 
-	/* (non-Javadoc)
-	 * @see classes.CustomerOperation#listCars(int)
-	 */
 	@Override
 	public ArrayList<CarDetails> listCars(int conId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see classes.CustomerOperation#buyCar(int)
-	 */
 	@Override
 	public void buyCar(int carId) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/* (non-Javadoc)
-	 * @see classes.CustomerOperation#sellCar(int)
-	 */
 	@Override
 	public void sellCar(int CarId) {
 		// TODO Auto-generated method stub
