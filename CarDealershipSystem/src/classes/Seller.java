@@ -24,6 +24,66 @@ public class Seller implements SellerOperations{
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see classes.SellerOperations#buyCar(int)
+	 */
+	@Override
+	public void buyCar(int carId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see classes.SellerOperations#sellCar(int, boolean)
+	 */
+	@Override
+	public void sellCar(int carId, boolean statusCar) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see classes.SellerOperations#rejectOperation(int)
+	 */
+	@Override
+	public void rejectOperation(int bookingId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see classes.SellerOperations#addCarExposed(int)
+	 */
+	@Override
+	public void addCarExposed(int carId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see classes.SellerOperations#deleteCarExposed(int)
+	 */
+	@Override
+	public void deleteCarExposed(int carId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public ArrayList<BookingDetails> checkPendigOperations(int conId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * @return the sellerId
 	 */
@@ -72,7 +132,6 @@ public class Seller implements SellerOperations{
 	public void setConId(int conId) {
 		this.conId = conId;
 	}
-	
-	
+		
 
 }
