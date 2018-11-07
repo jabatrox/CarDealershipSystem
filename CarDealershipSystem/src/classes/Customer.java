@@ -1,23 +1,21 @@
-/**
- * 
- */
 package classes;
 
 import java.util.ArrayList;
 
 /**
- * @author Borja
- *
+ * --------------------------------------------------
+ * @author Javier Soler, Borja Gonz�lez
+ * Date: 11/09/2018
+ * Lab: Final Project
+ * File name: Customer.java
  */
 public class Customer extends Agent implements CustomerOperation {
 	
-	int custId;
 	String address;
 	String email;
 	String phone;
 	
 	/**
-	 * @param custId
 	 * @param firstName
 	 * @param lastName
 	 * @param address
@@ -26,7 +24,6 @@ public class Customer extends Agent implements CustomerOperation {
 	 */
 	public Customer(int custId, String firstName, String lastName, String address, String email, String phone) {
 		super(agentID, firstName, lastName);
-		this.custId = agentID;
 		this.address = address;
 		this.email = email;
 		this.phone = phone;
@@ -48,20 +45,6 @@ public class Customer extends Agent implements CustomerOperation {
 	public void sellCar(int CarId) {
 		// TODO Auto-generated method stub
 
-	}
-
-	/**
-	 * @return the custId
-	 */
-	public int getCustId() {
-		return custId;
-	}
-
-	/**
-	 * @param custId the custId to set
-	 */
-	public void setCustId(int custId) {
-		this.custId = custId;
 	}
 
 	/**

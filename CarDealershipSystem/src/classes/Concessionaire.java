@@ -17,7 +17,8 @@ public class Concessionaire {
 	//ArrayList<CarDetails> carsExposed;
 	
 	/**
-	 * 
+	 * @param conID
+	 * @param carCapacity
 	 */
 	public Concessionaire(int conID, int carCapacity) {
 		this.conID = conID;

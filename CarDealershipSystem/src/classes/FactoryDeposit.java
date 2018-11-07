@@ -1,12 +1,17 @@
 package classes;
 
+/**
+ * --------------------------------------------------
+ * @author Javier Soler, Borja Gonz�lez
+ * Date: 11/09/2018
+ * Lab: Final Project
+ * File name: FactoryDeposit.java
+ */
 public class FactoryDeposit {
 	
 	int factID;
 	int carCapacity;
-	
-	
-	
+		
 	/**
 	 * @param factID
 	 * @param carCapacity

@@ -1,5 +1,12 @@
 package classes;
 
+/**
+ * --------------------------------------------------
+ * @author Javier Soler, Borja Gonz�lez
+ * Date: 11/09/2018
+ * Lab: Final Project
+ * File name: CarDetails.java
+ */
 public class CarDetails {
 	
 	int carID;
@@ -17,6 +24,21 @@ public class CarDetails {
 	boolean exposed;
 	boolean condition;
 	
+	/**
+	 * @param carID
+	 * @param conID
+	 * @param factID
+	 * @param carModel
+	 * @param carType
+	 * @param carColor
+	 * @param engineType
+	 * @param horsePower
+	 * @param price
+	 * @param kilometers
+	 * @param sold
+	 * @param exposed
+	 * @param condition
+	 */
 	public CarDetails(int carID, int conID, int factID, String carModel, String carType/*CarType carType*/, 
 			String carColor, String engineType, int horsePower, double price, 
 			int kilometers, boolean sold, boolean exposed, boolean condition) {

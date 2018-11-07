@@ -2,21 +2,25 @@ package classes;
 
 import java.util.ArrayList;
 
+/**
+ * --------------------------------------------------
+ * @author Javier Soler, Borja Gonz�lez
+ * Date: 11/09/2018
+ * Lab: Final Project
+ * File name: Seller.java
+ */
 public class Seller extends Agent implements SellerOperations{
 	
-	int sellerID;
 	int conID;
 	
 	
 	/**
-	 * @param sellerID
 	 * @param firstName
 	 * @param lastName
 	 * @param conID
 	 */
 	public Seller(int sellerID, String firstName, String lastName, int conID) {
 		super(agentID, firstName, lastName);
-		this.sellerID = agentID;
 		this.conID = conID;
 	}
 	
@@ -62,18 +66,6 @@ public class Seller extends Agent implements SellerOperations{
 		return null;
 	}
 
-	/**
-	 * @return the sellerID
-	 */
-	public int getSellerID() {
-		return sellerID;
-	}
-	/**
-	 * @param sellerID the sellerId to set
-	 */
-	public void setSellerID(int sellerID) {
-		this.sellerID = sellerID;
-	}
 	/**
 	 * @return the conID
 	 */
