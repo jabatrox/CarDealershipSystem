@@ -2,99 +2,222 @@ package classes;
 
 public class CarDetails {
 	
-	static int carId;
-	static int conId; 
-	static int factId;
-	static String carModel;
-	static String carType;
-	static String carColor;
-	static String engineType;
-	static int horsePower;
-	static double price;
-	static int kilometers;
-	static boolean sold;
-	static boolean exposed;
-	static boolean condition;
+	int carId;
+	int conId; 
+	int factId;
+	String carModel;
+	String carType;
+	String carColor;
+	String engineType;
+	int horsePower;
+	double price;
+	int kilometers;
+	boolean sold;
+	boolean exposed;
+	boolean condition;
 	
-	
-	public static int getCarId() {
+	public CarDetails(int carId, int conId, int factId, String carModel, String carType, 
+			String carColor, String engineType, int horsePower, double price, 
+			int kilometers, boolean sold, boolean exposed, boolean condition) {
+		
+		this.carId = carId;
+		this.conId = conId; 
+		this.factId = factId;
+		this.carModel = carModel;
+		this.carType = carType;
+		this.carColor = carColor;
+		this.engineType = engineType;
+		this.horsePower = horsePower;
+		this.price = price;
+		this.kilometers = kilometers;
+		this.sold = sold;
+		this.exposed = exposed;
+		this.condition = condition;
+	}
+
+	/**
+	 * @return the carId
+	 */
+	public int getCarId() {
 		return carId;
 	}
-	public static void setCarId(int carId) {
-		CarDetails.carId = carId;
+
+	/**
+	 * @param carId the carId to set
+	 */
+	public void setCarId(int carId) {
+		this.carId = carId;
 	}
-	public static int getConId() {
+
+	/**
+	 * @return the conId
+	 */
+	public int getConId() {
 		return conId;
 	}
-	public static void setConId(int conId) {
-		CarDetails.conId = conId;
+
+	/**
+	 * @param conId the conId to set
+	 */
+	public void setConId(int conId) {
+		this.conId = conId;
 	}
-	public static int getFactId() {
+
+	/**
+	 * @return the factId
+	 */
+	public int getFactId() {
 		return factId;
 	}
-	public static void setFactId(int factId) {
-		CarDetails.factId = factId;
+
+	/**
+	 * @param factId the factId to set
+	 */
+	public void setFactId(int factId) {
+		this.factId = factId;
 	}
-	public static String getCarModel() {
+
+	/**
+	 * @return the carModel
+	 */
+	public String getCarModel() {
 		return carModel;
 	}
-	public static void setCarModel(String carModel) {
-		CarDetails.carModel = carModel;
+
+	/**
+	 * @param carModel the carModel to set
+	 */
+	public void setCarModel(String carModel) {
+		this.carModel = carModel;
 	}
-	public static String getCarType() {
+
+	/**
+	 * @return the carType
+	 */
+	public String getCarType() {
 		return carType;
 	}
-	public static void setCarType(String carType) {
-		CarDetails.carType = carType;
+
+	/**
+	 * @param carType the carType to set
+	 */
+	public void setCarType(String carType) {
+		this.carType = carType;
 	}
-	public static String getCarColor() {
+
+	/**
+	 * @return the carColor
+	 */
+	public String getCarColor() {
 		return carColor;
 	}
-	public static void setCarColor(String carColor) {
-		CarDetails.carColor = carColor;
+
+	/**
+	 * @param carColor the carColor to set
+	 */
+	public void setCarColor(String carColor) {
+		this.carColor = carColor;
 	}
-	public static String getEngineType() {
+
+	/**
+	 * @return the engineType
+	 */
+	public String getEngineType() {
 		return engineType;
 	}
-	public static void setEngineType(String engineType) {
-		CarDetails.engineType = engineType;
+
+	/**
+	 * @param engineType the engineType to set
+	 */
+	public void setEngineType(String engineType) {
+		this.engineType = engineType;
 	}
-	public static int getHorsePower() {
+
+	/**
+	 * @return the horsePower
+	 */
+	public int getHorsePower() {
 		return horsePower;
 	}
-	public static void setHorsePower(int horsePower) {
-		CarDetails.horsePower = horsePower;
+
+	/**
+	 * @param horsePower the horsePower to set
+	 */
+	public void setHorsePower(int horsePower) {
+		this.horsePower = horsePower;
 	}
-	public static double getPrice() {
+
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
 		return price;
 	}
-	public static void setPrice(double price) {
-		CarDetails.price = price;
+
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
 	}
-	public static int getKilometers() {
+
+	/**
+	 * @return the kilometers
+	 */
+	public int getKilometers() {
 		return kilometers;
 	}
-	public static void setKilometers(int kilometers) {
-		CarDetails.kilometers = kilometers;
+
+	/**
+	 * @param kilometers the kilometers to set
+	 */
+	public void setKilometers(int kilometers) {
+		this.kilometers = kilometers;
 	}
-	public static boolean isSold() {
+
+	/**
+	 * @return the sold
+	 */
+	public boolean isSold() {
 		return sold;
 	}
-	public static void setSold(boolean sold) {
-		CarDetails.sold = sold;
+
+	/**
+	 * @param sold the sold to set
+	 */
+	public void setSold(boolean sold) {
+		this.sold = sold;
 	}
-	public static boolean isExposed() {
+
+	/**
+	 * @return the exposed
+	 */
+	public boolean isExposed() {
 		return exposed;
 	}
-	public static void setExposed(boolean exposed) {
-		CarDetails.exposed = exposed;
+
+	/**
+	 * @param exposed the exposed to set
+	 */
+	public void setExposed(boolean exposed) {
+		this.exposed = exposed;
 	}
-	public static boolean isCondition() {
+
+	/**
+	 * @return the condition
+	 */
+	public boolean isCondition() {
 		return condition;
 	}
-	public static void setCondition(boolean condition) {
-		CarDetails.condition = condition;
+
+	/**
+	 * @param condition the condition to set
+	 */
+	public void setCondition(boolean condition) {
+		this.condition = condition;
 	}
+	
+	
 	
 	
 }
