@@ -2,26 +2,22 @@ package classes;
 
 import java.util.ArrayList;
 
-public class Seller implements SellerOperations{
+public class Seller extends Agent implements SellerOperations{
 	
-	int sellerId;
-	String firstName;
-	String lastName;
-	int conId;
+	int sellerID;
+	int conID;
 	
 	
 	/**
 	 * @param sellerId
 	 * @param firstName
 	 * @param lastName
-	 * @param conId
+	 * @param conID
 	 */
-	public Seller(int sellerId, String firstName, String lastName, int conId) {
-		super();
-		this.sellerId = sellerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.conId = conId;
+	public Seller(int sellerID, String firstName, String lastName, int conId) {
+		super(agentID, firstName, lastName);
+		this.sellerID = agentID;
+		this.conID = conID;
 	}
 	
 	
@@ -30,7 +26,7 @@ public class Seller implements SellerOperations{
 	 * @see classes.SellerOperations#buyCar(int)
 	 */
 	@Override
-	public void buyCar(int carId) {
+	public void buyCar(int carID) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -41,7 +37,7 @@ public class Seller implements SellerOperations{
 	 * @see classes.SellerOperations#sellCar(int, boolean)
 	 */
 	@Override
-	public void sellCar(int carId, boolean statusCar) {
+	public void sellCar(int carID, boolean statusCar) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -52,7 +48,7 @@ public class Seller implements SellerOperations{
 	 * @see classes.SellerOperations#rejectOperation(int)
 	 */
 	@Override
-	public void rejectOperation(int bookingId) {
+	public void rejectOperation(int bookingID) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -63,7 +59,7 @@ public class Seller implements SellerOperations{
 	 * @see classes.SellerOperations#addCarExposed(int)
 	 */
 	@Override
-	public void addCarExposed(int carId) {
+	public void addCarExposed(int carID) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -74,65 +70,41 @@ public class Seller implements SellerOperations{
 	 * @see classes.SellerOperations#deleteCarExposed(int)
 	 */
 	@Override
-	public void deleteCarExposed(int carId) {
+	public void deleteCarExposed(int carID) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public ArrayList<BookingDetails> checkPendigOperations(int conId) {
+	public ArrayList<BookingDetails> checkPendigOperations(int conID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/**
-	 * @return the sellerId
+	 * @return the sellerID
 	 */
-	public int getSellerId() {
-		return sellerId;
+	public int getSellerID() {
+		return sellerID;
 	}
 	/**
-	 * @param sellerId the sellerId to set
+	 * @param sellerID the sellerId to set
 	 */
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSellerID(int sellerID) {
+		this.sellerID = sellerID;
 	}
 	/**
-	 * @return the firstName
+	 * @return the conID
 	 */
-	public String getFirstName() {
-		return firstName;
-	}
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	/**
-	 * @return the conId
-	 */
-	public int getConId() {
-		return conId;
+	public int getConID() {
+		return conID;
 	}
 	/**
 	 * @param conId the conId to set
 	 */
-	public void setConId(int conId) {
-		this.conId = conId;
+	public void setConId(int conID) {
+		this.conID = conID;
 	}
 		
 

@@ -9,11 +9,9 @@ import java.util.ArrayList;
  * @author Borja
  *
  */
-public class Customer implements CustomerOperation {
+public class Customer extends Agent implements CustomerOperation {
 	
 	int custId;
-	String firstName;
-	String lastName;
 	String address;
 	String email;
 	String phone;
@@ -30,10 +28,8 @@ public class Customer implements CustomerOperation {
 	 * @param phone
 	 */
 	public Customer(int custId, String firstName, String lastName, String address, String email, String phone) {
-		super();
-		this.custId = custId;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		super(agentID, firstName, lastName);
+		this.custId = agentID;
 		this.address = address;
 		this.email = email;
 		this.phone = phone;
@@ -78,34 +74,6 @@ public class Customer implements CustomerOperation {
 	 */
 	public void setCustId(int custId) {
 		this.custId = custId;
-	}
-
-	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	/**
