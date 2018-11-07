@@ -16,7 +16,7 @@ public interface AdminOperations {
 	/**
 	 * @param factID
 	 */
-	public abstract void deleteFactory();
+	public abstract void deleteFactory(int factID);
 	/**
 	 * @param Concessionaire
 	 */
@@ -24,7 +24,7 @@ public interface AdminOperations {
 	/**
 	 * @param conID
 	 */
-	public abstract void deleteConcessionaire();
+	public abstract void deleteConcessionaire(int conID);
 	/**
 	 * @param sellerID
 	 * @return
