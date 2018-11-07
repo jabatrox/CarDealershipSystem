@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="classes.Agent" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/Agent.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="245" width="163" x="648" y="-279"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="classes.Factory" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/Factory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="191" width="155" x="193" y="-279"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="classes.BookingDetails" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/BookingDetails.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="515" width="220" x="388" y="-279"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="classes.Customer" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/Customer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="353" width="273" x="335" y="546"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="classes.Admin" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/Admin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="137" width="215" x="648" y="546"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="classes.CustomerOperation" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/CustomerOperation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="119" width="208" x="335" y="939"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="classes.SellerOperations" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/SellerOperations.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="173" width="319" x="925" y="939"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="classes.AdminOperations" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/AdminOperations.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="155" width="259" x="626" y="939"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="classes.CarDetails" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/CarDetails.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="785" width="483" x="851" y="-279"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="classes.Concessionaire" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/Concessionaire.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="191" width="155" x="1374" y="-279"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="classes.Seller" project="CarDealershipSystem" 
+    file="/CarDealershipSystem/src/classes/Seller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="299" width="319" x="903" y="546"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="12">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="15">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="17">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
