@@ -12,19 +12,19 @@ public interface AdminOperations {
 	/**
 	 * @param Factory
 	 */
-	public abstract void createFactory(Factory fact);
+	public abstract void createFactory();
 	/**
 	 * @param factID
 	 */
-	public abstract void deleteFactory(int factID);
+	public abstract void deleteFactory();
 	/**
 	 * @param Concessionaire
 	 */
-	public abstract void createConcessionaire(Concessionaire con);
+	public abstract void createConcessionaire();
 	/**
 	 * @param conID
 	 */
-	public abstract void deleteConcessionaire(int conID);
+	public abstract void deleteConcessionaire();
 	/**
 	 * @param sellerID
 	 * @return
