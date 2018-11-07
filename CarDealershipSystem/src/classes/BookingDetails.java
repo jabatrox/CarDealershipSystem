@@ -1,11 +1,11 @@
-/**
- * 
- */
 package classes;
 
 /**
- * @author Borja
- *
+ * --------------------------------------------------
+ * @author Javier Soler, Borja González
+ * Date: 11/09/2018
+ * Lab: Final Project
+ * File name: BookingDetails.java
  */
 public class BookingDetails {
 	
@@ -17,6 +17,7 @@ public class BookingDetails {
 	boolean bookingCompleted;
 	int paymentType;
 	int amount;
+	
 	/**
 	 * @return the bookingId
 	 */

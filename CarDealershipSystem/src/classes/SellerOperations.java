@@ -2,6 +2,13 @@ package classes;
 
 import java.util.ArrayList;
 
+/**
+ * --------------------------------------------------
+ * @author Javier Soler, Borja Gonz�lez
+ * Date: 11/09/2018
+ * Lab: Final Project
+ * File name: SellerOperations.java
+ */
 public interface SellerOperations {
 	
 	/**

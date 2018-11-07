@@ -12,8 +12,11 @@ public class Agent {
 	static int agentID;
 	static String firstName;
 	static String lastName;
+
 	/**
-	 * 
+	 * @param agentID
+	 * @param firstName
+	 * @param lastName
 	 */
 	public Agent(int agentID, String firstName, String lastName) {
 		Agent.agentID = agentID;
