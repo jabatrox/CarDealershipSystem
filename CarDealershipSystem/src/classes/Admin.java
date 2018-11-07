@@ -9,11 +9,9 @@ package classes;
  */
 public class Admin extends Agent implements AdminOperations {
 
-	/**
-	 * 
-	 */
-	public Admin() {
+	public Admin(int agentID, String firstName, String lastName) {
 		super(agentID, firstName, lastName);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -47,5 +45,7 @@ public class Admin extends Agent implements AdminOperations {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }
