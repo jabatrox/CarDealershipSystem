@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 public class Seller implements SellerOperations{
 	
 	int sellerId;

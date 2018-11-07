@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 public interface SellerOperations {
 	
 	public abstract void buyCar(int carId);
