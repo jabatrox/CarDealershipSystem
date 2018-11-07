@@ -1,6 +1,6 @@
 package classes;
 
-public class Seller {
+public class Seller implements SellerOperations{
 	
 	int sellerId;
 	String firstName;

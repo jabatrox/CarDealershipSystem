@@ -19,6 +19,26 @@ public class Customer implements CustomerOperation {
 	String phone;
 	
 	
+	
+	
+	/**
+	 * @param custId
+	 * @param firstName
+	 * @param lastName
+	 * @param address
+	 * @param email
+	 * @param phone
+	 */
+	public Customer(int custId, String firstName, String lastName, String address, String email, String phone) {
+		super();
+		this.custId = custId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+	}
+
 	/* (non-Javadoc)
 	 * @see classes.CustomerOperation#listCars(int)
 	 */
