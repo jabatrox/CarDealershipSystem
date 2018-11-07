@@ -9,7 +9,7 @@ public class Seller extends Agent implements SellerOperations{
 	
 	
 	/**
-	 * @param sellerId
+	 * @param sellerID
 	 * @param firstName
 	 * @param lastName
 	 * @param conID
@@ -21,7 +21,6 @@ public class Seller extends Agent implements SellerOperations{
 	}
 	
 	
-	
 	/* (non-Javadoc)
 	 * @see classes.SellerOperations#buyCar(int)
 	 */
@@ -31,8 +30,7 @@ public class Seller extends Agent implements SellerOperations{
 		
 	}
 
-
-
+	
 	/* (non-Javadoc)
 	 * @see classes.SellerOperations#sellCar(int, boolean)
 	 */
@@ -42,8 +40,7 @@ public class Seller extends Agent implements SellerOperations{
 		
 	}
 
-
-
+	
 	/* (non-Javadoc)
 	 * @see classes.SellerOperations#rejectOperation(int)
 	 */
@@ -53,8 +50,7 @@ public class Seller extends Agent implements SellerOperations{
 		
 	}
 
-
-
+	
 	/* (non-Javadoc)
 	 * @see classes.SellerOperations#addCarExposed(int)
 	 */
@@ -63,7 +59,6 @@ public class Seller extends Agent implements SellerOperations{
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 	/* (non-Javadoc)

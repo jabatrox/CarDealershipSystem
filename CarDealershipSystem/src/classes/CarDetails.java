@@ -6,6 +6,7 @@ public class CarDetails {
 	int conId; 
 	int factId;
 	String carModel;
+//	enum CarType{ELECTRIC, HYBRID, GASOLINE, DIESEL;};
 	String carType;
 	String carColor;
 	String engineType;
@@ -16,7 +17,7 @@ public class CarDetails {
 	boolean exposed;
 	boolean condition;
 	
-	public CarDetails(int carId, int conId, int factId, String carModel, String carType, 
+	public CarDetails(int carId, int conId, int factId, String carModel, String carType/*CarType carType*/, 
 			String carColor, String engineType, int horsePower, double price, 
 			int kilometers, boolean sold, boolean exposed, boolean condition) {
 		

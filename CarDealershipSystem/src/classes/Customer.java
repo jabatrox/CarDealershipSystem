@@ -16,9 +16,6 @@ public class Customer extends Agent implements CustomerOperation {
 	String email;
 	String phone;
 	
-	
-	
-	
 	/**
 	 * @param custId
 	 * @param firstName

@@ -10,14 +10,14 @@ package classes;
 public class Building {
 	
 	static int buildingID; // (foreign key "buildingID" from "Concessionaire" or "FactoryDeposit")
-	enum type{CONCESSIONAIRE, FACTORYDEPOSIT;};
+	enum BuildingType{CONCESSIONAIRE, FACTORYDEPOSIT;};
 	int carCapacity;
 
 
 	/**
 	 * 
 	 */
-	public Building(int buildingID, type buildingType) {
+	public Building(int buildingID, BuildingType buildingType) {
 		Building.buildingID = buildingID;
 	}
 

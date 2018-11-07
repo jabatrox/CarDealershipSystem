@@ -1,7 +1,6 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * --------------------------------------------------
@@ -20,7 +19,7 @@ public class Concessionaire extends Building {
 	 * 
 	 */
 	public Concessionaire(int conID) {
-		super(buildingID, type.CONCESSIONAIRE);
+		super(buildingID, BuildingType.CONCESSIONAIRE);
 		this.conID = buildingID;
 //		sellers.add(new Seller());
 		carsExposed = new ArrayList<>();
