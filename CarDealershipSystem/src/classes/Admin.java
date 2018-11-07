@@ -27,7 +27,7 @@ public class Admin extends Agent implements AdminOperations {
 	 * @see classes.AdminOperations#deleteFactory(int)
 	 */
 	@Override
-	public void deleteFactory() {
+	public void deleteFactory(int factID) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -45,7 +45,7 @@ public class Admin extends Agent implements AdminOperations {
 	 * @see classes.AdminOperations#deleteConcessionaire(int)
 	 */
 	@Override
-	public void deleteConcessionaire() {
+	public void deleteConcessionaire(int conID) {
 		// TODO Auto-generated method stub
 		
 	}
