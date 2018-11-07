@@ -30,7 +30,7 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void createConcessionaire() {
 		// TODO Auto-generated method stub
-//		Concessionaire con = new Concessionaire();
+//		Concessionaire con = new Concessionaire(,40);
 		
 	}
 
