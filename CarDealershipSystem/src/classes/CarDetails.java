@@ -2,9 +2,9 @@ package classes;
 
 public class CarDetails {
 	
-	int carId;
-	int conId; 
-	int factId;
+	int carID;
+	int conID; 
+	int factID;
 	String carModel;
 //	enum CarType{ELECTRIC, HYBRID, GASOLINE, DIESEL;};
 	String carType;
@@ -17,13 +17,13 @@ public class CarDetails {
 	boolean exposed;
 	boolean condition;
 	
-	public CarDetails(int carId, int conId, int factId, String carModel, String carType/*CarType carType*/, 
+	public CarDetails(int carID, int conID, int factID, String carModel, String carType/*CarType carType*/, 
 			String carColor, String engineType, int horsePower, double price, 
 			int kilometers, boolean sold, boolean exposed, boolean condition) {
 		
-		this.carId = carId;
-		this.conId = conId; 
-		this.factId = factId;
+		this.carID = carID;
+		this.conID = conID; 
+		this.factID = factID;
 		this.carModel = carModel;
 		this.carType = carType;
 		this.carColor = carColor;
@@ -37,45 +37,45 @@ public class CarDetails {
 	}
 
 	/**
-	 * @return the carId
+	 * @return the carID
 	 */
-	public int getCarId() {
-		return carId;
+	public int getCarID() {
+		return carID;
 	}
 
 	/**
-	 * @param carId the carId to set
+	 * @param carID the carID to set
 	 */
-	public void setCarId(int carId) {
-		this.carId = carId;
+	public void setCarID(int carID) {
+		this.carID = carID;
 	}
 
 	/**
-	 * @return the conId
+	 * @return the conID
 	 */
-	public int getConId() {
-		return conId;
+	public int getConID() {
+		return conID;
 	}
 
 	/**
-	 * @param conId the conId to set
+	 * @param conID the conID to set
 	 */
-	public void setConId(int conId) {
-		this.conId = conId;
+	public void setConID(int conID) {
+		this.conID = conID;
 	}
 
 	/**
-	 * @return the factId
+	 * @return the factID
 	 */
-	public int getFactId() {
-		return factId;
+	public int getFactID() {
+		return factID;
 	}
 
 	/**
-	 * @param factId the factId to set
+	 * @param factID the factID to set
 	 */
-	public void setFactId(int factId) {
-		this.factId = factId;
+	public void setFactID(int factID) {
+		this.factID = factID;
 	}
 
 	/**

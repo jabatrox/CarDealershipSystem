@@ -2,7 +2,7 @@ package classes;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja González
+ * @author Javier Soler, Borja Gonzï¿½lez
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: AdminOperations.java
@@ -10,13 +10,21 @@ package classes;
 public interface AdminOperations {
 	
 	/**
-	 * @param buildingType
+	 * @param Factory
 	 */
-	public abstract void createBuilding(Building.BuildingType buildingType);
+	public abstract void createFactory(Factory fact);
 	/**
-	 * @param buildingID
+	 * @param factID
 	 */
-	public abstract void deleteBuilding(int buildingID);
+	public abstract void deleteFactory(int factID);
+	/**
+	 * @param Concessionaire
+	 */
+	public abstract void createConcessionaire(Concessionaire con);
+	/**
+	 * @param conID
+	 */
+	public abstract void deleteConcessionaire(int conID);
 	/**
 	 * @param sellerID
 	 * @return
