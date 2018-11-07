@@ -22,6 +22,8 @@ public class Seller implements SellerOperations{
 		this.conId = conId;
 	}
 	
+	
+	
 	/**
 	 * @return the sellerId
 	 */
