@@ -12,10 +12,10 @@ public class CarDetails {
 	int carID;
 	int conID; 
 	int factID;
+	String carBrand;
 	String carModel;
-//	enum CarType{ELECTRIC, HYBRID, GASOLINE, DIESEL;};
-	String carType;
 	String carColor;
+//	enum HorsePower{ELECTRIC, HYBRID, GASOLINE, DIESEL;};
 	String engineType;
 	int horsePower;
 	double price;
@@ -39,15 +39,15 @@ public class CarDetails {
 	 * @param exposed
 	 * @param condition
 	 */
-	public CarDetails(int carID, int conID, int factID, String carModel, String carType/*CarType carType*/, 
-			String carColor, String engineType, int horsePower, double price, 
+	public CarDetails(int carID, int conID, int factID, String carBrand, String carModel, 
+			String carColor, String engineType, int horsePower /*HorsePower horsePower*/, double price, 
 			int kilometers, boolean sold, boolean exposed, boolean condition) {
 		
 		this.carID = carID;
 		this.conID = conID; 
 		this.factID = factID;
+		this.carBrand = carBrand;
 		this.carModel = carModel;
-		this.carType = carType;
 		this.carColor = carColor;
 		this.engineType = engineType;
 		this.horsePower = horsePower;
@@ -101,6 +101,20 @@ public class CarDetails {
 	}
 
 	/**
+	 * @return the carBrand
+	 */
+	public String getCarBrand() {
+		return carBrand;
+	}
+
+	/**
+	 * @param carBrand the carBrand to set
+	 */
+	public void setCarBrand(String carBrand) {
+		this.carBrand = carBrand;
+	}
+
+	/**
 	 * @return the carModel
 	 */
 	public String getCarModel() {
@@ -112,20 +126,6 @@ public class CarDetails {
 	 */
 	public void setCarModel(String carModel) {
 		this.carModel = carModel;
-	}
-
-	/**
-	 * @return the carType
-	 */
-	public String getCarType() {
-		return carType;
-	}
-
-	/**
-	 * @param carType the carType to set
-	 */
-	public void setCarType(String carType) {
-		this.carType = carType;
 	}
 
 	/**
