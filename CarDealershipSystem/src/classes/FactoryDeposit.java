@@ -2,7 +2,7 @@ package classes;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: FactoryDeposit.java
@@ -46,6 +46,5 @@ public class FactoryDeposit {
 	public void setCarCapacity(int carCapacity) {
 		this.carCapacity = carCapacity;
 	}
-	
 	
 }

@@ -115,5 +115,4 @@ public class BookingDetails {
 		this.amount = amount;
 	}
 	
-	
 }

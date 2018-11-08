@@ -50,6 +50,4 @@ public class Admin extends Agent implements AdminOperations {
 		return null;
 	}
 
-	
-
 }

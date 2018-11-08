@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Customer.java
@@ -88,6 +88,5 @@ public class Customer extends Agent implements CustomerOperation {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
 
 }

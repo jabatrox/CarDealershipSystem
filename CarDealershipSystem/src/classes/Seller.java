@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Seller.java
@@ -61,7 +61,7 @@ public class Seller extends Agent implements SellerOperations{
 
 
 	@Override
-	public ArrayList<BookingDetails> checkPendigOperations(int conID) {
+	public ArrayList<BookingDetails> checkPendingOperations(int conID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -78,6 +78,5 @@ public class Seller extends Agent implements SellerOperations{
 	public void setConId(int conID) {
 		this.conID = conID;
 	}
-		
 
 }
