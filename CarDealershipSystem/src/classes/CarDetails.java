@@ -22,7 +22,7 @@ public class CarDetails {
 	int kilometers;
 	boolean sold;
 	boolean exposed;
-	boolean condition;
+	boolean carCondition;
 	
 	/**
 	 * @param carID
@@ -37,11 +37,11 @@ public class CarDetails {
 	 * @param kilometers
 	 * @param sold
 	 * @param exposed
-	 * @param condition
+	 * @param carCondition
 	 */
 	public CarDetails(int carID, int conID, int factID, String carBrand, String carModel, 
 			String carColor, String engineType, int horsePower /*HorsePower horsePower*/, double price, 
-			int kilometers, boolean sold, boolean exposed, boolean condition) {
+			int kilometers, boolean sold, boolean exposed, boolean carCondition) {
 		
 		this.carID = carID;
 		this.conID = conID; 
@@ -55,7 +55,7 @@ public class CarDetails {
 		this.kilometers = kilometers;
 		this.sold = sold;
 		this.exposed = exposed;
-		this.condition = condition;
+		this.carCondition = carCondition;
 	}
 
 	/**
@@ -229,15 +229,15 @@ public class CarDetails {
 	/**
 	 * @return the condition
 	 */
-	public boolean isCondition() {
-		return condition;
+	public boolean isCarCondition() {
+		return carCondition;
 	}
 
 	/**
 	 * @param condition the condition to set
 	 */
-	public void setCondition(boolean condition) {
-		this.condition = condition;
+	public void setCarCondition(boolean condition) {
+		this.carCondition = condition;
 	}
 	
 }
