@@ -15,6 +15,7 @@ public class Concessionaire {
 	//ArrayList<CarDetails> carsExposed;
 	
 	/**
+	 * Generates a new Concessionaire with a certain ID and capacity.
 	 * @param conID
 	 * @param carCapacity
 	 */

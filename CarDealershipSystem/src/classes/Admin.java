@@ -14,7 +14,7 @@ public class Admin extends Agent implements AdminOperations {
 	 * @param firstName
 	 * @param lastName
 	 */
-	public Admin(int agentID, String firstName, String lastName) {
+	public Admin(int adminID/*, String firstName, String lastName*/) {
 		super(agentID, firstName, lastName);
 	}
 
@@ -35,6 +35,7 @@ public class Admin extends Agent implements AdminOperations {
 	public void createConcessionaire() {
 		// TODO Auto-generated method stub
 //		Concessionaire con = new Concessionaire(,40);
+//		Seller newSeller = (Seller) new Agent(0);
 		
 	}
 

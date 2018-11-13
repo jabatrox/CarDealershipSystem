@@ -1,5 +1,9 @@
 package classes;
 
+import java.util.Random;
+
+import classes.CarDetails.EngineType;
+
 /**
  * --------------------------------------------------
  * @author Javier Soler, Borja González
@@ -20,6 +24,19 @@ public class FactoryDeposit {
 		super();
 		this.factID = factID;
 		this.carCapacity = carCapacity;
+	}
+	
+	public int produceCar(int conID, String carModel, String carType, String carColor,
+			EngineType engineType, int horsePower, double price) {
+		
+		Random rand = new Random();
+		int carID = rand.nextInt(6) + 5;
+		
+		CarDetails newCar = new CarDetails(carID, conID, FactoryDeposit.this.getFactID(), carModel,
+				carType, carColor, engineType, horsePower, price,
+				0, false, true, true);
+		return newCar.getCarID();
+		
 	}
 	
 	/**

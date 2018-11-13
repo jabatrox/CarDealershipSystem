@@ -15,8 +15,8 @@ public class CarDetails {
 	String carBrand;
 	String carModel;
 	String carColor;
-//	enum HorsePower{ELECTRIC, HYBRID, GASOLINE, DIESEL;};
-	String engineType;
+	public enum EngineType{ELECTRIC, HYBRID, GASOLINE, DIESEL};
+	EngineType engineType;
 	int horsePower;
 	double price;
 	int kilometers;
@@ -40,7 +40,7 @@ public class CarDetails {
 	 * @param carCondition
 	 */
 	public CarDetails(int carID, int conID, int factID, String carBrand, String carModel, 
-			String carColor, String engineType, int horsePower /*HorsePower horsePower*/, double price, 
+			String carColor, EngineType engineType /*String engineType*/, int horsePower, double price, 
 			int kilometers, boolean sold, boolean exposed, boolean carCondition) {
 		
 		this.carID = carID;
@@ -145,14 +145,14 @@ public class CarDetails {
 	/**
 	 * @return the engineType
 	 */
-	public String getEngineType() {
+	public EngineType getEngineType() {
 		return engineType;
 	}
 
 	/**
 	 * @param engineType the engineType to set
 	 */
-	public void setEngineType(String engineType) {
+	public void setEngineType(EngineType engineType) {
 		this.engineType = engineType;
 	}
 

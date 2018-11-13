@@ -19,7 +19,7 @@ public class Seller extends Agent implements SellerOperations{
 	 * @param lastName
 	 * @param conID
 	 */
-	public Seller(int sellerID, String firstName, String lastName, int conID) {
+	public Seller(/*int sellerID, String firstName, String lastName, */int conID) {
 		super(agentID, firstName, lastName);
 		this.conID = conID;
 	}

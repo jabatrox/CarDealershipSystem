@@ -9,26 +9,50 @@ package classes;
  */
 public class BookingDetails {
 	
-	int bookingId;
+	int bookingID;
 	int bookingType;
-	int custId;
-	int sellerId;
-	int carId;
+	int custID;
+	int sellerID;
+	int carID;
 	boolean bookingCompleted;
 	int paymentType;
 	int amount;
 	
 	/**
-	 * @return the bookingId
+	 * @param bookingID
+	 * @param bookingType
+	 * @param custID
+	 * @param sellerID
+	 * @param carID
+	 * @param bookingCompleted
+	 * @param paymentType
+	 * @param amount
 	 */
-	public int getBookingId() {
-		return bookingId;
+	public BookingDetails(int bookingID, int bookingType, int custID, int sellerID,
+			int carID, boolean bookingCompleted, int paymentType, int amount) {
+		
+		this.bookingID = bookingID;
+		this.bookingType = bookingType;
+		this.custID = custID;
+		this.sellerID = sellerID;
+		this.carID = carID;
+		this.bookingCompleted = bookingCompleted;
+		this.paymentType = paymentType;
+		this.amount = amount;
+		
+	}
+	
+	/**
+	 * @return the bookingID
+	 */
+	public int getBookingID() {
+		return bookingID;
 	}
 	/**
-	 * @param bookingId the bookingId to set
+	 * @param bookingID the bookingId to set
 	 */
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
+	public void setBookingID(int bookingID) {
+		this.bookingID = bookingID;
 	}
 	/**
 	 * @return the bookingType
@@ -43,40 +67,40 @@ public class BookingDetails {
 		this.bookingType = bookingType;
 	}
 	/**
-	 * @return the custId
+	 * @return the custID
 	 */
-	public int getCustId() {
-		return custId;
+	public int getCustID() {
+		return custID;
 	}
 	/**
-	 * @param custId the custId to set
+	 * @param custID the custID to set
 	 */
-	public void setCustId(int custId) {
-		this.custId = custId;
+	public void setCustID(int custID) {
+		this.custID = custID;
 	}
 	/**
-	 * @return the sellerId
+	 * @return the sellerID
 	 */
-	public int getSellerId() {
-		return sellerId;
+	public int getSellerID() {
+		return sellerID;
 	}
 	/**
-	 * @param sellerId the sellerId to set
+	 * @param sellerID the sellerID to set
 	 */
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setSellerID(int sellerID) {
+		this.sellerID = sellerID;
 	}
 	/**
-	 * @return the carId
+	 * @return the carID
 	 */
-	public int getCarId() {
-		return carId;
+	public int getCarID() {
+		return carID;
 	}
 	/**
-	 * @param carId the carId to set
+	 * @param carID the carID to set
 	 */
-	public void setCarId(int carId) {
-		this.carId = carId;
+	public void setCarId(int carID) {
+		this.carID = carID;
 	}
 	/**
 	 * @return the bookingCompleted

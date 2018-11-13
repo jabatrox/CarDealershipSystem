@@ -16,13 +16,14 @@ public class Customer extends Agent implements CustomerOperation {
 	String phone;
 	
 	/**
+	 * Generates a new Customer. It takes the 
 	 * @param firstName
 	 * @param lastName
 	 * @param address
 	 * @param email
 	 * @param phone
 	 */
-	public Customer(int custId, String firstName, String lastName, String address, String email, String phone) {
+	public Customer(int custID,/* String firstName, String lastName, */String address, String email, String phone) {
 		super(agentID, firstName, lastName);
 		this.address = address;
 		this.email = email;
@@ -30,19 +31,19 @@ public class Customer extends Agent implements CustomerOperation {
 	}
 
 	@Override
-	public ArrayList<CarDetails> listCars(int conId) {
+	public ArrayList<CarDetails> listCars(int conID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void buyCar(int carId) {
+	public void buyCar(int carID) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void sellCar(int CarId) {
+	public void sellCar(int CarID) {
 		// TODO Auto-generated method stub
 
 	}
