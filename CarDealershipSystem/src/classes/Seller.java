@@ -37,7 +37,11 @@ public class Seller extends Agent implements SellerOperations{
 	@Override
 	public void sellCar(int carID, boolean statusCar) {
 		// TODO Auto-generated method stub
-		
+		boolean accepted = true; // Take it from the DB
+		if (accepted && statusCar) {
+			int factID = conID;//.getFact();
+//			FactoryDeposit.produceCar(carID, null, null, null, null, carID, carID);
+		}
 	}
 
 	

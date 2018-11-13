@@ -29,12 +29,25 @@ public class FactoryDeposit {
 	public int produceCar(int conID, String carModel, String carType, String carColor,
 			EngineType engineType, int horsePower, double price) {
 		
+		// Generate random ID (just for initial development)
 		Random rand = new Random();
 		int carID = rand.nextInt(6) + 5;
 		
-		CarDetails newCar = new CarDetails(carID, conID, FactoryDeposit.this.getFactID(), carModel,
-				carType, carColor, engineType, horsePower, price,
-				0, false, true, true);
+		CarDetails newCar = new CarDetails(
+				carID,
+				conID,
+				FactoryDeposit.this.getFactID(),
+				carModel,
+				carType,
+				carColor,
+				engineType,
+				horsePower,
+				price,
+				0,
+				false,
+				true,
+				true
+				);
 		return newCar.getCarID();
 		
 	}
