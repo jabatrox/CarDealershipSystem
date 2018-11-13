@@ -21,7 +21,9 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void createFactory() {
 		// TODO Auto-generated method stub
-//		Factory fact = new Factory();
+		// ID por autoincrement y elegir carCapacity
+		FactoryDeposit fact = new FactoryDeposit(0, 40);
+		createConcessionaire(40, fact.getFactID());
 		
 	}
 
@@ -32,10 +34,9 @@ public class Admin extends Agent implements AdminOperations {
 	}
 
 	@Override
-	public void createConcessionaire() {
+	public void createConcessionaire(int carCapacity, int factID) {
 		// TODO Auto-generated method stub
-		// Elegir ID y capacidad por la interfaz
-		Concessionaire con = new Concessionaire(0, 0);
+		Concessionaire con = new Concessionaire(0, carCapacity, factID);
 		
 		// Elegir ID, nombre y apellido por la interfaz
 		Seller seller = new Seller(0, null, null, con.getConID());

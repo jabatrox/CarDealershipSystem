@@ -13,15 +13,18 @@ public class Concessionaire {
 	//ArrayList<Integer> sellers = new ArrayList<>();
 	int carCapacity;
 	//ArrayList<CarDetails> carsExposed;
+	int factID;
 	
 	/**
 	 * Generates a new Concessionaire with a certain ID and capacity.
 	 * @param conID
 	 * @param carCapacity
+	 * @param factID
 	 */
-	public Concessionaire(int conID, int carCapacity) {
+	public Concessionaire(int conID, int carCapacity, int factID) {
 		this.conID = conID;
 		this.carCapacity = carCapacity;
+		this.factID = factID;
 		//sellers.add(new Seller());
 		//carsExposed = new ArrayList<>();
 	}
@@ -52,6 +55,20 @@ public class Concessionaire {
 	 */
 	public void setCarCapacity(int carCapacity) {
 		this.carCapacity = carCapacity;
+	}
+
+	/**
+	 * @return the factID
+	 */
+	public int getFactID() {
+		return factID;
+	}
+
+	/**
+	 * @param factID the factID to set
+	 */
+	public void setFactID(int factID) {
+		this.factID = factID;
 	}
 
 }

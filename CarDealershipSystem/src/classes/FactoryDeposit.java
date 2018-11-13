@@ -21,7 +21,6 @@ public class FactoryDeposit {
 	 * @param carCapacity
 	 */
 	public FactoryDeposit(int factID, int carCapacity) {
-		super();
 		this.factID = factID;
 		this.carCapacity = carCapacity;
 	}

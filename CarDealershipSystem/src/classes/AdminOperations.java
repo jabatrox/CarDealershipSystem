@@ -18,9 +18,10 @@ public interface AdminOperations {
 	 */
 	public abstract void deleteFactory(int factID);
 	/**
-	 * @param Concessionaire
+	 * @param carCapacity
+	 * @param factID
 	 */
-	public abstract void createConcessionaire();
+	public abstract void createConcessionaire(int carCapacity, int factID);
 	/**
 	 * @param conID
 	 */
