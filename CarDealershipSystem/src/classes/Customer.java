@@ -16,15 +16,16 @@ public class Customer extends Agent implements CustomerOperation {
 	String phone;
 	
 	/**
-	 * Generates a new Customer. It takes the 
+	 * Generates a new Customer.
+	 * @param custID
 	 * @param firstName
 	 * @param lastName
 	 * @param address
 	 * @param email
 	 * @param phone
 	 */
-	public Customer(int custID,/* String firstName, String lastName, */String address, String email, String phone) {
-		super(agentID, firstName, lastName);
+	public Customer(int custID, String firstName, String lastName, String address, String email, String phone) {
+		super(custID, firstName, lastName);
 		this.address = address;
 		this.email = email;
 		this.phone = phone;

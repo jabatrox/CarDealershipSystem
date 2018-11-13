@@ -15,12 +15,14 @@ public class Seller extends Agent implements SellerOperations{
 	
 	
 	/**
+	 * Generates a new seller, and associates it to a Concessionaire
+	 * @param sellerID
 	 * @param firstName
 	 * @param lastName
 	 * @param conID
 	 */
-	public Seller(/*int sellerID, String firstName, String lastName, */int conID) {
-		super(agentID, firstName, lastName);
+	public Seller(int sellerID, String firstName, String lastName, int conID) {
+		super(sellerID, firstName, lastName);
 		this.conID = conID;
 	}
 	

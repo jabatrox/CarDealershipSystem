@@ -14,8 +14,8 @@ public class Admin extends Agent implements AdminOperations {
 	 * @param firstName
 	 * @param lastName
 	 */
-	public Admin(int adminID/*, String firstName, String lastName*/) {
-		super(agentID, firstName, lastName);
+	public Admin(int adminID, String firstName, String lastName) {
+		super(adminID, firstName, lastName);
 	}
 
 	@Override
@@ -34,8 +34,11 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void createConcessionaire() {
 		// TODO Auto-generated method stub
-//		Concessionaire con = new Concessionaire(,40);
-//		Seller newSeller = (Seller) new Agent(0);
+		// Elegir ID y capacidad por la interfaz
+		Concessionaire con = new Concessionaire(0, 0);
+		
+		// Elegir ID, nombre y apellido por la interfaz
+		Seller seller = new Seller(0, null, null, con.getConID());
 		
 	}
 
