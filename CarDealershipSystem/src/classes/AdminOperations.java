@@ -27,6 +27,14 @@ public interface AdminOperations {
 	 */
 	public abstract void deleteConcessionaire(int conID);
 	/**
+	 * @param conID
+	 */
+	public abstract void addSeller(int conID);
+	/**
+	 * @param sellerID
+	 */
+	public abstract void deleteSeller(int sellerID);
+	/**
 	 * @param sellerID
 	 * @return
 	 */

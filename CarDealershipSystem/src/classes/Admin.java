@@ -37,14 +37,25 @@ public class Admin extends Agent implements AdminOperations {
 	public void createConcessionaire(int carCapacity, int factID) {
 		// TODO Auto-generated method stub
 		Concessionaire con = new Concessionaire(0, carCapacity, factID);
-		
-		// Elegir ID, nombre y apellido por la interfaz
-		Seller seller = new Seller(0, null, null, con.getConID());
+		addSeller(con.getConID());
 		
 	}
 
 	@Override
 	public void deleteConcessionaire(int conID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addSeller(int conID) {
+		// TODO Auto-generated method stub
+		// Elegir ID, nombre y apellido por la interfaz
+		Seller seller = new Seller(0, null, null, conID);
+	}
+
+	@Override
+	public void deleteSeller(int sellerID) {
 		// TODO Auto-generated method stub
 		
 	}
