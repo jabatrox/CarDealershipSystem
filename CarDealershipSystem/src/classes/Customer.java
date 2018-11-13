@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Customer.java
@@ -16,33 +16,35 @@ public class Customer extends Agent implements CustomerOperation {
 	String phone;
 	
 	/**
+	 * Generates a new Customer.
+	 * @param custID
 	 * @param firstName
 	 * @param lastName
 	 * @param address
 	 * @param email
 	 * @param phone
 	 */
-	public Customer(int custId, String firstName, String lastName, String address, String email, String phone) {
-		super(agentID, firstName, lastName);
+	public Customer(int custID, String firstName, String lastName, String address, String email, String phone) {
+		super(custID, firstName, lastName);
 		this.address = address;
 		this.email = email;
 		this.phone = phone;
 	}
 
 	@Override
-	public ArrayList<CarDetails> listCars(int conId) {
+	public ArrayList<CarDetails> listCars(int conID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void buyCar(int carId) {
+	public void buyCar(int carID) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void sellCar(int CarId) {
+	public void sellCar(int CarID) {
 		// TODO Auto-generated method stub
 
 	}
@@ -88,6 +90,5 @@ public class Customer extends Agent implements CustomerOperation {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
 
 }

@@ -2,7 +2,7 @@ package classes;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: CarDetails.java
@@ -12,17 +12,17 @@ public class CarDetails {
 	int carID;
 	int conID; 
 	int factID;
+	String carBrand;
 	String carModel;
-//	enum CarType{ELECTRIC, HYBRID, GASOLINE, DIESEL;};
-	String carType;
 	String carColor;
-	String engineType;
+	public enum EngineType{ELECTRIC, HYBRID, GASOLINE, DIESEL};
+	EngineType engineType;
 	int horsePower;
 	double price;
 	int kilometers;
 	boolean sold;
 	boolean exposed;
-	boolean condition;
+	boolean carCondition;
 	
 	/**
 	 * @param carID
@@ -37,17 +37,17 @@ public class CarDetails {
 	 * @param kilometers
 	 * @param sold
 	 * @param exposed
-	 * @param condition
+	 * @param carCondition
 	 */
-	public CarDetails(int carID, int conID, int factID, String carModel, String carType/*CarType carType*/, 
-			String carColor, String engineType, int horsePower, double price, 
-			int kilometers, boolean sold, boolean exposed, boolean condition) {
+	public CarDetails(int carID, int conID, int factID, String carBrand, String carModel, 
+			String carColor, EngineType engineType /*String engineType*/, int horsePower, double price, 
+			int kilometers, boolean sold, boolean exposed, boolean carCondition) {
 		
 		this.carID = carID;
 		this.conID = conID; 
 		this.factID = factID;
+		this.carBrand = carBrand;
 		this.carModel = carModel;
-		this.carType = carType;
 		this.carColor = carColor;
 		this.engineType = engineType;
 		this.horsePower = horsePower;
@@ -55,7 +55,7 @@ public class CarDetails {
 		this.kilometers = kilometers;
 		this.sold = sold;
 		this.exposed = exposed;
-		this.condition = condition;
+		this.carCondition = carCondition;
 	}
 
 	/**
@@ -101,6 +101,20 @@ public class CarDetails {
 	}
 
 	/**
+	 * @return the carBrand
+	 */
+	public String getCarBrand() {
+		return carBrand;
+	}
+
+	/**
+	 * @param carBrand the carBrand to set
+	 */
+	public void setCarBrand(String carBrand) {
+		this.carBrand = carBrand;
+	}
+
+	/**
 	 * @return the carModel
 	 */
 	public String getCarModel() {
@@ -112,20 +126,6 @@ public class CarDetails {
 	 */
 	public void setCarModel(String carModel) {
 		this.carModel = carModel;
-	}
-
-	/**
-	 * @return the carType
-	 */
-	public String getCarType() {
-		return carType;
-	}
-
-	/**
-	 * @param carType the carType to set
-	 */
-	public void setCarType(String carType) {
-		this.carType = carType;
 	}
 
 	/**
@@ -145,14 +145,14 @@ public class CarDetails {
 	/**
 	 * @return the engineType
 	 */
-	public String getEngineType() {
+	public EngineType getEngineType() {
 		return engineType;
 	}
 
 	/**
 	 * @param engineType the engineType to set
 	 */
-	public void setEngineType(String engineType) {
+	public void setEngineType(EngineType engineType) {
 		this.engineType = engineType;
 	}
 
@@ -229,18 +229,15 @@ public class CarDetails {
 	/**
 	 * @return the condition
 	 */
-	public boolean isCondition() {
-		return condition;
+	public boolean isCarCondition() {
+		return carCondition;
 	}
 
 	/**
 	 * @param condition the condition to set
 	 */
-	public void setCondition(boolean condition) {
-		this.condition = condition;
+	public void setCarCondition(boolean condition) {
+		this.carCondition = condition;
 	}
-	
-	
-	
 	
 }

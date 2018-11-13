@@ -1,10 +1,8 @@
 package classes;
 
-import java.util.ArrayList;
-
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Concessionaire.java
@@ -17,6 +15,7 @@ public class Concessionaire {
 	//ArrayList<CarDetails> carsExposed;
 	
 	/**
+	 * Generates a new Concessionaire with a certain ID and capacity.
 	 * @param conID
 	 * @param carCapacity
 	 */
@@ -54,7 +53,5 @@ public class Concessionaire {
 	public void setCarCapacity(int carCapacity) {
 		this.carCapacity = carCapacity;
 	}
-	
-	
 
 }

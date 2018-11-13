@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Seller.java
@@ -15,12 +15,14 @@ public class Seller extends Agent implements SellerOperations{
 	
 	
 	/**
+	 * Generates a new seller, and associates it to a Concessionaire
+	 * @param sellerID
 	 * @param firstName
 	 * @param lastName
 	 * @param conID
 	 */
 	public Seller(int sellerID, String firstName, String lastName, int conID) {
-		super(agentID, firstName, lastName);
+		super(sellerID, firstName, lastName);
 		this.conID = conID;
 	}
 	
@@ -35,7 +37,11 @@ public class Seller extends Agent implements SellerOperations{
 	@Override
 	public void sellCar(int carID, boolean statusCar) {
 		// TODO Auto-generated method stub
-		
+		boolean accepted = true; // Take it from the DB
+		if (accepted && statusCar) {
+			int factID = conID;//.getFact();
+//			FactoryDeposit.produceCar(carID, null, null, null, null, carID, carID);
+		}
 	}
 
 	
@@ -61,7 +67,7 @@ public class Seller extends Agent implements SellerOperations{
 
 
 	@Override
-	public ArrayList<BookingDetails> checkPendigOperations(int conID) {
+	public ArrayList<BookingDetails> checkPendingOperations(int conID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -78,6 +84,5 @@ public class Seller extends Agent implements SellerOperations{
 	public void setConId(int conID) {
 		this.conID = conID;
 	}
-		
 
 }

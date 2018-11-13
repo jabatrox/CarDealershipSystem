@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: SellerOperations.java
@@ -36,5 +36,6 @@ public interface SellerOperations {
 	 * @param conId
 	 * @return
 	 */
-	public abstract ArrayList<BookingDetails> checkPendigOperations(int conId);
+	public abstract ArrayList<BookingDetails> checkPendingOperations(int conId);
+
 }

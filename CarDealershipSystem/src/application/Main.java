@@ -1,5 +1,7 @@
 package application;
 	
+import classes.Admin;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -22,5 +24,9 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+		
+		// Introducir nombre y apellidos desde la interfaz
+		// VER CÓMO GENERAL EL ID CON LA BD!!!!
+		Admin admin = new Admin(0, "NAME"/*getUserAgentStylesheet()*/, "LAST_NAME"/*getUserAgentStylesheet()*/);
 	}
 }

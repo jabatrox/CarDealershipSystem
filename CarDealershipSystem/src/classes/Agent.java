@@ -9,9 +9,9 @@ package classes;
  */
 public class Agent {
 	
-	static int agentID;
-	static String firstName;
-	static String lastName;
+	int agentID;
+	String firstName;
+	String lastName;
 
 	/**
 	 * @param agentID
@@ -19,45 +19,45 @@ public class Agent {
 	 * @param lastName
 	 */
 	public Agent(int agentID, String firstName, String lastName) {
-		Agent.agentID = agentID;
-		Agent.firstName = firstName;
-		Agent.lastName = lastName;
+		this.agentID = agentID;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	/**
 	 * @return the agentID
 	 */
-	public static int getAgentID() {
+	public int getAgentID() {
 		return agentID;
 	}
 	/**
 	 * @param agentID the agentID to set
 	 */
-	public static void setAgentID(int agentID) {
-		Agent.agentID = agentID;
+	public void setAgentID(int agentID) {
+		this.agentID = agentID;
 	}
 	/**
 	 * @return the firstName
 	 */
-	public static String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 	/**
 	 * @param firstName the firstName to set
 	 */
-	public static void setFirstName(String firstName) {
-		Agent.firstName = firstName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	/**
 	 * @return the lastName
 	 */
-	public static String getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 	/**
 	 * @param lastName the lastName to set
 	 */
-	public static void setLastName(String lastName) {
-		Agent.lastName = lastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }
