@@ -4,7 +4,7 @@
   router="FAN">  
   <class id="1" language="java" name="classes.Agent" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Agent.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="869" y="-109"/>    
+    <position height="-1" width="-1" x="870" y="-101"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="classes.BookingDetails" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/BookingDetails.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="194" y="26"/>    
+    <position height="-1" width="-1" x="194" y="34"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +58,7 @@
   </interface>  
   <class id="7" language="java" name="classes.FactoryDeposit" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/FactoryDeposit.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="545" y="-127"/>    
+    <position height="-1" width="-1" x="545" y="-119"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,8 +66,8 @@
     </display>  
   </class>  
   <enumeration id="8" language="java" name="classes.CarDetails.EngineType" project="CarDealershipSystem" 
-    file="/CarDealershipSystem/src/classes/CarDetails.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1255" y="-154"/>    
+    file="/CarDealershipSystem/src/classes/CarDetails.java" binary="false" corner="BOTTOM_LEFT">    
+    <position height="-1" width="-1" x="1288" y="-146"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +85,7 @@
   </interface>  
   <class id="10" language="java" name="classes.CarDetails" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/CarDetails.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1586" y="152"/>    
+    <position height="-1" width="-1" x="1666" y="160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +94,7 @@
   </class>  
   <class id="11" language="java" name="classes.Concessionaire" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Concessionaire.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1071" y="-109"/>    
+    <position height="-1" width="-1" x="1076" y="-101"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -110,46 +110,46 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="13">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
-  <generalization id="14">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <realization id="15">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <generalization id="16">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="17">    
+  <association id="13">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="18" name="engineType">        
-        <position height="0" width="0" x="-153" y="-805"/>      
+      <attribute id="14" name="engineType">        
+        <position height="0" width="0" x="-120" y="-762"/>      
       </attribute>      
-      <multiplicity id="19" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-153" y="-805"/>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-120" y="-762"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="20">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="8"/>  
-  </nesting>  
-  <realization id="21">    
+  <generalization id="16">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="17">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
-  <generalization id="22">    
+  <nesting id="18">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <generalization id="19">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
+  <generalization id="20">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="21">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="22">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
