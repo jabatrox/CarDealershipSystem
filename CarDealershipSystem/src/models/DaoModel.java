@@ -26,7 +26,7 @@ public class DaoModel {
 	    try {
 	   
 	    // Open a connection
-	    System.out.println("Connecting to database to create Table...");
+	    System.out.println("Connecting to database to create Tables...");
 	    stmt = conn.connect().createStatement();
 	    System.out.println("Connected database successfully...");
 	   
