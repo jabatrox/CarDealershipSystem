@@ -36,11 +36,10 @@ public class DaoModel {
 	    //String schema = conn.getSchema();
 	 
 	   
-	    String sql = "CREATE TABLE concessionaire (\n" + 
-	    		"  conID INTEGER NOT NULL,\n" + 
+	    String sql = "CREATE TABLE factoryDeposit (\n" + 
+	    		"  factID INTEGER NOT NULL,\n" + 
 	    		"  carCapacity INTEGER NOT NULL,\n" + 
-	    		"  factID INTEGER NOT NULL REFERENCES factoryDeposit(factID),\n" + 
-	    		"  PRIMARY KEY(conID)\n" + 
+	    		"  PRIMARY KEY(factID)\n" + 
 	    		");\n" + 
 	    		"\n" + 
 	    		"CREATE TABLE factoryDeposit (\n" + 
