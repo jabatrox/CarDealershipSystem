@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ import models.DBConnect;
 public class MainController {
 
 	Connection conn = null;
-	DBConnect openDBconn = null;
+	DBConnect openDBconn = new DBConnect();
 	Statement stmt = null;
 
 
@@ -60,7 +61,6 @@ public class MainController {
 	public void Login (ActionEvent event) throws Exception{
 
 		try {
-			openDBconn = new DBConnect();
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
 			System.out.print("Checking for user in the database");
@@ -126,27 +126,47 @@ public class MainController {
 	}
 	
 	public void RegisterUser (ActionEvent event) throws Exception{
-//		conn = openDBconn.connect();
-//		stmt = conn.createStatement();
-
-//		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameId.getText()+"'";
-//		ResultSet rs = stmt.executeQuery(sql);
-//		conn.close();
-//		if (!rs.next()) {
-//			userId.setText("");;
-//		}
-		System.out.println("Testing with user "+userNameId.getText());
-	}
-
-	public void CheckUserName(ActionEvent event) throws Exception {
+		System.out.println("Adding new user...");
+		
+		// Check if all fields have content
+//		firstNameId.getText().isEmpty();
+//		lastNameId.getText().isEmpty();
+//		addressId.getText().isEmpty();
+//		emailId.getText().isEmpty();
+//		phoneId.getText().isEmpty();
+//		userNameRegisterId.getText().isEmpty();
+//		passId.getText().isEmpty();
+		
 		conn = openDBconn.connect();
 		stmt = conn.createStatement();
 
+		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameRegisterId.getText()+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+//		conn.close();
+		System.out.println("\\___Checking for username "+userNameRegisterId.getText()+"...");
+		if (rs.next()) {
+			System.out.println("   \\___Username "+userNameRegisterId.getText()+" already exits,"
+					+ " please select a different one.");
+			new Alert(Alert.AlertType.WARNING, "Username "+userNameRegisterId.getText()
+					+" already exits, please select a different one").showAndWait();
+			userNameRegisterId.setStyle("-fx-background-color: red;");
+		} else {
+			System.out.println("    \\___Username "+userNameRegisterId.getText()+" is correct.");
+		}
+		System.out.println("New user added.");
+	}
+
+	public void CheckUserName(ActionEvent event) throws Exception {
+//		conn = openDBconn.connect();
+//		stmt = conn.createStatement();
+//
 //		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameId.getText()+"'";
 //		ResultSet rs = stmt.executeQuery(sql);
 //		conn.close();
 //		if (!rs.next()) {
-//			userId.setText("");;
+//			userId.setText("");
+//			System.out.println("Username "+userNameRegisterId.getText()+" does not exits");
+//			userNameRegisterId.setStyle("-fx-background-color: red;");
 //		}
 		System.out.println("Testing");
 	}
@@ -158,6 +178,7 @@ public class MainController {
 		emailId.setText("");
 		phoneId.setText("");
 		userNameRegisterId.setText("");
+		userNameRegisterId.setStyle(null);
 		passId.setText("");
 	}
 }
