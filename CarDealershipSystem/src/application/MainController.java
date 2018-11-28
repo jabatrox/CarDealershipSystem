@@ -19,7 +19,8 @@ import models.DBConnect;
 
 public class MainController {
 	
-	DBConnect conn = null;
+	Connection conn = null;
+	DBConnect openDBconn = null;
 	Statement stmt = null;
 
 	
@@ -35,7 +36,8 @@ public class MainController {
 	public void Login(ActionEvent event) throws Exception{
 		
 		try {
-			stmt = conn.connect().createStatement();
+			openDBconn = new DBConnect();
+			stmt = openDBconn.connect().createStatement();
 			System.out.print("Checking for user in the database");
 			
 			String sql = "SELECT userType FROM userDB WHERE userName="+userId.getText();
