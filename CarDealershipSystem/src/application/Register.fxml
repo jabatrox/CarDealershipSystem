@@ -20,7 +20,7 @@
       <Label layoutX="106.0" layoutY="94.0" text="First Name" />
       <Label layoutX="106.0" layoutY="138.0" text="Last Name" />
       <Label layoutX="106.0" layoutY="182.0" text="Address" />
-      <TextField layoutX="217.0" layoutY="309.0" onInputMethodTextChanged="#CheckUserName" />
+      <TextField fx:id="userNameId" layoutX="217.0" layoutY="309.0" onInputMethodTextChanged="#CheckUserName" />
       <Label layoutX="106.0" layoutY="226.0" text="Email" />
       <Label layoutX="106.0" layoutY="270.0" text="Phone Number" />
       <Label layoutX="106.0" layoutY="314.0" text="User Name" />
