@@ -36,7 +36,7 @@ public class MainController {
 	@FXML
 	private TextField userNameId;
 
-	public void Login(ActionEvent event) throws Exception{
+	public void Login (ActionEvent event) throws Exception{
 
 		try {
 			openDBconn = new DBConnect();
@@ -95,7 +95,7 @@ public class MainController {
 
 	}
 
-	public void Register(ActionEvent event) throws Exception{
+	public void RegisterPage (ActionEvent event) throws Exception{
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/application/Register.fxml"));
 		Scene scene = new Scene(root,600,400);
@@ -103,16 +103,30 @@ public class MainController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+	
+	public void RegisterUser (ActionEvent event) throws Exception{
+//		conn = openDBconn.connect();
+//		stmt = conn.createStatement();
+
+//		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameId.getText()+"'";
+//		ResultSet rs = stmt.executeQuery(sql);
+//		conn.close();
+//		if (!rs.next()) {
+//			userId.setText("");;
+//		}
+		System.out.println("Testing with user "+userNameId.getText());
+	}
 
 	public void CheckUserName(ActionEvent event) throws Exception {
 		conn = openDBconn.connect();
 		stmt = conn.createStatement();
 
-		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameId.getText()+"'";
-		ResultSet rs = stmt.executeQuery(sql);
-		conn.close();
-		if (!rs.next()) {
-			userId.setText("");;
-		}
+//		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameId.getText()+"'";
+//		ResultSet rs = stmt.executeQuery(sql);
+//		conn.close();
+//		if (!rs.next()) {
+//			userId.setText("");;
+//		}
+		System.out.println("Testing");
 	}
 }

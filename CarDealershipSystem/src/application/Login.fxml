@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <Button fx:id="loginId" layoutX="271.0" layoutY="233.0" mnemonicParsing="false" onAction="#Login" text="Login">
          <font>
@@ -34,7 +34,7 @@
             <Font size="18.0" />
          </font>
       </PasswordField>
-      <Button fx:id="registerId" layoutX="263.0" layoutY="272.0" mnemonicParsing="false" onAction="#Register" text="Register">
+      <Button fx:id="registerId" layoutX="263.0" layoutY="272.0" mnemonicParsing="false" onAction="#RegisterPage" text="Register">
          <font>
             <Font size="12.0" />
          </font>
