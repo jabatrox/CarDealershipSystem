@@ -1,13 +1,10 @@
 package application;
 	
-import classes.Admin;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
@@ -26,9 +23,5 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
-		
-		// Introducir nombre y apellidos desde la interfaz
-		// VER C�MO GENERAL EL ID CON LA BD!!!!
-		Admin admin = new Admin(0, "NAME"/*getUserAgentStylesheet()*/, "LAST_NAME"/*getUserAgentStylesheet()*/);
 	}
 }
