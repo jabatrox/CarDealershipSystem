@@ -13,8 +13,8 @@ import java.sql.DriverManager;
 public class DaoModel {
 
 	//Declare DB objects 
-	DBConnect conn = null;
-	Connection c = null;
+	DBConnect openDBconn = null;
+	Connection conn = null;
 	Statement stmt = null;
 	
 	private String[] DBtables = {
@@ -30,7 +30,7 @@ public class DaoModel {
 
 	// constructor
 	public DaoModel() { //create db object instance
-		conn = new DBConnect();
+		openDBconn = new DBConnect();
 	}
 
 	// CREATE TABLE METHOD
@@ -38,33 +38,34 @@ public class DaoModel {
 		try {
 
 			// Connect to DB and check existing tables.
-			System.out.println("Connecting to the DB and checking for existing tables...");
-			c = conn.connect();
+			System.out.println("Connecting to the DB...");
+			conn = openDBconn.connect();
 			System.out.println("\\___DB connection successful.");
-			DatabaseMetaData dbm = c.getMetaData();
+			System.out.println("\nChecking for existing tables...");
+			DatabaseMetaData dbm = conn.getMetaData();
 			for (int i = 0; i < DBtables.length; i++) {
 				ResultSet rs = dbm.getTables(null, null, DBtables[i], null);
 				if (rs.next()) {
-					System.out.println("\\___Table "+DBtables[i]+" exists.");
+					System.out.println("\\___Table "+DBtables[i]+" already exists.");
 					continue;
 				} else {
 					System.out.println("\\___Table "+DBtables[i]+" does not exist, creating it.");
 					
 					// Create and execute SQL query to create missing tables.
-					stmt = conn.connect().createStatement();
+					stmt = conn.createStatement();
 					
 					String sql = "";
 			        switch (DBtables[i]) {
 			            case "factoryDeposit":
 			            	sql = "CREATE TABLE factoryDeposit (\n" + 
-			    					"  factID INTEGER NOT NULL auto_increment,\n" + 
+			    					"  factID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  carCapacity INTEGER NOT NULL,\n" + 
 			    					"  PRIMARY KEY(factID)\n" + 
 			    					");";
 			                break;
 			            case "concessionaire":
 			            	sql = "CREATE TABLE concessionaire (\n" + 
-			    					"  conID INTEGER NOT NULL auto_increment,\n" + 
+			    					"  conID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  carCapacity INTEGER NOT NULL,\n" + 
 			    					"  factID INTEGER NOT NULL REFERENCES factoryDeposit(factID),\n" + 
 			    					"  PRIMARY KEY(conID)\n" + 
@@ -72,7 +73,7 @@ public class DaoModel {
 			                break;
 			            case "carDetails":
 			            	sql = "CREATE TABLE carDetails (\n" + 
-			    					"  carID INTEGER NOT NULL,\n" + 
+			    					"  carID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  conID INTEGER NOT NULL REFERENCES concessionaire(conID),\n" + 
 			    					"  factID INTEGER NOT NULL REFERENCES factoryDeposit(factID),\n" + 
 			    					"  carBrand VARCHAR(30) NOT NULL,\n" + 
@@ -90,7 +91,7 @@ public class DaoModel {
 			                break;
 			            case "customer":
 			            	sql = "CREATE TABLE customer (\n" + 
-			    					"  custID INTEGER NOT NULL,\n" + 
+			    					"  custID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  firstName VARCHAR(50) NOT NULL,\n" + 
 			    					"  lastName VARCHAR(50) NOT NULL,\n" + 
 			    					"  address VARCHAR(100) NOT NULL,\n" + 
@@ -101,7 +102,7 @@ public class DaoModel {
 			                break;
 			            case "usersDB":
 			            	sql = "CREATE TABLE usersDB (\n" + 
-			    					"  userID INTEGER NOT NULL ,\n" + 
+			    					"  userID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  username VARCHAR(50) NOT NULL,\n" + 
 			    					"  userType CHAR(1) NOT NULL\n" + 
 			    					"  PRIMARY KEY(userID)\n" + 
@@ -109,7 +110,7 @@ public class DaoModel {
 			                break;
 			            case "admin":
 			            	sql = "CREATE TABLE admin (\n" + 
-			    					"  adminID INTEGER NOT NULL ,\n" + 
+			    					"  adminID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  firstName VARCHAR(50) NOT NULL,\n" + 
 			    					"  lastName VARCHAR(50) NOT NULL,\n" + 
 			    					"  hashPass CHAR(64) NOT NULL,\n" + 
@@ -118,7 +119,7 @@ public class DaoModel {
 			                break;
 			            case "seller":
 			            	sql = "CREATE TABLE seller (\n" + 
-			    					"  sellerID INTEGER NOT NULL ,\n" + 
+			    					"  sellerID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  firstName VARCHAR(50) NOT NULL,\n" + 
 			    					"  lastName VARCHAR(50) NOT NULL,\n" + 
 			    					"  conID INTEGER NOT NULL REFERENCES concessionaire(conID),\n" + 
@@ -127,7 +128,7 @@ public class DaoModel {
 			                break;
 			            case "bookingDetails":
 			            	sql = "CREATE TABLE bookingDetails (\n" + 
-			    					"  bookingID INTEGER NOT NULL ,\n" + 
+			    					"  bookingID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  bookingType INTEGER NOT NULL,\n" + 
 			    					"  custID INTEGER NOT NULL REFERENCES customer(custID),\n" + 
 			    					"  sellerID INTEGER NOT NULL REFERENCES seller(sellerID),\n" + 
@@ -142,9 +143,10 @@ public class DaoModel {
 			                break;
 			        }
 			        stmt.executeUpdate(sql);
-			        conn.connect().close(); //close db connection 
+			        conn.close(); //close db connection 
 				}
 			}
+			System.out.println("==> All tables exist.");
 
 /*			// Open a connection
 			System.out.println("Connecting to database to create Tables...");
