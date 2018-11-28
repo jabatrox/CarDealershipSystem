@@ -43,11 +43,12 @@ public class MainController {
 			String sql = "SELECT userType FROM usersDB WHERE userName='"+userId.getText()+"'";
 			
 			ResultSet rs = stmt.executeQuery(sql);
-			if (rs == null) {
-				statusId.setText("The username password combination is not correct");
+			if (!rs.next()) {
 				userId.setText("");
 				passwordId.setText("");
+				statusId.setText("The username/password combination is not correct");
 			}
+			else {
 			String response = rs.getString("userType");
 			switch(response) {
 			
@@ -66,7 +67,7 @@ public class MainController {
 					statusId.setText("Login is Correct...Redirecting to the seller interface");
 					Stage primaryStage = new Stage();
 					Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
-					Scene scene = new Scene(root,400,400);
+					Scene scene = new Scene(root,600,400);
 					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 					primaryStage.setScene(scene);
 					primaryStage.show();
@@ -76,12 +77,13 @@ public class MainController {
 					statusId.setText("Login is Correct...Redirecting to the admin interface");
 					Stage primaryStage = new Stage();
 					Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
-					Scene scene = new Scene(root,400,400);
+					Scene scene = new Scene(root,600,400);
 					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 					primaryStage.setScene(scene);
 					primaryStage.show();
 				}
 			}
+		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

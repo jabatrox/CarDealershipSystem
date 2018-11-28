@@ -19,7 +19,7 @@
             <Font name="PT Sans" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="stausId" layoutX="276.0" layoutY="319.0" text="Status" textFill="#d71010">
+      <Label fx:id="statusId" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="321.0" prefHeight="15.0" prefWidth="534.0" textAlignment="CENTER" textFill="#d71010">
          <font>
             <Font size="12.0" />
          </font>
