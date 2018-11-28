@@ -35,6 +35,27 @@ public class MainController {
 	
 	@FXML
 	private TextField userNameId;
+	
+	@FXML
+	private TextField firstNameId;
+	
+	@FXML
+	private TextField lastNameId;
+	
+	@FXML
+	private TextField addressId;
+	
+	@FXML
+	private TextField emailId;
+	
+	@FXML
+	private TextField phoneId;
+	
+	@FXML
+	private TextField userNameRegisterId;
+	
+	@FXML
+	private TextField passId;
 
 	public void Login (ActionEvent event) throws Exception{
 
@@ -128,5 +149,15 @@ public class MainController {
 //			userId.setText("");;
 //		}
 		System.out.println("Testing");
+	}
+	
+	public void ClearAll() {
+		firstNameId.setText("");
+		lastNameId.setText("");
+		addressId.setText("");
+		emailId.setText("");
+		phoneId.setText("");
+		userNameRegisterId.setText("");
+		passId.setText("");
 	}
 }
