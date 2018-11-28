@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Lab: Final Project
  * File name: CustomerOperation.java
  */
-public interface CustomerOperation {
+public interface CustomerOperations {
 	
 	/**
 	 * @param conId

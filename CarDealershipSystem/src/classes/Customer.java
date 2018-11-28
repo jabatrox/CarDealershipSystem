@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Lab: Final Project
  * File name: Customer.java
  */
-public class Customer extends Agent implements CustomerOperation {
+public class Customer extends Agent implements CustomerOperations {
 	
 	String address;
 	String email;
