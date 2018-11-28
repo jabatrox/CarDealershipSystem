@@ -38,7 +38,7 @@ public class MainController {
 			stmt = conn.connect().createStatement();
 			System.out.print("Checking for user in the database");
 			
-			String sql = "SELECT userType FROM userDB WHERE userName="+userId;
+			String sql = "SELECT userType FROM userDB WHERE userName="+userId.getText();
 			
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs == null) {
@@ -88,6 +88,11 @@ public class MainController {
 	}
 	
 	public void Register(ActionEvent event) throws Exception{
-		
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/Register.fxml"));
+		Scene scene = new Scene(root,400,400);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 }
