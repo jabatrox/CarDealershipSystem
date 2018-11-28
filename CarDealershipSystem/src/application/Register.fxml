@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
       <Label layoutX="209.0" layoutY="30.0" text="Registration page">
          <font>
@@ -20,13 +20,17 @@
       <Label layoutX="106.0" layoutY="94.0" text="First Name" />
       <Label layoutX="106.0" layoutY="138.0" text="Last Name" />
       <Label layoutX="106.0" layoutY="182.0" text="Address" />
-      <TextField fx:id="userNameId" layoutX="217.0" layoutY="309.0" onInputMethodTextChanged="#CheckUserName" />
+      <TextField fx:id="userNameId" layoutX="217.0" layoutY="309.0" />
       <Label layoutX="106.0" layoutY="226.0" text="Email" />
       <Label layoutX="106.0" layoutY="270.0" text="Phone Number" />
       <Label layoutX="106.0" layoutY="314.0" text="User Name" />
       <TextField fx:id="passId" layoutX="217.0" layoutY="353.0" />
       <Label layoutX="106.0" layoutY="358.0" text="Password" />
+<<<<<<< HEAD
       <Button layoutX="452.0" layoutY="89.0" mnemonicParsing="false" onAction="#RegisterCustomer" prefWidth="69.5" text="Register" />
+=======
+      <Button layoutX="452.0" layoutY="89.0" mnemonicParsing="false" onAction="#RegisterUser" prefWidth="69.5" text="Register" />
+>>>>>>> branch 'master' of https://github.com/jabatrox/CarDealershipSystem.git
       <Button layoutX="452.0" layoutY="133.0" mnemonicParsing="false" text="Clear All" />
    </children>
 </AnchorPane>
