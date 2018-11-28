@@ -5,6 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnect {
+<<<<<<< HEAD
+=======
+ 
+// Code database URL
+static final String DB_URL = "jdbc:sqlserver://dealershipserver.database.windows.net:1433;database=DealershipDB;user=root123@dealershipserver;password={Contraseña123};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30";
+// Database credentials
+static final String USER = "root123", PASS = "Contraseña123";
+>>>>>>> branch 'master' of https://github.com/jabatrox/CarDealershipSystem.git
 
 	// Code database URL
 	static final String DB_URL = "jdbc:sqlserver://dealershipserver.database.windows.net:1433;database=DealershipDB;user=root123;password={Contraseña123};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30";;
