@@ -12,11 +12,11 @@
          <font>
             <Font name="PT Sans" size="24.0" />
          </font></Label>
-      <TextField layoutX="217.0" layoutY="89.0" />
-      <TextField layoutX="217.0" layoutY="133.0" />
-      <TextField layoutX="217.0" layoutY="177.0" />
-      <TextField layoutX="217.0" layoutY="221.0" />
-      <TextField layoutX="217.0" layoutY="265.0" />
+      <TextField fx:id="firstNameId" layoutX="217.0" layoutY="89.0" />
+      <TextField fx:id="lastNameId" layoutX="217.0" layoutY="133.0" />
+      <TextField fx:id="addressId" layoutX="217.0" layoutY="177.0" />
+      <TextField fx:id="emailId" layoutX="217.0" layoutY="221.0" />
+      <TextField fx:id="phoneId" layoutX="217.0" layoutY="265.0" />
       <Label layoutX="106.0" layoutY="94.0" text="First Name" />
       <Label layoutX="106.0" layoutY="138.0" text="Last Name" />
       <Label layoutX="106.0" layoutY="182.0" text="Address" />
@@ -24,7 +24,7 @@
       <Label layoutX="106.0" layoutY="226.0" text="Email" />
       <Label layoutX="106.0" layoutY="270.0" text="Phone Number" />
       <Label layoutX="106.0" layoutY="314.0" text="User Name" />
-      <TextField layoutX="217.0" layoutY="353.0" />
+      <TextField fx:id="passId" layoutX="217.0" layoutY="353.0" />
       <Label layoutX="106.0" layoutY="358.0" text="Password" />
       <Button layoutX="452.0" layoutY="89.0" mnemonicParsing="false" onAction="#RegisterCustomer" prefWidth="69.5" text="Register" />
       <Button layoutX="452.0" layoutY="133.0" mnemonicParsing="false" text="Clear All" />
