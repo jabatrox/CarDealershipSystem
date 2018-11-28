@@ -40,7 +40,7 @@ public class MainController {
 			stmt = openDBconn.connect().createStatement();
 			System.out.print("Checking for user in the database");
 			
-			String sql = "SELECT userType FROM userDB WHERE userName="+userId.getText();
+			String sql = "SELECT userType FROM usersDB WHERE userName='"+userId.getText()+"'";
 			
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs == null) {
