@@ -12,7 +12,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = new BorderPane();
+			Parent root = FXMLLoader.Load(getClass().getResource("/application/Login.fxml"));
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -26,7 +26,7 @@ public class Main extends Application {
 		launch(args);
 		
 		// Introducir nombre y apellidos desde la interfaz
-		// VER CÓMO GENERAL EL ID CON LA BD!!!!
+		// VER Cï¿½MO GENERAL EL ID CON LA BD!!!!
 		Admin admin = new Admin(0, "NAME"/*getUserAgentStylesheet()*/, "LAST_NAME"/*getUserAgentStylesheet()*/);
 	}
 }

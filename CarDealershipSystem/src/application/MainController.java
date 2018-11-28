@@ -9,8 +9,12 @@ import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import models.DBConnect;
 
 public class MainController {
@@ -28,7 +32,7 @@ public class MainController {
 	@FXML
 	private TextField passwordId;
 	
-	public void Login(ActionEvent event) {
+	public void Login(ActionEvent event) throws Exception{
 		
 		try {
 			stmt = conn.connect().createStatement();
@@ -48,20 +52,42 @@ public class MainController {
 				case "c":
 				{
 					statusId.setText("Login is Correct...Redirecting to the customer interface");
+					Stage primaryStage = new Stage();
+					Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
+					Scene scene = new Scene(root,400,400);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					primaryStage.setScene(scene);
+					primaryStage.show();
 				}
 				case "s": 
 				{
 					statusId.setText("Login is Correct...Redirecting to the seller interface");
+					Stage primaryStage = new Stage();
+					Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
+					Scene scene = new Scene(root,400,400);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					primaryStage.setScene(scene);
+					primaryStage.show();
 				}
 				case "a":
 				{
 					statusId.setText("Login is Correct...Redirecting to the admin interface");
+					Stage primaryStage = new Stage();
+					Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
+					Scene scene = new Scene(root,400,400);
+					scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+					primaryStage.setScene(scene);
+					primaryStage.show();
 				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public void Register(ActionEvent event) throws Exception{
 		
 	}
 }
