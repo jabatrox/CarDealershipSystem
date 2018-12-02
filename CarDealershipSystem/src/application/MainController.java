@@ -27,7 +27,9 @@ public class MainController {
 	Statement stmt = null;
 	
 	static String nL = System.getProperty("line.separator");
-
+	
+	@FXML
+	private Label customerWelcomeId;
 
 	@FXML
 	private Label statusId;
@@ -83,7 +85,7 @@ public class MainController {
 			stmt = conn.createStatement();
 			System.out.print("Checking for user in the database");
 
-			String sql = "SELECT userType FROM usersDB WHERE userName='"+userId.getText()+"'";
+			String sql = "SELECT * FROM usersDB WHERE userName='"+userId.getText()+"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 //			conn.close();
@@ -98,12 +100,7 @@ public class MainController {
 					case "c":
 					{
 						statusId.setText("Correct login... Redirecting to the customer interface");
-						Stage primaryStage = new Stage();
-						Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
-						Scene scene = new Scene(root,600,400);
-						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-						primaryStage.setScene(scene);
-						primaryStage.show();
+						CustomerPage(event, rs.getString("userID"));
 					}
 					case "s": 
 					{
@@ -244,5 +241,43 @@ public class MainController {
 		usernameRegisterId.setStyle(null);
 		passId.setText("");
 		System.out.println("\nAll fields cleared!");
+	}
+	
+	public void ListAvailableCars(ActionEvent event) throws Exception{
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/ListCars.fxml"));
+		Scene scene = new Scene(root,600,400);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+	}
+	
+	public void CustomerPage(ActionEvent event, String userID) throws Exception {
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
+		Scene scene = new Scene(root,600,400);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+		conn = openDBconn.connect();
+		stmt = conn.createStatement();
+		
+		System.out.println("userId is: "+userID);
+		
+		String sql = "SELECT * FROM customer WHERE userDB_ID='"+userID+"'";
+		ResultSet rs = stmt.executeQuery(sql);
+		
+		if (rs.next()) {
+			System.out.println("No results");
+		}
+		
+		//System.out.println("First name is: "+rs.getString("firstName"));
+		String name = "Welcome "+rs.getString("firstName");
+		customerWelcomeId.setText(name);
+
+		
+		conn.close();
 	}
 }
