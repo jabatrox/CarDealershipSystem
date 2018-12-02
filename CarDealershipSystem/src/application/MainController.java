@@ -1,6 +1,9 @@
 package application;
 
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -37,8 +40,8 @@ public class MainController {
 	@FXML
 	private TextField userId;
 
-	@FXML
-	private TextField userNameId;
+//	@FXML
+//	private TextField userNameId;
 
 	@FXML
 	private TextField passwordId;
@@ -83,26 +86,27 @@ public class MainController {
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			System.out.print("Checking for user in the database");
+			System.out.println("Checking for user in the database...");
 
-			String sql = "SELECT * FROM usersDB WHERE userName='"+userId.getText()+"'";
+			String sql = "SELECT * FROM usersDB WHERE userName='"+userId.getText()+"' AND hashPass='"+passwordId.getText()+"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 //			conn.close();
 			if (!rs.next()) {
-				userId.setText("");
+				System.out.println("\\___The username/password combination is not correct");
 				passwordId.setText("");
 				statusId.setText("The username/password combination is not correct");
 			}
 			else {
+				System.out.println("User found!");
 				String response = rs.getString("userType");
 				switch(response) {
 					case "c":
 					{
 						statusId.setText("Correct login... Redirecting to the customer interface");
-						CustomerPage(rs.getString("userID"));
+//						CustomerPage(event/*,rs.getString("userID")*/);
+						break;
 					}
-					break;
 					case "s": 
 					{
 						statusId.setText("Correct login... Redirecting to the seller interface");
@@ -112,8 +116,8 @@ public class MainController {
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 						primaryStage.setScene(scene);
 						primaryStage.show();
+						break;
 					}
-					break;
 					case "a":
 					{
 						statusId.setText("Correct login... Redirecting to the admin interface");
@@ -123,8 +127,8 @@ public class MainController {
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 						primaryStage.setScene(scene);
 						primaryStage.show();
+						break;
 					}
-					break;
 				}
 			}
 		} catch (SQLException e) {
@@ -159,8 +163,11 @@ public class MainController {
 			checkEmail(emailId, emailLabel);
 			System.out.printf("    \\___Checking phone... ");
 			checkPhone(phoneId, phoneLabel);
-			System.out.printf("    \\___Checking username...");
+			System.out.printf("    \\___Checking username... ");
 			CheckUserName(usernameRegisterId, usernameRegisterLabel);
+			System.out.printf("    \\___Checking password... ");
+			checkPassword(passId, passLabel);
+//			get_SecurePassword(passId.getText());
 	//		passId.getText().isEmpty();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -171,14 +178,21 @@ public class MainController {
 	
 	public static boolean checkNamesAddress(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
 			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
 		}
+		input.setStyle(null);
 		System.out.println("OK");
 		return true;
 	}
 	
 	public static boolean checkEmail(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
 			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
 		}
 		// Regex pattern to valid email address
@@ -186,8 +200,11 @@ public class MainController {
 	    Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 	    Matcher matcher = pattern.matcher(input.getText());
 	    if (!matcher.matches()) {
+	    	input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Incorrect email format").show();
 	    	throw new IllegalArgumentException(" ---> Incorrect email format.");
 	    }
+	    input.setStyle(null);
 	    System.out.println("OK");
 	    return matcher.matches();
 	}
@@ -210,28 +227,74 @@ public class MainController {
 		if (input.getText().isEmpty()) {
 			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
 		}
+		String username = input.getText();
 		try {
+			System.out.printf("checking if \""+username+"\" is available... ");
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-
-			String sql = "SELECT username FROM usersDB WHERE userName='"+usernameRegisterId.getText()+"'";
+			
+			String sql = "SELECT username FROM usersDB WHERE userName='"+username+"'";
 			ResultSet rs = stmt.executeQuery(sql);
-			System.out.printf(nL+"        \\___Checking if username \""+usernameRegisterId.getText()+"\" is available... ");
 			if (rs.next()) {
-				System.out.println("---> Username \""+usernameRegisterId.getText()+"\" already exits,"
-						+ " please select a different one.");
-				usernameRegisterId.setStyle("-fx-border-color: red;");
-				new Alert(Alert.AlertType.WARNING, "Username "+usernameRegisterId.getText()
+				System.out.println("---> Username \""+username+"\" already exits, please select a different one.");
+				input.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Username "+username
 						+" already exits, please select a different one").showAndWait();
 			} else {
 				System.out.println("OK");
-				usernameRegisterId.setStyle(null);
+				input.setStyle(null);
 			}
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static boolean checkPassword(TextField input, Label inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		String password = input.getText();
+		boolean isAtLeast8   = password.length() >= 8; //Checks for at least 8 characters
+		boolean hasUppercase = !password.equals(password.toLowerCase()); //Checks for at least one uppercase characters
+		boolean hasLowercase = !password.equals(password.toUpperCase()); //Checks for at least one lowercase characters
+		boolean hasSpecial   = !password.matches("[A-Za-z0-9 ]*"); //Checks for at least non-alphanumeric character
+		boolean noConditions = !(password.contains("AND") || password.contains("NOT")); //Check that it doesn't contain AND or NOT
+		
+		if (isAtLeast8 && hasUppercase && hasLowercase && hasSpecial && noConditions) {
+			try {
+				get_SecurePassword(password);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			throw new IllegalArgumentException(" ---> Invalid password: must have at least 8 characters, with one uppercase, "
+					+ "one lowercase, and one non-alphanumeric character.");
+		}
+		System.out.println("OK");
+		return true;
+	}
+
+	// Password hashing function
+	public static String get_SecurePassword(String passwordToHash) throws UnsupportedEncodingException {
+		String generatedPassword = passwordToHash;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+			byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			for(int i=0; i< bytes.length ;i++){
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			generatedPassword = sb.toString();
+		} 
+		catch (NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}
+		return generatedPassword;
+
 	}
 	
 	public void ClearAll() {
@@ -245,43 +308,5 @@ public class MainController {
 		passId.setText("");
 		System.out.println("\nAll fields cleared!");
 	}
-	
-	public void ListAvailableCars(ActionEvent event) throws Exception{
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/application/ListCars.fxml"));
-		Scene scene = new Scene(root,600,400);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-	}
-	
-	public void CustomerPage (String userID) throws Exception {
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
-		Scene scene = new Scene(root,600,400);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-		conn = openDBconn.connect();
-		stmt = conn.createStatement();
-		
-		System.out.println("userId is: "+userID);
-		
-		String sql = "SELECT * FROM customer WHERE userDB_ID='"+userID+"'";
-		ResultSet rs = stmt.executeQuery(sql);
-		
-		if (rs.next()) {
-			System.out.println("No results");
-		}
-		
-		//System.out.println("First name is: "+rs.getString("firstName"));
-		String name = "Welcome "+rs.getString("firstName");
-		passwordId.getText();
-		firstNameId.getText();
-		customerWelcomeId.setText(name);
-		
-		conn.close();
-	}
+
 }

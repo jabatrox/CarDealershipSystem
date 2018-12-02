@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -7,14 +8,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <Button fx:id="loginId" layoutX="271.0" layoutY="233.0" mnemonicParsing="false" onAction="#Login" text="Login">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Button>
-      <Label layoutX="173.0" layoutY="54.0" prefHeight="47.0" prefWidth="254.0" text="Car Dealership System" textAlignment="CENTER" textOverrun="CLIP">
+      <Group layoutX="149.0" layoutY="210.0">
+         <children>
+            <Button fx:id="loginId" mnemonicParsing="false" onAction="#Login" text="Login">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="registerId" layoutX="53.0" mnemonicParsing="false" onAction="#RegisterPage" text="Register">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </Group>
+      <AnchorPane layoutX="38.0" layoutY="92.0">
+         <children>
+            <TextField fx:id="userId" onAction="#Login" promptText="Username">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="passwordId" layoutY="52.0" onAction="#Login" promptText="Password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </PasswordField>
+         </children>
+      </AnchorPane>
+      <Label contentDisplay="CENTER" layoutX="20.0" layoutY="21.0" text="Car Dealership System" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font name="PT Sans" size="26.0" />
          </font>
@@ -24,20 +48,5 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="userId" layoutX="184.0" layoutY="121.0" promptText="Username">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="passwordId" layoutX="184.0" layoutY="173.0" promptText="Password">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </PasswordField>
-      <Button fx:id="registerId" layoutX="263.0" layoutY="272.0" mnemonicParsing="false" onAction="#RegisterPage" text="Register">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
