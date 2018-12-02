@@ -119,6 +119,7 @@ public class MainController extends Application {
 				String response = rs.getString("userType");
 				switch(response) {
 					case "c":
+					case "C":
 					{
 						statusId.setText("");
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Customer.fxml"));
@@ -134,7 +135,8 @@ public class MainController extends Application {
 						stage.show();
 						break;
 					}
-					case "s": 
+					case "s":
+					case "S":
 					{
 						statusId.setText("");
 						Stage primaryStage = new Stage();
@@ -146,6 +148,7 @@ public class MainController extends Application {
 						break;
 					}
 					case "a":
+					case "A":
 					{
 						statusId.setText("");
 						Stage primaryStage = new Stage();
