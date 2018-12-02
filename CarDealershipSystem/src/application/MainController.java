@@ -152,9 +152,9 @@ public class MainController {
 //			userNameRegisterId.setStyle("-fx-background-color: red;");
 			userNameRegisterId.setStyle("-fx-border-color: red;");
 		} else {
-			System.out.println("    \\___Username "+userNameRegisterId.getText()+" is correct.");
+			System.out.println("    \\___Username "+userNameRegisterId.getText()+" is available.");
+			System.out.println("New user added.");
 		}
-		System.out.println("New user added.");
 	}
 
 	public void CheckUserName(ActionEvent event) throws Exception {

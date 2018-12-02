@@ -97,6 +97,7 @@ public class DaoModel {
 			    					"  address VARCHAR(100) NOT NULL,\n" + 
 			    					"  email VARCHAR(50) NOT NULL,\n" + 
 			    					"  phone VARCHAR(20) NOT NULL,\n" + 
+			    					"  userDB_ID INTEGER NOT NULL REFERENCES usersDB(userID),\n" +
 			    					"  PRIMARY KEY(custID)\n" + 
 			    					");";
 			                break;
@@ -105,6 +106,7 @@ public class DaoModel {
 			    					"  userID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  username VARCHAR(50) NOT NULL,\n" + 
 			    					"  userType CHAR(1) NOT NULL\n" + 
+			    					"  hashPass CHAR(64) NOT NULL,\n" + 
 			    					"  PRIMARY KEY(userID)\n" + 
 			    					");";
 			                break;
@@ -113,7 +115,7 @@ public class DaoModel {
 			    					"  adminID INTEGER NOT NULL IDENTITY,\n" + 
 			    					"  firstName VARCHAR(50) NOT NULL,\n" + 
 			    					"  lastName VARCHAR(50) NOT NULL,\n" + 
-			    					"  hashPass CHAR(64) NOT NULL,\n" + 
+			    					"  userDB_ID INTEGER NOT NULL REFERENCES usersDB(userID),\n" +
 			    					"  PRIMARY KEY(adminID)\n" + 
 			    					");";
 			                break;
@@ -123,6 +125,7 @@ public class DaoModel {
 			    					"  firstName VARCHAR(50) NOT NULL,\n" + 
 			    					"  lastName VARCHAR(50) NOT NULL,\n" + 
 			    					"  conID INTEGER NOT NULL REFERENCES concessionaire(conID),\n" + 
+			    					"  userDB_ID INTEGER NOT NULL REFERENCES usersDB(userID),\n" +
 			    					"  PRIMARY KEY(sellerID)\n" + 
 			    					");";
 			                break;
