@@ -91,11 +91,6 @@ public class CustomerController implements Initializable{
 	 public void CustomerPage (ActionEvent event) throws Exception {
 		 Stage primaryStage = new Stage();
 		 Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
-		 //ObservableList<String> availableChoices = FXCollections.observableArrayList("Diesel","Hybrid","Gasoline","Diesel"); 
-		 //engineTypes.setItems(availableChoices);
-		 //engineTypes.getSelectionModel().setSelectedItem("Diesel");
-		 //engineTypes.setItems(FXCollections.observableArrayList("Diesel","Hybrid","Gasoline","Diesel"));
-		 //engineTypes.getSelectionModel().selectFirst();
 		 Scene scene = new Scene(root,600,400);
 		 scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		 primaryStage.setScene(scene);
