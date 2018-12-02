@@ -149,7 +149,8 @@ public class MainController {
 					+ " please select a different one.");
 			new Alert(Alert.AlertType.WARNING, "Username "+userNameRegisterId.getText()
 					+" already exits, please select a different one").showAndWait();
-			userNameRegisterId.setStyle("-fx-background-color: red;");
+//			userNameRegisterId.setStyle("-fx-background-color: red;");
+			userNameRegisterId.setStyle("-fx-border-color: red;");
 		} else {
 			System.out.println("    \\___Username "+userNameRegisterId.getText()+" is correct.");
 		}
