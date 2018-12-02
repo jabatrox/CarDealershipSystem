@@ -51,51 +51,46 @@ public class MainController extends Application {
 	static String nL = System.getProperty("line.separator");
 	
 	@FXML
-	private Label statusId;
+	private Label statusLoginID;
+	@FXML
+	private TextField usernameLoginID;
+	@FXML
+	private TextField passwordLoginID;
 
 	@FXML
-	private TextField userId;
-
-//	@FXML
-//	private TextField userNameId;
-
+	private TextField firstNameRegisterID;
 	@FXML
-	private TextField passwordId;
+	private Label firstNameRegisterLabel;
 
 	@FXML
-	private TextField firstNameId;
+	private TextField lastNameRegisterID;	
 	@FXML
-	private Label firstNameLabel;
+	private Label lastNameRegisterLabel;
 
 	@FXML
-	private TextField lastNameId;	
+	private TextField addressRegisterID;
 	@FXML
-	private Label lastNameLabel;
+	private Label addressRegisterLabel;
 
 	@FXML
-	private TextField addressId;
+	private TextField emailRegisterID;
 	@FXML
-	private Label addressLabel;
+	private Label emailRegisterLabel;
 
 	@FXML
-	private TextField emailId;
+	private TextField phoneRegisterID;
 	@FXML
-	private Label emailLabel;
+	private Label phoneRegisterLabel;
 
 	@FXML
-	private TextField phoneId;
-	@FXML
-	private Label phoneLabel;
-
-	@FXML
-	private TextField usernameRegisterId;
+	private TextField usernameRegisterID;
 	@FXML
 	private Label usernameRegisterLabel;
 
 	@FXML
-	private TextField passId;
+	private TextField passwordRegisterID;
 	@FXML
-	private Label passLabel;
+	private Label passwordRegisterLabel;
 	
 	
 	public void Login (ActionEvent event) throws Exception{
@@ -105,14 +100,14 @@ public class MainController extends Application {
 			stmt = conn.createStatement();
 			System.out.println("Checking for user in the database...");
 
-			String sql = "SELECT * FROM usersDB WHERE userName='"+userId.getText()+"' AND hashPass='"+get_SecurePassword(passwordId.getText())+"'";
+			String sql = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+"' AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 //			conn.close();
 			if (!rs.next()) {
 				System.out.println("\\___Login failed: wrong username/password");
-				passwordId.setText("");
-				statusId.setText("Login failed: wrong username/password");
+				passwordLoginID.setText("");
+				statusLoginID.setText("Login failed: wrong username/password");
 			}
 			else {
 				System.out.println("User found!");
@@ -121,7 +116,7 @@ public class MainController extends Application {
 					case "c":
 					case "C":
 					{
-						statusId.setText("");
+						statusLoginID.setText("");
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Customer.fxml"));
 						Stage stage = new Stage();
 						Region root = (Region) loader.load();
@@ -138,7 +133,7 @@ public class MainController extends Application {
 					case "s":
 					case "S":
 					{
-						statusId.setText("");
+						statusLoginID.setText("");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
 						Scene scene = new Scene(root,600,400);
@@ -150,7 +145,7 @@ public class MainController extends Application {
 					case "a":
 					case "A":
 					{
-						statusId.setText("");
+						statusLoginID.setText("");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
 						Scene scene = new Scene(root,600,400);
@@ -184,19 +179,19 @@ public class MainController extends Application {
 			// Check if all fields have content
 			System.out.println("\\___Checking fields...");
 			System.out.printf("    \\___Checking firstname... ");
-			checkNamesAddress(firstNameId, firstNameLabel);
+			checkNamesAddress(firstNameRegisterID, firstNameRegisterLabel);
 			System.out.printf("    \\___Checking lastname... ");
-			checkNamesAddress(lastNameId, lastNameLabel);
+			checkNamesAddress(lastNameRegisterID, lastNameRegisterLabel);
 			System.out.printf("    \\___Checking address... ");
-			checkNamesAddress(addressId, addressLabel);
+			checkNamesAddress(addressRegisterID, addressRegisterLabel);
 			System.out.printf("    \\___Checking email... ");
-			checkEmail(emailId, emailLabel);
+			checkEmail(emailRegisterID, emailRegisterLabel);
 			System.out.printf("    \\___Checking phone... ");
-			checkPhone(phoneId, phoneLabel);
+			checkPhone(phoneRegisterID, phoneRegisterLabel);
 			System.out.printf("    \\___Checking username... ");
-			CheckUserName(usernameRegisterId, usernameRegisterLabel);
+			CheckUserName(usernameRegisterID, usernameRegisterLabel);
 			System.out.printf("    \\___Checking password... ");
-			checkPassword(passId, passLabel);
+			checkPassword(passwordRegisterID, passwordRegisterLabel);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
@@ -206,14 +201,14 @@ public class MainController extends Application {
 			stmt = conn.createStatement();
 			
 			String sql_usersDB = "INSERT INTO usersDB (username, userType, hashPass) VALUES "
-							+ "('"+usernameRegisterId.getText()+"',"
+							+ "('"+usernameRegisterID.getText()+"',"
 							+ "'C',"
-							+ "'"+get_SecurePassword(passId.getText())+"');";
+							+ "'"+get_SecurePassword(passwordRegisterID.getText())+"');";
 			stmt.executeUpdate(sql_usersDB);
 			
 //			String sql_getUserID = "SELECT * FROM usersDB WHERE userName='"+usernameRegisterId.getText()+"' "
 //					+ "AND hashPass='"+get_SecurePassword(passId.getText())+"'";
-			String sql_getUserID = "SELECT * FROM usersDB WHERE userName='"+usernameRegisterId.getText()+"'";
+			String sql_getUserID = "SELECT * FROM usersDB WHERE userName='"+usernameRegisterID.getText()+"'";
 			ResultSet rs = stmt.executeQuery(sql_getUserID);
 			if (!rs.next()) {
 				System.out.println("Sin resultados");
@@ -222,11 +217,11 @@ public class MainController extends Application {
 			String response = rs.getString("userID");
 			
 			String sql_customer = "INSERT INTO customer (firstName, lastName, address, email, phone, userDB_ID) VALUES "
-							+ "('"+firstNameId.getText()+"',"
-							+ "'"+lastNameId.getText()+"',"
-							+ "'"+addressId.getText()+"',"
-							+ "'"+emailId.getText()+"',"
-							+ "'"+phoneId.getText()+"',"
+							+ "('"+firstNameRegisterID.getText()+"',"
+							+ "'"+lastNameRegisterID.getText()+"',"
+							+ "'"+addressRegisterID.getText()+"',"
+							+ "'"+emailRegisterID.getText()+"',"
+							+ "'"+phoneRegisterID.getText()+"',"
 							+ "'"+response+"')";
 			stmt.executeUpdate(sql_customer);
 			conn.close();
@@ -373,14 +368,26 @@ public class MainController extends Application {
 	}
 	
 	public void ClearAll() {
-		firstNameId.setText("");
-		lastNameId.setText("");
-		addressId.setText("");
-		emailId.setText("");
-		phoneId.setText("");
-		usernameRegisterId.setText("");
-		usernameRegisterId.setStyle(null);
-		passId.setText("");
+		firstNameRegisterID.setText("");
+		firstNameRegisterID.setStyle(null);
+		
+		lastNameRegisterID.setText("");
+		lastNameRegisterID.setStyle(null);
+		
+		addressRegisterID.setText("");
+		addressRegisterID.setStyle(null);
+		
+		emailRegisterID.setText("");
+		emailRegisterID.setStyle(null);
+		
+		phoneRegisterID.setText("");
+		phoneRegisterID.setStyle(null);
+		
+		usernameRegisterID.setText("");
+		usernameRegisterID.setStyle(null);
+		
+		passwordRegisterID.setText("");
+		passwordRegisterID.setStyle(null);
 		System.out.println("\nAll fields cleared!");
 	}
 
