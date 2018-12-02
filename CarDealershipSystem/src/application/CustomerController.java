@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,6 +102,8 @@ public class CustomerController implements Initializable{
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
 			Boolean f = false;
+			engineTypes.setItems(FXCollections.observableArrayList("Diesel","Hybrid","Gasoline","Diesel"));
+			engineTypes.getSelectionModel().selectFirst();
 			
 			//Check data
 			String br = brand.getText();
