@@ -43,7 +43,6 @@ public class MainController extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
 
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();
@@ -98,7 +97,7 @@ public class MainController extends Application {
 	@FXML
 	private Label passLabel;
 	
-
+	
 	public void Login (ActionEvent event) throws Exception{
 
 		try {
@@ -106,12 +105,12 @@ public class MainController extends Application {
 			stmt = conn.createStatement();
 			System.out.println("Checking for user in the database...");
 
-			String sql = "SELECT * FROM usersDB WHERE userName='"+userId.getText()+"' AND hashPass='"+passwordId.getText()+"'";
+			String sql = "SELECT * FROM usersDB WHERE userName='"+userId.getText()+"' AND hashPass='"+get_SecurePassword(passwordId.getText())+"'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 //			conn.close();
 			if (!rs.next()) {
-				System.out.println("\\___The username/password combination is not correct");
+				System.out.println("\\___Login failed: wrong username/password");
 				passwordId.setText("");
 				statusId.setText("Login failed: wrong username/password");
 			}
@@ -121,17 +120,13 @@ public class MainController extends Application {
 				switch(response) {
 					case "c":
 					{
-						System.out.println("userId is: "+rs.getString("userID"));
-						
+						statusId.setText("");
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Customer.fxml"));
 						Stage stage = new Stage();
 						Region root = (Region) loader.load();
 						CustomerController cController = loader.<CustomerController>getController();
 						cController.initData(rs.getString("userID"));
 
-						statusId.setText("Correct login... Redirecting to the customer interface");
-						
-						
 						Scene scene = new Scene(root,600,400);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 						stage.setScene(scene);
@@ -142,7 +137,6 @@ public class MainController extends Application {
 					case "s": 
 					{
 						statusId.setText("");
-//						statusId.setText("Correct login... Redirecting to the seller interface");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
 						Scene scene = new Scene(root,600,400);
@@ -154,7 +148,6 @@ public class MainController extends Application {
 					case "a":
 					{
 						statusId.setText("");
-//						statusId.setText("Correct login... Redirecting to the admin interface");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
 						Scene scene = new Scene(root,600,400);
@@ -201,16 +194,48 @@ public class MainController extends Application {
 			CheckUserName(usernameRegisterId, usernameRegisterLabel);
 			System.out.printf("    \\___Checking password... ");
 			checkPassword(passId, passLabel);
-//			get_SecurePassword(passId.getText());
-	//		passId.getText().isEmpty();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
 		}
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			String sql_usersDB = "INSERT INTO usersDB (username, userType, hashPass) VALUES "
+							+ "('"+usernameRegisterId.getText()+"',"
+							+ "'C',"
+							+ "'"+get_SecurePassword(passId.getText())+"');";
+			stmt.executeUpdate(sql_usersDB);
+			
+//			String sql_getUserID = "SELECT * FROM usersDB WHERE userName='"+usernameRegisterId.getText()+"' "
+//					+ "AND hashPass='"+get_SecurePassword(passId.getText())+"'";
+			String sql_getUserID = "SELECT * FROM usersDB WHERE userName='"+usernameRegisterId.getText()+"'";
+			ResultSet rs = stmt.executeQuery(sql_getUserID);
+			if (!rs.next()) {
+				System.out.println("Sin resultados");
+				return;
+			}
+			String response = rs.getString("userID");
+			
+			String sql_customer = "INSERT INTO customer (firstName, lastName, address, email, phone, userDB_ID) VALUES "
+							+ "('"+firstNameId.getText()+"',"
+							+ "'"+lastNameId.getText()+"',"
+							+ "'"+addressId.getText()+"',"
+							+ "'"+emailId.getText()+"',"
+							+ "'"+phoneId.getText()+"',"
+							+ "'"+response+"')";
+			stmt.executeUpdate(sql_customer);
+			conn.close();
+		} catch (SQLException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return; 
+		}
 		System.out.println("New user added.");
 	}
 	
-	public static boolean checkNamesAddress(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public void checkNamesAddress(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
@@ -219,10 +244,9 @@ public class MainController extends Application {
 		}
 		input.setStyle(null);
 		System.out.println("OK");
-		return true;
 	}
 	
-	public static boolean checkEmail(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public void checkEmail(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
@@ -240,25 +264,34 @@ public class MainController extends Application {
 	    }
 	    input.setStyle(null);
 	    System.out.println("OK");
-	    return matcher.matches();
 	}
 	
-	public static boolean checkPhone(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public void checkPhone(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
 			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
 		}
 		if (!input.getText().matches("\\d{9,13}")) {
 			if (input.getText().length() < 9 || input.getText().length() > 13) {
+				input.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Incorrect phone format: phone length is not valid").show();
 				throw new IllegalArgumentException(" ---> Incorrect phone format: phone length is not valid.");
 			}
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Incorrect phone format: must be numbers 0-9").show();
 			throw new IllegalArgumentException(" ---> Incorrect phone format: must be numbers 0-9.");
 		}
+		input.setStyle(null);
 		System.out.println("OK");
-		return true;
 	}
 
 	public void CheckUserName(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
 			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
 		}
 		String username = input.getText();
@@ -270,14 +303,13 @@ public class MainController extends Application {
 			String sql = "SELECT username FROM usersDB WHERE userName='"+username+"'";
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next()) {
-				System.out.println("---> Username \""+username+"\" already exits, please select a different one.");
 				input.setStyle("-fx-border-color: red;");
 				new Alert(Alert.AlertType.ERROR, "Username "+username
-						+" already exits, please select a different one").showAndWait();
-			} else {
-				System.out.println("OK");
-				input.setStyle(null);
+						+" already exits, please select a different one").show();
+				throw new IllegalArgumentException("Username "+username+" already exits, please select a different one.");
 			}
+			input.setStyle(null);
+			System.out.println("OK");
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -285,8 +317,11 @@ public class MainController extends Application {
 		}
 	}
 	
-	public static boolean checkPassword(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public void checkPassword(TextField input, Label inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
 			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
 		}
 		String password = input.getText();
@@ -294,7 +329,7 @@ public class MainController extends Application {
 		boolean hasUppercase = !password.equals(password.toLowerCase()); //Checks for at least one uppercase characters
 		boolean hasLowercase = !password.equals(password.toUpperCase()); //Checks for at least one lowercase characters
 		boolean hasSpecial   = !password.matches("[A-Za-z0-9 ]*"); //Checks for at least non-alphanumeric character
-		boolean noConditions = !(password.contains("AND") || password.contains("NOT")); //Check that it doesn't contain AND or NOT
+		boolean noConditions = !(password.contains("AND ") || password.contains("NOT ")); //Check that it doesn't contain AND or NOT
 		
 		if (isAtLeast8 && hasUppercase && hasLowercase && hasSpecial && noConditions) {
 			try {
@@ -304,11 +339,14 @@ public class MainController extends Application {
 				e.printStackTrace();
 			}
 		} else {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Invalid password: must have at least 8 characters, with one uppercase, "
+					+ "one lowercase, and one non-alphanumeric character").show();
 			throw new IllegalArgumentException(" ---> Invalid password: must have at least 8 characters, with one uppercase, "
 					+ "one lowercase, and one non-alphanumeric character.");
 		}
+		input.setStyle(null);
 		System.out.println("OK");
-		return true;
 	}
 
 	// Password hashing function

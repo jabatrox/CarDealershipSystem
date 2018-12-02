@@ -31,6 +31,7 @@ public class CustomerController implements Initializable{
 	@FXML
 	private Label customerWelcomeId;
 	
+	@FXML
 	private String userID;
 	
 	
@@ -41,36 +42,25 @@ public class CustomerController implements Initializable{
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-		
 	}
 	
 	void initData(String userID) {
 		try {
 			conn = openDBconn.connect();
-		
 			stmt = conn.createStatement();
-			System.out.println("userId is: "+userID);
 			
-				String sql = "SELECT * FROM customer WHERE userDB_ID='"+userID+"'";
-				ResultSet rs = stmt.executeQuery(sql);
-				
-				if (rs.next()) {
-					System.out.println("No results");
-				}
-				
-				//System.out.println("First name is: "+rs.getString("firstName"));
+			String sql = "SELECT * FROM customer WHERE userDB_ID='"+userID+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
 				String name = "Welcome "+rs.getString("firstName");
-				//passwordId.getText();
-				//firstNameId.getText();
 				customerWelcomeId.setText(name);
-				
-				conn.close();
-				
+			}
+			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	  }
+	 }
 	 public void ListAvailableCars(ActionEvent event) throws Exception{
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/ListCars.fxml"));
@@ -78,8 +68,7 @@ public class CustomerController implements Initializable{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-		}
+	}
 	 
 	 public void SellCar(ActionEvent event) throws Exception{
 			Stage primaryStage = new Stage();
@@ -88,8 +77,7 @@ public class CustomerController implements Initializable{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
-		}
+	}
 	 
 	 public void CustomerPage (ActionEvent event) throws Exception {
 		 Stage primaryStage = new Stage();
@@ -115,8 +103,5 @@ public class CustomerController implements Initializable{
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-	
-	
-	
 
 }
