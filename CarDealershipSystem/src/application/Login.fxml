@@ -43,7 +43,7 @@
             <Font name="PT Sans" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="statusId" alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="321.0" prefHeight="15.0" prefWidth="534.0" textAlignment="CENTER" textFill="#d71010">
+      <Label fx:id="statusId" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="66.0" prefHeight="17.0" prefWidth="224.0" textAlignment="CENTER" textFill="#d71010">
          <font>
             <Font size="12.0" />
          </font>

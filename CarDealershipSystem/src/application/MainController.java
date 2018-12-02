@@ -32,10 +32,7 @@ public class MainController {
 	static String nL = System.getProperty("line.separator");
 	
 	@FXML
-	private Label customerWelcomeId;
-
-	@FXML
-	private Label statusId;
+	private Label customerWelcomeId, statusId;
 
 	@FXML
 	private TextField userId;
@@ -95,7 +92,7 @@ public class MainController {
 			if (!rs.next()) {
 				System.out.println("\\___The username/password combination is not correct");
 				passwordId.setText("");
-				statusId.setText("The username/password combination is not correct");
+				statusId.setText("Login failed: wrong username/password");
 			}
 			else {
 				System.out.println("User found!");
@@ -103,13 +100,15 @@ public class MainController {
 				switch(response) {
 					case "c":
 					{
-						statusId.setText("Correct login... Redirecting to the customer interface");
+						statusId.setText("");
+//						statusId.setText("Correct login... Redirecting to the customer interface");
 //						CustomerPage(event/*,rs.getString("userID")*/);
 						break;
 					}
 					case "s": 
 					{
-						statusId.setText("Correct login... Redirecting to the seller interface");
+						statusId.setText("");
+//						statusId.setText("Correct login... Redirecting to the seller interface");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
 						Scene scene = new Scene(root,600,400);
@@ -120,7 +119,8 @@ public class MainController {
 					}
 					case "a":
 					{
-						statusId.setText("Correct login... Redirecting to the admin interface");
+						statusId.setText("");
+//						statusId.setText("Correct login... Redirecting to the admin interface");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
 						Scene scene = new Scene(root,600,400);
