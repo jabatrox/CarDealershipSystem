@@ -12,7 +12,7 @@
       <MenuButton layoutX="347.0" layoutY="131.0" mnemonicParsing="false" text="What would you like to do?">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#ListAvailableCars" text="View Availabe Cars" />
-          <MenuItem mnemonicParsing="false" text="Sell your car" />
+          <MenuItem mnemonicParsing="false" onAction="#SellCar" text="Sell your car" />
         </items>
       </MenuButton>
       <Text layoutX="91.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduction to the customer view explaining available operations" wrappingWidth="123.7353515625" />

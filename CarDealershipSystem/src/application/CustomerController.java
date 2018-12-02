@@ -80,6 +80,17 @@ public class CustomerController implements Initializable{
 			primaryStage.show();
 			
 		}
+	 
+	 public void SellCar(ActionEvent event) throws Exception{
+			Stage primaryStage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("/application/Customer_Sell_Car.fxml"));
+			Scene scene = new Scene(root,600,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			
+		}
+	 
 	 public void CustomerPage (ActionEvent event) throws Exception {
 		 Stage primaryStage = new Stage();
 		 Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));

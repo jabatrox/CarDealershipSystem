@@ -43,6 +43,7 @@ public class MainController extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();
@@ -96,6 +97,7 @@ public class MainController extends Application {
 	private TextField passId;
 	@FXML
 	private Label passLabel;
+	
 
 	public void Login (ActionEvent event) throws Exception{
 
