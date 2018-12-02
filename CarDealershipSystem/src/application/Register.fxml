@@ -9,25 +9,53 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
+      <AnchorPane layoutX="106.0" layoutY="89.0">
+         <children>
+            <TextField fx:id="firstNameId" layoutX="111.0" />
+            <Label fx:id="firstNameLabel" layoutY="5.0" text="First Name" />
+         </children>
+      </AnchorPane>
       <Label layoutX="209.0" layoutY="30.0" text="Registration page">
          <font>
             <Font name="PT Sans" size="24.0" />
          </font></Label>
-      <TextField fx:id="firstNameId" layoutX="217.0" layoutY="89.0" />
-      <TextField fx:id="lastNameId" layoutX="217.0" layoutY="133.0" />
-      <TextField fx:id="addressId" layoutX="217.0" layoutY="177.0" />
-      <TextField fx:id="emailId" layoutX="217.0" layoutY="221.0" />
-      <TextField fx:id="phoneId" layoutX="217.0" layoutY="265.0" />
-      <Label layoutX="106.0" layoutY="94.0" text="First Name" />
-      <Label layoutX="106.0" layoutY="138.0" text="Last Name" />
-      <Label blendMode="DARKEN" layoutX="106.0" layoutY="182.0" text="Address" />
-      <TextField fx:id="userNameRegisterId" layoutX="217.0" layoutY="309.0" />
-      <Label layoutX="106.0" layoutY="226.0" text="Email" />
-      <Label layoutX="106.0" layoutY="270.0" text="Phone Number" />
-      <Label layoutX="106.0" layoutY="314.0" text="User Name" />
-      <Label layoutX="106.0" layoutY="358.0" text="Password" />
+      <AnchorPane layoutX="106.0" layoutY="133.0">
+         <children>
+            <TextField fx:id="lastNameId" layoutX="111.0" />
+            <Label fx:id="lastNameLabel" layoutY="5.0" text="Last Name" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="106.0" layoutY="177.0">
+         <children>
+            <TextField fx:id="addressId" layoutX="111.0" />
+            <Label fx:id="addressLabel" blendMode="DARKEN" layoutY="5.0" text="Address" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="106.0" layoutY="221.0">
+         <children>
+            <TextField fx:id="emailId" layoutX="111.0" />
+            <Label fx:id="emailLabel" layoutY="5.0" text="Email" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="106.0" layoutY="265.0">
+         <children>
+            <TextField fx:id="phoneId" layoutX="111.0" />
+            <Label fx:id="phoneLabel" layoutY="5.0" text="Phone Number" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="106.0" layoutY="309.0">
+         <children>
+            <TextField fx:id="usernameRegisterId" layoutX="111.0" />
+            <Label fx:id="usernameRegisterLabel" layoutY="5.0" text="Username" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="106.0" layoutY="353.0">
+         <children>
+            <Label fx:id="passLabel" layoutY="5.0" text="Password" />
+            <PasswordField fx:id="passId" layoutX="111.0" />
+         </children>
+      </AnchorPane>
       <Button layoutX="452.0" layoutY="89.0" mnemonicParsing="false" onAction="#RegisterUser" prefWidth="69.5" text="Register" />
       <Button layoutX="452.0" layoutY="133.0" mnemonicParsing="false" onAction="#ClearAll" text="Clear All" />
-      <PasswordField fx:id="passId" layoutX="217.0" layoutY="353.0" />
    </children>
 </AnchorPane>

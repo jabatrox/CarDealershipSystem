@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +25,8 @@ public class MainController {
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();
 	Statement stmt = null;
+	
+	static String nL = System.getProperty("line.separator");
 
 
 	@FXML
@@ -32,31 +36,45 @@ public class MainController {
 	private TextField userId;
 
 	@FXML
-	private TextField passwordId;
-	
-	@FXML
 	private TextField userNameId;
-	
+
+	@FXML
+	private TextField passwordId;
+
 	@FXML
 	private TextField firstNameId;
-	
 	@FXML
-	private TextField lastNameId;
-	
+	private Label firstNameLabel;
+
+	@FXML
+	private TextField lastNameId;	
+	@FXML
+	private Label lastNameLabel;
+
 	@FXML
 	private TextField addressId;
-	
+	@FXML
+	private Label addressLabel;
+
 	@FXML
 	private TextField emailId;
-	
+	@FXML
+	private Label emailLabel;
+
 	@FXML
 	private TextField phoneId;
-	
 	@FXML
-	private TextField userNameRegisterId;
-	
+	private Label phoneLabel;
+
+	@FXML
+	private TextField usernameRegisterId;
+	@FXML
+	private Label usernameRegisterLabel;
+
 	@FXML
 	private TextField passId;
+	@FXML
+	private Label passLabel;
 
 	public void Login (ActionEvent event) throws Exception{
 
@@ -125,51 +143,95 @@ public class MainController {
 		primaryStage.show();
 	}
 	
-	public void RegisterUser (ActionEvent event) throws Exception{
-		System.out.println("Adding new user...");
+	public void RegisterUser () {
+		System.out.println("\nAdding new user...");
 		
-		// Check if all fields have content
-//		firstNameId.getText().isEmpty();
-//		lastNameId.getText().isEmpty();
-//		addressId.getText().isEmpty();
-//		emailId.getText().isEmpty();
-//		phoneId.getText().isEmpty();
-//		userNameRegisterId.getText().isEmpty();
-//		passId.getText().isEmpty();
-		
-		conn = openDBconn.connect();
-		stmt = conn.createStatement();
-
-		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameRegisterId.getText()+"'";
-		ResultSet rs = stmt.executeQuery(sql);
-//		conn.close();
-		System.out.println("\\___Checking for username "+userNameRegisterId.getText()+"...");
-		if (rs.next()) {
-			System.out.println("   \\___Username "+userNameRegisterId.getText()+" already exits,"
-					+ " please select a different one.");
-			new Alert(Alert.AlertType.WARNING, "Username "+userNameRegisterId.getText()
-					+" already exits, please select a different one").showAndWait();
-//			userNameRegisterId.setStyle("-fx-background-color: red;");
-			userNameRegisterId.setStyle("-fx-border-color: red;");
-		} else {
-			System.out.println("    \\___Username "+userNameRegisterId.getText()+" is available.");
-			System.out.println("New user added.");
+		try {
+			// Check if all fields have content
+			System.out.println("\\___Checking fields...");
+			System.out.printf("    \\___Checking firstname... ");
+			checkNamesAddress(firstNameId, firstNameLabel);
+			System.out.printf("    \\___Checking lastname... ");
+			checkNamesAddress(lastNameId, lastNameLabel);
+			System.out.printf("    \\___Checking address... ");
+			checkNamesAddress(addressId, addressLabel);
+			System.out.printf("    \\___Checking email... ");
+			checkEmail(emailId, emailLabel);
+			System.out.printf("    \\___Checking phone... ");
+			checkPhone(phoneId, phoneLabel);
+			System.out.printf("    \\___Checking username...");
+			CheckUserName(usernameRegisterId, usernameRegisterLabel);
+	//		passId.getText().isEmpty();
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
 		}
+		System.out.println("New user added.");
+	}
+	
+	public static boolean checkNamesAddress(TextField input, Label inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		System.out.println("OK");
+		return true;
+	}
+	
+	public static boolean checkEmail(TextField input, Label inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		// Regex pattern to valid email address
+	    String EMAIL_REGEX="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+	    Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+	    Matcher matcher = pattern.matcher(input.getText());
+	    if (!matcher.matches()) {
+	    	throw new IllegalArgumentException(" ---> Incorrect email format.");
+	    }
+	    System.out.println("OK");
+	    return matcher.matches();
+	}
+	
+	public static boolean checkPhone(TextField input, Label inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		if (!input.getText().matches("\\d{9,13}")) {
+			if (input.getText().length() < 9 || input.getText().length() > 13) {
+				throw new IllegalArgumentException(" ---> Incorrect phone format: phone length is not valid.");
+			}
+			throw new IllegalArgumentException(" ---> Incorrect phone format: must be numbers 0-9.");
+		}
+		System.out.println("OK");
+		return true;
 	}
 
-	public void CheckUserName(ActionEvent event) throws Exception {
-//		conn = openDBconn.connect();
-//		stmt = conn.createStatement();
-//
-//		String sql = "SELECT username FROM usersDB WHERE userName='"+userNameId.getText()+"'";
-//		ResultSet rs = stmt.executeQuery(sql);
-//		conn.close();
-//		if (!rs.next()) {
-//			userId.setText("");
-//			System.out.println("Username "+userNameRegisterId.getText()+" does not exits");
-//			userNameRegisterId.setStyle("-fx-background-color: red;");
-//		}
-		System.out.println("Testing");
+	public void CheckUserName(TextField input, Label inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+
+			String sql = "SELECT username FROM usersDB WHERE userName='"+usernameRegisterId.getText()+"'";
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.printf(nL+"        \\___Checking if username \""+usernameRegisterId.getText()+"\" is available... ");
+			if (rs.next()) {
+				System.out.println("---> Username \""+usernameRegisterId.getText()+"\" already exits,"
+						+ " please select a different one.");
+				usernameRegisterId.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.WARNING, "Username "+usernameRegisterId.getText()
+						+" already exits, please select a different one").showAndWait();
+			} else {
+				System.out.println("OK");
+				usernameRegisterId.setStyle(null);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void ClearAll() {
@@ -178,8 +240,9 @@ public class MainController {
 		addressId.setText("");
 		emailId.setText("");
 		phoneId.setText("");
-		userNameRegisterId.setText("");
-		userNameRegisterId.setStyle(null);
+		usernameRegisterId.setText("");
+		usernameRegisterId.setStyle(null);
 		passId.setText("");
+		System.out.println("\nAll fields cleared!");
 	}
 }

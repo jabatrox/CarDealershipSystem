@@ -21,8 +21,8 @@ public class DaoModel {
 			"factoryDeposit",
 			"concessionaire",
 			"carDetails",
-			"customer",
 			"usersDB",
+			"customer",
 			"admin",
 			"seller",
 			"bookingDetails"
@@ -89,6 +89,15 @@ public class DaoModel {
 			    					"  PRIMARY KEY(carID)\n" + 
 			    					");";
 			                break;
+			            case "usersDB":
+			            	sql = "CREATE TABLE usersDB (\n" + 
+			    					"  userID INTEGER NOT NULL IDENTITY,\n" + 
+			    					"  username VARCHAR(50) NOT NULL,\n" + 
+			    					"  userType CHAR(1) NOT NULL,\n" + 
+			    					"  hashPass CHAR(64) NOT NULL,\n" + 
+			    					"  PRIMARY KEY(userID)\n" + 
+			    					");";
+			                break;
 			            case "customer":
 			            	sql = "CREATE TABLE customer (\n" + 
 			    					"  custID INTEGER NOT NULL IDENTITY,\n" + 
@@ -99,15 +108,6 @@ public class DaoModel {
 			    					"  phone VARCHAR(20) NOT NULL,\n" + 
 			    					"  userDB_ID INTEGER NOT NULL REFERENCES usersDB(userID),\n" +
 			    					"  PRIMARY KEY(custID)\n" + 
-			    					");";
-			                break;
-			            case "usersDB":
-			            	sql = "CREATE TABLE usersDB (\n" + 
-			    					"  userID INTEGER NOT NULL IDENTITY,\n" + 
-			    					"  username VARCHAR(50) NOT NULL,\n" + 
-			    					"  userType CHAR(1) NOT NULL\n" + 
-			    					"  hashPass CHAR(64) NOT NULL,\n" + 
-			    					"  PRIMARY KEY(userID)\n" + 
 			    					");";
 			                break;
 			            case "admin":
@@ -146,9 +146,9 @@ public class DaoModel {
 			                break;
 			        }
 			        stmt.executeUpdate(sql);
-			        conn.close(); //close db connection 
 				}
 			}
+			conn.close(); //close db connection 
 			System.out.println("==> All tables exist.");
 
 /*			// Open a connection
