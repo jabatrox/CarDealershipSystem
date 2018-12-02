@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,6 +34,12 @@ public class CustomerController implements Initializable{
 	
 	@FXML
 	private String userID;
+	
+	@FXML
+	private TextField brand,model,color,horsePower,price,miles,year,conID,factID;
+	
+	@FXML
+	private ChoiceBox<String> engineTypes;
 	
 	
 	public CustomerController(){
@@ -86,6 +93,36 @@ public class CustomerController implements Initializable{
 		 scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		 primaryStage.setScene(scene);
 		 primaryStage.show();
+	 }
+	 
+	 public void RequestSellCar() {
+		 
+		 try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			Boolean f = false;
+			
+			//Check data
+			String br = brand.getText();
+			String mo = model.getText();
+			String co = color.getText();
+			String et = engineTypes.getValue();
+			String hp = horsePower.getText();
+			String pr = price.getText();
+			String mi = miles.getText();
+			String ye = year.getText();
+			String ci = conID.getText();
+			String fi = factID.getText();
+			
+			stmt.executeUpdate("INSERT INTO carDetails (conID,factID,carBrand,carModel"
+					+ ",carColor,engineType,horsePower,price,kilometers,sold,exposed,"
+					+ "carCondition,year) VALUES ('"+ci+"','"+fi+"','"+br+"','"+mo+"','"+co+"',"
+					+ "'"+et+"','"+hp+"','"+pr+"','"+mi+"','"+f+"','"+f+"','"+f+"','"+ye+"')");
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	 }
 
 
