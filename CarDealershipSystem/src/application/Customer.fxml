@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
    <children>
       <MenuButton layoutX="347.0" layoutY="131.0" mnemonicParsing="false" text="What would you like to do?">
         <items>
@@ -16,7 +16,7 @@
         </items>
       </MenuButton>
       <Text layoutX="91.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduction to the customer view explaining available operations" wrappingWidth="123.7353515625" />
-      <Label fx:id="customerWelcomeId" alignment="CENTER" contentDisplay="CENTER" layoutX="222.0" layoutY="44.0" prefHeight="31.0" prefWidth="156.0" textAlignment="CENTER">
+      <Label fx:id="customerWelcomeId" alignment="CENTER" contentDisplay="CENTER" layoutX="121.0" layoutY="43.0" prefHeight="31.0" prefWidth="358.0" textAlignment="CENTER">
          <font>
             <Font name="PT Sans" size="24.0" />
          </font>

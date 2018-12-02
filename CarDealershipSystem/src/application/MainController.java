@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import models.DBConnect;
 
@@ -50,7 +51,7 @@ public class MainController extends Application {
 	static String nL = System.getProperty("line.separator");
 	
 	@FXML
-	private Label customerWelcomeId, statusId;
+	private Label statusId;
 
 	@FXML
 	private TextField userId;
@@ -118,9 +119,22 @@ public class MainController extends Application {
 				switch(response) {
 					case "c":
 					{
-						statusId.setText("");
-//						statusId.setText("Correct login... Redirecting to the customer interface");
-//						CustomerPage(event/*,rs.getString("userID")*/);
+						System.out.println("userId is: "+rs.getString("userID"));
+						
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Customer.fxml"));
+						Stage stage = new Stage();
+						Region root = (Region) loader.load();
+						CustomerController cController = loader.<CustomerController>getController();
+						cController.initData(rs.getString("userID"));
+
+						statusId.setText("Correct login... Redirecting to the customer interface");
+						
+						
+						Scene scene = new Scene(root,600,400);
+						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+						stage.setScene(scene);
+	
+						stage.show();
 						break;
 					}
 					case "s": 
