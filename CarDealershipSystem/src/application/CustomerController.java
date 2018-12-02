@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,6 +91,11 @@ public class CustomerController implements Initializable{
 	 public void CustomerPage (ActionEvent event) throws Exception {
 		 Stage primaryStage = new Stage();
 		 Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
+		 //ObservableList<String> availableChoices = FXCollections.observableArrayList("Diesel","Hybrid","Gasoline","Diesel"); 
+		 //engineTypes.setItems(availableChoices);
+		 //engineTypes.getSelectionModel().setSelectedItem("Diesel");
+		 //engineTypes.setItems(FXCollections.observableArrayList("Diesel","Hybrid","Gasoline","Diesel"));
+		 //engineTypes.getSelectionModel().selectFirst();
 		 Scene scene = new Scene(root,600,400);
 		 scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		 primaryStage.setScene(scene);
@@ -101,15 +107,12 @@ public class CustomerController implements Initializable{
 		 try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			Boolean f = false;
-			engineTypes.setItems(FXCollections.observableArrayList("Diesel","Hybrid","Gasoline","Diesel"));
-			engineTypes.getSelectionModel().selectFirst();
 			
 			//Check data
 			String br = brand.getText();
 			String mo = model.getText();
 			String co = color.getText();
-			String et = engineTypes.getValue();
+			String et = engineTypes.getSelectionModel().getSelectedItem();
 			String hp = horsePower.getText();
 			String pr = price.getText();
 			String mi = miles.getText();
@@ -120,7 +123,7 @@ public class CustomerController implements Initializable{
 			stmt.executeUpdate("INSERT INTO carDetails (conID,factID,carBrand,carModel"
 					+ ",carColor,engineType,horsePower,price,kilometers,sold,exposed,"
 					+ "carCondition,year) VALUES ('"+ci+"','"+fi+"','"+br+"','"+mo+"','"+co+"',"
-					+ "'"+et+"','"+hp+"','"+pr+"','"+mi+"','"+f+"','"+f+"','"+f+"','"+ye+"')");
+					+ "'"+et+"','"+hp+"','"+pr+"','"+mi+"','"+0+"','"+0+"','"+0+"','"+ye+"')");
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -7,6 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.collections.ObservableList?>
+<?import java.lang.String?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
    <children>
@@ -35,6 +38,15 @@
       <Text layoutX="322.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FactID" />
       <TextField fx:id="conID" layoutX="393.0" layoutY="179.0" />
       <Text layoutX="323.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ConID" /> 
-      <ChoiceBox fx:id="engineTypes" layoutX="119.0" layoutY="221.0" prefHeight="27.0" prefWidth="167.0"/>
+      <ChoiceBox fx:id="engineTypes" value="Diesel" layoutX="119.0" layoutY="221.0" prefHeight="27.0" prefWidth="167.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="Hybrid" />
+            <String fx:value="Gasoline" />
+            <String fx:value="Electric" />
+            <String fx:value="Diesel" />
+        </FXCollections>
+    </items>
+      </ChoiceBox>
    </children>
 </AnchorPane>
