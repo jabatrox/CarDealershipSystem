@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,24 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.DBConnect;
 
-public class MainController {
+public class MainController extends Application {
+	
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+			Scene scene = new Scene(root,300,260);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();
