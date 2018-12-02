@@ -100,8 +100,9 @@ public class MainController {
 					case "c":
 					{
 						statusId.setText("Correct login... Redirecting to the customer interface");
-						CustomerPage(event, rs.getString("userID"));
+						CustomerPage(rs.getString("userID"));
 					}
+					break;
 					case "s": 
 					{
 						statusId.setText("Correct login... Redirecting to the seller interface");
@@ -112,6 +113,7 @@ public class MainController {
 						primaryStage.setScene(scene);
 						primaryStage.show();
 					}
+					break;
 					case "a":
 					{
 						statusId.setText("Correct login... Redirecting to the admin interface");
@@ -122,6 +124,7 @@ public class MainController {
 						primaryStage.setScene(scene);
 						primaryStage.show();
 					}
+					break;
 				}
 			}
 		} catch (SQLException e) {
@@ -253,7 +256,7 @@ public class MainController {
 		
 	}
 	
-	public void CustomerPage(ActionEvent event, String userID) throws Exception {
+	public void CustomerPage (String userID) throws Exception {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
 		Scene scene = new Scene(root,600,400);
@@ -275,8 +278,9 @@ public class MainController {
 		
 		//System.out.println("First name is: "+rs.getString("firstName"));
 		String name = "Welcome "+rs.getString("firstName");
+		passwordId.getText();
+		firstNameId.getText();
 		customerWelcomeId.setText(name);
-
 		
 		conn.close();
 	}
