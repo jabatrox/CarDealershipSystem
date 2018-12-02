@@ -20,7 +20,7 @@
       <TextField fx:id="phoneId" layoutX="217.0" layoutY="265.0" />
       <Label layoutX="106.0" layoutY="94.0" text="First Name" />
       <Label layoutX="106.0" layoutY="138.0" text="Last Name" />
-      <Label layoutX="106.0" layoutY="182.0" text="Address" />
+      <Label blendMode="DARKEN" layoutX="106.0" layoutY="182.0" text="Address" />
       <TextField fx:id="userNameRegisterId" layoutX="217.0" layoutY="309.0" />
       <Label layoutX="106.0" layoutY="226.0" text="Email" />
       <Label layoutX="106.0" layoutY="270.0" text="Phone Number" />
