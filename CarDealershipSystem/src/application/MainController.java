@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import classes.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -101,9 +102,11 @@ public class MainController extends Application {
 			System.out.println("Checking for user in the database...");
 
 			String sql = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+"' AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
-
+			
 			ResultSet rs = stmt.executeQuery(sql);
-//			conn.close();
+		
+	
+			//conn.close();
 			if (!rs.next()) {
 				System.out.println("\\___Login failed: wrong username/password");
 				passwordLoginID.setText("");
@@ -112,6 +115,16 @@ public class MainController extends Application {
 			else {
 				System.out.println("User found!");
 				String response = rs.getString("userType");
+				System.out.println(rs.getString("userID"));
+				String sql1 = "SELECT * FROM customer WHERE userDB_ID='"+rs.getString("userID")+"'";
+				ResultSet rs1 = stmt.executeQuery(sql1);
+				
+				if (!rs1.next()) {
+					System.out.println("No Data");
+					return;
+				}
+				
+				Agent customer = new Customer(Integer.parseInt(rs1.getString("custID")),rs1.getString("firstName"),rs1.getString("lastName"),rs1.getString("address"),rs1.getString("email"),rs1.getString("phone"));
 				switch(response) {
 					case "c":
 					case "C":
@@ -121,7 +134,7 @@ public class MainController extends Application {
 						Stage stage = new Stage();
 						Region root = (Region) loader.load();
 						CustomerController cController = loader.<CustomerController>getController();
-						cController.initData(rs.getString("userID"));
+						cController.initData(customer);
 
 						Scene scene = new Scene(root,600,400);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -136,7 +149,7 @@ public class MainController extends Application {
 						statusLoginID.setText("");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
-						Scene scene = new Scene(root,600,400);
+						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 						primaryStage.setScene(scene);
 						primaryStage.show();
@@ -148,7 +161,7 @@ public class MainController extends Application {
 						statusLoginID.setText("");
 						Stage primaryStage = new Stage();
 						Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
-						Scene scene = new Scene(root,600,400);
+						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 						primaryStage.setScene(scene);
 						primaryStage.show();
@@ -166,7 +179,7 @@ public class MainController extends Application {
 	public void RegisterPage (ActionEvent event) throws Exception{
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/application/Register.fxml"));
-		Scene scene = new Scene(root,600,400);
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();

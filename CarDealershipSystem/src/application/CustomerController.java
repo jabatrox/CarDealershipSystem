@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.DBConnect;
@@ -43,6 +45,12 @@ public class CustomerController implements Initializable{
 	@FXML
 	private ChoiceBox<String> engineTypes;
 	
+	@FXML
+	private ChoiceBox<String> sellCarOptions;
+	
+	@FXML
+	private ListView carListView;
+	
 	
 	public CustomerController(){
 	
@@ -53,27 +61,16 @@ public class CustomerController implements Initializable{
 		
 	}
 	
-	void initData(String userID) {
-		try {
-			conn = openDBconn.connect();
-			stmt = conn.createStatement();
-			
-			String sql = "SELECT * FROM customer WHERE userDB_ID='"+userID+"'";
-			ResultSet rs = stmt.executeQuery(sql);
-			if (rs.next()) {
-				String name = "Welcome "+rs.getString("firstName");
-				customerWelcomeId.setText(name);
-			}
-			conn.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	void initData(Agent customer) {
+
+		String name = "Welcome "+customer.getFirstName();
+		customerWelcomeId.setText(name);
+
 	 }
 	 public void ListAvailableCars(ActionEvent event) throws Exception{
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/ListCars.fxml"));
-			Scene scene = new Scene(root,600,400);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -82,16 +79,21 @@ public class CustomerController implements Initializable{
 	 public void SellCar(ActionEvent event) throws Exception{
 			Stage primaryStage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("/application/Customer_Sell_Car.fxml"));
-			Scene scene = new Scene(root,600,400);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			String cLV = sellCarOptions.getSelectionModel().getSelectedItem();
+			
+			
+			
 	}
 	 
 	 public void CustomerPage (ActionEvent event) throws Exception {
 		 Stage primaryStage = new Stage();
 		 Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
-		 Scene scene = new Scene(root,600,400);
+		 Scene scene = new Scene(root);
 		 scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		 primaryStage.setScene(scene);
 		 primaryStage.show();
