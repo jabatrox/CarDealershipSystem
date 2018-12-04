@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -7,38 +9,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.collections.ObservableList?>
-<?import java.lang.String?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
    <children>
-      <Label layoutX="143.0" layoutY="34.0" text="Introduce the details of the car you want to sell">
+      <Label layoutX="121.0" layoutY="33.0" text="Introduce the details of the car you want to sell">
          <font>
-            <Font name="PT Sans" size="18.0" />
+            <Font name="Lucida Sans Unicode" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="brand" layoutX="119.0" layoutY="95.0" />
-      <TextField fx:id="horsePower" layoutX="119.0" layoutY="263.0" />
-      <TextField fx:id="color" layoutX="119.0" layoutY="179.0" />
-      <TextField fx:id="model" layoutX="119.0" layoutY="137.0" />
-      <Text layoutX="49.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand" />
-      <Text layoutX="30.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horse Power" />
-      <Text layoutX="31.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EngineType" />
-      <Text layoutX="53.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
-      <Text layoutX="49.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model" />
-      <TextField fx:id="price" layoutX="119.0" layoutY="305.0" />
-      <Text layoutX="31.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selling Price" />
-      <TextField fx:id="miles" layoutX="393.0" layoutY="95.0" />
-      <Text layoutX="326.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miles" />
-      <TextField fx:id="year" layoutX="393.0" layoutY="137.0" />
-      <Text layoutX="328.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
-      <Button layoutX="425.0" layoutY="277.0" mnemonicParsing="false" onAction="#RequestSellCar" text="Send Request" />
-      <TextField fx:id="factID" layoutX="393.0" layoutY="221.0" />
-      <Text layoutX="322.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FactID" />
-      <TextField fx:id="conID" layoutX="393.0" layoutY="179.0" />
-      <Text layoutX="323.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ConID" /> 
-      <ChoiceBox fx:id="engineTypes" value="Diesel" layoutX="119.0" layoutY="221.0" prefHeight="27.0" prefWidth="167.0">
+      <TextField fx:id="brand" layoutX="151.0" layoutY="95.0" />
+      <TextField fx:id="horsePower" layoutX="151.0" layoutY="263.0" />
+      <TextField fx:id="color" layoutX="151.0" layoutY="179.0" />
+      <TextField fx:id="model" layoutX="151.0" layoutY="137.0" />
+      <Text layoutX="62.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand" />
+      <Text layoutX="62.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horse Power" />
+      <Text layoutX="62.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EngineType" />
+      <Text layoutX="62.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
+      <Text layoutX="62.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model" />
+      <TextField fx:id="price" layoutX="151.0" layoutY="305.0" />
+      <Text layoutX="62.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selling Price" />
+      <TextField fx:id="miles" layoutX="466.0" layoutY="95.0" />
+      <Text layoutX="366.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miles" />
+      <TextField fx:id="year" layoutX="466.0" layoutY="137.0" />
+      <Text layoutX="366.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
+      <Button fx:id="requestButon" layoutX="529.0" layoutY="305.0" mnemonicParsing="false" text="Send Request" />
+      <TextField fx:id="factID" layoutX="466.0" layoutY="221.0" />
+      <Text layoutX="366.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fact. Number" />
+      <TextField fx:id="conID" layoutX="466.0" layoutY="179.0" />
+      <Text layoutX="366.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conc. Number" /> 
+      <ChoiceBox fx:id="engineTypes" layoutX="151.0" layoutY="221.0" prefHeight="27.0" prefWidth="167.0" value="Diesel">
       <items>
         <FXCollections fx:factory="observableArrayList">
             <String fx:value="Hybrid" />
@@ -48,5 +47,7 @@
         </FXCollections>
     </items>
       </ChoiceBox>
+      <TextField fx:id="chassis" layoutX="466.0" layoutY="263.0" />
+      <Text layoutX="366.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chassis Nº" />
    </children>
 </AnchorPane>

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja González
+ * @author Javier Soler, Borja Gonzï¿½lez
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: CustomerOperation.java
@@ -23,6 +23,6 @@ public interface CustomerOperations {
 	/**
 	 * @param CarId
 	 */
-	public abstract void sellCar(int CarId); 
+	public abstract void sellCar(CarDetails car); 
 
 }

@@ -2,7 +2,7 @@ package classes;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja González
+ * @author Javier Soler, Borja Gonzï¿½lez
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: CarDetails.java
@@ -23,6 +23,7 @@ public class CarDetails {
 	boolean sold;
 	boolean exposed;
 	boolean carCondition;
+	int year;
 	
 	/**
 	 * @param carID
@@ -41,7 +42,7 @@ public class CarDetails {
 	 */
 	public CarDetails(int carID, int conID, int factID, String carBrand, String carModel, 
 			String carColor, EngineType engineType /*String engineType*/, int horsePower, double price, 
-			int kilometers, boolean sold, boolean exposed, boolean carCondition) {
+			int kilometers, boolean sold, boolean exposed, boolean carCondition, int year) {
 		
 		this.carID = carID;
 		this.conID = conID; 
@@ -56,6 +57,7 @@ public class CarDetails {
 		this.sold = sold;
 		this.exposed = exposed;
 		this.carCondition = carCondition;
+		this.year = year;
 	}
 
 	/**
@@ -239,5 +241,21 @@ public class CarDetails {
 	public void setCarCondition(boolean condition) {
 		this.carCondition = condition;
 	}
+
+	/**
+	 * @return the year
+	 */
+	public int getYear() {
+		return year;
+	}
+
+	/**
+	 * @param year the year to set
+	 */
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
+	
 	
 }

@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import classes.*;
+import classes.CarDetails.EngineType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -40,7 +42,7 @@ public class CustomerController implements Initializable{
 	private String userID;
 	
 	@FXML
-	private TextField brand,model,color,horsePower,price,miles,year,conID,factID;
+	private TextField brand,model,color,horsePower,price,miles,year,conID,factID,chassis;
 	
 	@FXML
 	private ChoiceBox<String> engineTypes;
@@ -50,6 +52,9 @@ public class CustomerController implements Initializable{
 	
 	@FXML
 	private ListView carListView;
+	
+	@FXML
+	private Button requestButton;
 	
 	
 	public CustomerController(){
@@ -61,11 +66,11 @@ public class CustomerController implements Initializable{
 		
 	}
 	
-	void initData(Agent customer) {
-
+	void initData(Agent customer1) {
+		final Customer customer = (Customer) customer1;
 		String name = "Welcome "+customer.getFirstName();
 		customerWelcomeId.setText(name);
-
+		requestButton.addEventHandler(, customer.sellCar(CarID));
 	 }
 	 public void ListAvailableCars(ActionEvent event) throws Exception{
 			Stage primaryStage = new Stage();
@@ -99,8 +104,7 @@ public class CustomerController implements Initializable{
 		 primaryStage.show();
 	 }
 	 
-	 public void RequestSellCar() {
-		 
+	 public void RequestSellCar(Customer customer) {
 		 try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
@@ -116,6 +120,36 @@ public class CustomerController implements Initializable{
 			String ye = year.getText();
 			String ci = conID.getText();
 			String fi = factID.getText();
+			String chassisId = chassis.getText();
+			
+			int carId = Integer.parseInt(chassisId);
+			
+			String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"'";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				CarDetails car = new CarDetails(carId,
+						rs.getInt("conID"),
+						rs.getInt("factID"),
+						rs.getString("carBrand"),
+						rs.getString("carModel"),
+						co,
+						EngineType.valueOf(rs.getString("engineType")),
+						rs.getInt("horsePower"),
+						Double.parseDouble(pr),
+						Integer.parseInt(mi),
+						rs.getBoolean("sold"),
+						rs.getBoolean("exposed"),
+						rs.getBoolean("carCondition"),
+						rs.getInt("year"));
+						customer.sellCar(car);
+				
+			}
+			else {
+				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+"! "
+						+ "is incorrect. Only cars that were previously bought from us are accepted").show();
+			}
 			
 			stmt.executeUpdate("INSERT INTO carDetails (conID,factID,carBrand,carModel"
 					+ ",carColor,engineType,horsePower,price,kilometers,sold,exposed,"
