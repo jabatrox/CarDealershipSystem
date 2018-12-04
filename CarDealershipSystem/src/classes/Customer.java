@@ -1,6 +1,12 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+import models.DBConnect;
 
 /**
  * --------------------------------------------------
@@ -44,9 +50,39 @@ public class Customer extends Agent implements CustomerOperations {
 	}
 
 	@Override
-	public void sellCar(CarDetails car) {
+	public boolean sellCar(CarDetails car) {
 		// TODO Auto-generated method stub
+		
+		Connection conn = null;
+		DBConnect openDBconn = new DBConnect();
+		Statement stmt = null;
+		
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+		
+			//BookingDetails bookD = new BookingDetails(car.getPrice(),);
+		
+			String sql = "INSERT INTO bookingDetails () VALUES "
+				+ "('1',"
+				+ "'"+this.getAgentID()+"',"
+				+ "'"+car.getConID()+"',"
+				+ "'"+car.getCarID()+"',"
+				+ "'0',"
+				+ "'0',"
+				+ "'"+car.getPrice()+"')";
 
+		
+			if(0==stmt.executeUpdate(sql)) 
+				return true;
+			else
+				return false;
+			
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	/**

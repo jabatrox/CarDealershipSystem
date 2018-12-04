@@ -23,6 +23,6 @@ public interface CustomerOperations {
 	/**
 	 * @param CarId
 	 */
-	public abstract void sellCar(CarDetails car); 
+	public abstract boolean sellCar(CarDetails car); 
 
 }
