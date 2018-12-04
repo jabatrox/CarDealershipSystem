@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 import classes.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -31,9 +33,11 @@ public class SellerController implements Initializable {
 	private Label freeSlotsLabel;
 	
 	@FXML
-	private TableView<CarDetails> carsTable_bookingDetails;
+	private TableView<BookingDetails> carsTable_bookingDetails;
 	@FXML
 	private TableView<CarDetails> carsTable_Exposed;
+	
+	private ObservableList<BookingDetails> data;
 	
 	public SellerController() {
 		// TODO Auto-generated constructor stub
@@ -81,8 +85,38 @@ public class SellerController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
+		
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			String sql_pending_bookings = "SELECT * FROM bookingDetails WHERE sellerID='"+seller.getConID()+"' "
+					+ "AND bookingCompleted='0' ";
+			ResultSet rs_pending_bookings = stmt.executeQuery(sql_pending_bookings);
+			
+			//if (rs_pending_bookings.next()) {
+				System.out.println("Helloooo");
+				while (rs_pending_bookings.next()) {
+					data = FXCollections.observableArrayList(
+			            new BookingDetails(rs_pending_bookings.getInt("bookingID"),
+			            		rs_pending_bookings.getInt("bookingType"),
+			            		rs_pending_bookings.getInt("custID"),
+			            		rs_pending_bookings.getInt("sellerID"),
+			            		rs_pending_bookings.getInt("carID"),
+			            		rs_pending_bookings.getBoolean("bookingCompleted"),
+			            		rs_pending_bookings.getInt("paymentType"),
+			            		rs_pending_bookings.getInt("amount")));
+				}
+			//}
+			
+			carsTable_bookingDetails.setItems(data);
+			conn.close();
+			
+			
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	 }
 
 }
