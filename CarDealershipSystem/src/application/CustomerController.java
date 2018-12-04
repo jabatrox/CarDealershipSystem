@@ -56,6 +56,8 @@ public class CustomerController implements Initializable{
 	@FXML
 	private Button requestButton;
 	
+	private Customer customer;
+	
 	
 	public CustomerController(){
 	
@@ -88,7 +90,7 @@ public class CustomerController implements Initializable{
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			String cLV = sellCarOptions.getSelectionModel().getSelectedItem();
+			//String cLV = sellCarOptions.getSelectionModel().getSelectedItem();
 			
 			
 			
@@ -103,7 +105,7 @@ public class CustomerController implements Initializable{
 		 primaryStage.show();
 	 }
 	 
-	 public void RequestSellCar(Customer customer) {
+	 public void RequestSellCar(ActionEvent event) {
 		 try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
@@ -121,6 +123,8 @@ public class CustomerController implements Initializable{
 			String fi = factID.getText();
 			String chassisId = chassis.getText();
 			
+			System.out.println(chassisId);
+			
 			int carId = Integer.parseInt(chassisId);
 			
 			String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"'";
@@ -128,6 +132,7 @@ public class CustomerController implements Initializable{
 			ResultSet rs = stmt.executeQuery(sql);
 
 			if (rs.next()) {
+				System.out.println("Helloooo");
 				CarDetails car = new CarDetails(carId,
 						rs.getInt("conID"),
 						rs.getInt("factID"),
@@ -144,12 +149,12 @@ public class CustomerController implements Initializable{
 						rs.getInt("year"));
 						if(customer.sellCar(car)) {
 							new Alert(Alert.AlertType.INFORMATION, "Request Complete. Waiting for "
-									+ "an employees aproval").show();
+									+ "an employees approval").show();
 						}
 				
 			}
 			else {
-				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+"! "
+				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
 						+ "is incorrect. Only cars that were previously bought from us are accepted").show();
 			}
 			conn.close();

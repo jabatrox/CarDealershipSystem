@@ -56,6 +56,7 @@ public class Customer extends Agent implements CustomerOperations {
 		Connection conn = null;
 		DBConnect openDBconn = new DBConnect();
 		Statement stmt = null;
+		boolean x = false;
 		
 		try {
 			conn = openDBconn.connect();
@@ -73,16 +74,17 @@ public class Customer extends Agent implements CustomerOperations {
 				+ "'"+car.getPrice()+"')";
 
 		
-			if(0==stmt.executeUpdate(sql)) 
-				return true;
+			if(0==stmt.executeUpdate(sql))
+				x = true;
 			else
-				return false;
+				x = false;
 			
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		return x;
 	}
 
 	/**

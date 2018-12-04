@@ -32,7 +32,7 @@
       <Text layoutX="366.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miles" />
       <TextField fx:id="year" layoutX="466.0" layoutY="137.0" />
       <Text layoutX="366.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
-      <Button fx:id="requestButon" layoutX="529.0" layoutY="305.0" mnemonicParsing="false" text="Send Request" />
+      <Button layoutX="529.0" layoutY="305.0" mnemonicParsing="false" onAction="#RequestSellCar" text="Send Request" />
       <TextField fx:id="factID" layoutX="466.0" layoutY="221.0" />
       <Text layoutX="366.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fact. Number" />
       <TextField fx:id="conID" layoutX="466.0" layoutY="179.0" />
