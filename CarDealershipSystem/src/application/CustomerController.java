@@ -90,10 +90,7 @@ public class CustomerController implements Initializable{
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
-			//String cLV = sellCarOptions.getSelectionModel().getSelectedItem();
-			
-			
-			
+			//try {String cLV = sellCarOptions.getSelectionModel().getSelectedItem();} catch (Exception e) {};
 	}
 	 
 	 public void CustomerPage (ActionEvent event) throws Exception {

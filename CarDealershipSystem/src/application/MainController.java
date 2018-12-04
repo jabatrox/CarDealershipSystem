@@ -101,11 +101,10 @@ public class MainController extends Application {
 			stmt = conn.createStatement();
 			System.out.println("Checking for user in the database...");
 
-			String sql = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+"' AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
-			
+			String sql = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+
+					"' AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
 			ResultSet rs = stmt.executeQuery(sql);
-		
-	
+
 			//conn.close();
 			if (!rs.next()) {
 				System.out.println("\\___Login failed: wrong username/password");
@@ -115,44 +114,62 @@ public class MainController extends Application {
 			else {
 				System.out.println("User found!");
 				String response = rs.getString("userType");
-				System.out.println(rs.getString("userID"));
-				String sql1 = "SELECT * FROM customer WHERE userDB_ID='"+rs.getString("userID")+"'";
-				ResultSet rs1 = stmt.executeQuery(sql1);
-				
-				if (!rs1.next()) {
-					System.out.println("No Data");
-					return;
-				}
-				
-				Agent customer = new Customer(Integer.parseInt(rs1.getString("custID")),rs1.getString("firstName"),rs1.getString("lastName"),rs1.getString("address"),rs1.getString("email"),rs1.getString("phone"));
+								
 				switch(response) {
 					case "c":
 					case "C":
 					{
 						statusLoginID.setText("");
+						String sql_customer = "SELECT * FROM customer WHERE userDB_ID='"+rs.getString("userID")+"'";
+						ResultSet rs_customer = stmt.executeQuery(sql_customer);
+						if (!rs_customer.next()) {
+							System.out.println("No Data");
+							return;
+						}
+						Agent customer = new Customer(Integer.parseInt(rs_customer.getString("custID")),
+								rs_customer.getString("firstName"),
+								rs_customer.getString("lastName"),
+								rs_customer.getString("address"),
+								rs_customer.getString("email"),
+								rs_customer.getString("phone"));
+
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Customer.fxml"));
-						Stage stage = new Stage();
+						Stage stage_customer = new Stage();
 						Region root = (Region) loader.load();
 						CustomerController cController = loader.<CustomerController>getController();
 						cController.initData(customer);
 
-						Scene scene = new Scene(root,600,400);
+						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-						stage.setScene(scene);
-	
-						stage.show();
+						stage_customer.setScene(scene);
+						stage_customer.show();
 						break;
 					}
 					case "s":
 					case "S":
 					{
 						statusLoginID.setText("");
-						Stage primaryStage = new Stage();
-						Parent root = FXMLLoader.load(getClass().getResource("/application/Seller.fxml"));
+						String sql_seller = "SELECT * FROM seller WHERE userDB_ID='"+rs.getString("userID")+"'";
+						ResultSet rs_seller = stmt.executeQuery(sql_seller);
+						if (!rs_seller.next()) {
+							System.out.println("No Data");
+							return;
+						}
+						Agent seller = new Seller(Integer.parseInt(rs_seller.getString("sellerID")),
+								rs_seller.getString("firstName"),
+								rs_seller.getString("lastName"),
+								Integer.parseInt(rs_seller.getString("conID")));
+						
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Seller.fxml"));
+						Stage stage_seller = new Stage();
+						Region root = (Region) loader.load();
+						SellerController sController = loader.<SellerController>getController();
+						sController.initData(seller);
+						
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-						primaryStage.setScene(scene);
-						primaryStage.show();
+						stage_seller.setScene(scene);
+						stage_seller.show();
 						break;
 					}
 					case "a":
@@ -376,6 +393,7 @@ public class MainController extends Application {
 		catch (NoSuchAlgorithmException e){
 			e.printStackTrace();
 		}
+//		System.out.println(generatedPassword);
 		return generatedPassword;
 
 	}

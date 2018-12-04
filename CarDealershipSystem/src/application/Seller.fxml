@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="445.0" layoutY="6.0" prefHeight="44.0" prefWidth="410.0" text="Selling Operations" textAlignment="CENTER">
+         <font>
+            <Font name="Lucida Sans Unicode" size="24.0" />
+         </font></Label>
+      <Label fx:id="sellerWelcomeName" layoutX="14.0" layoutY="10.0" text="Label">
+         <font>
+            <Font name="Lucida Sans Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="sellerWelcomeID" layoutX="14.0" layoutY="30.0" text="Label">
+         <font>
+            <Font name="Lucida Sans Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="carsExposedLabel" layoutX="14.0" layoutY="109.0" text="Cars Exposed: ">
+         <font>
+            <Font name="Lucida Sans Regular" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="freeSlotsLabel" layoutX="14.0" layoutY="147.0" text="Free Slots: ">
+         <font>
+            <Font name="Lucida Sans Regular" size="14.0" />
+         </font>
+      </Label>
+      <TabPane layoutX="155.0" layoutY="65.0" prefHeight="536.0" prefWidth="1145.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="PENDING BOOKINGS">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="carsTable_bookingDetails" prefHeight="508.0" prefWidth="1145.0">
+                           <columns>
+                              <TableColumn prefWidth="125.0" text="Brand" />
+                              <TableColumn prefWidth="125.0" text="Model" />
+                              <TableColumn prefWidth="125.0" text="Color" />
+                              <TableColumn prefWidth="125.0" text="Engyne Type" />
+                              <TableColumn prefWidth="125.0" text="Horse Power" />
+                              <TableColumn prefWidth="125.0" text="Price" />
+                              <TableColumn prefWidth="125.0" text="Miles" />
+                              <TableColumn prefWidth="125.0" text="Car Condition" />
+                              <TableColumn prefWidth="155.0" text="" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="CARS EXPOSED">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="carsTable_Exposed" prefHeight="508.0" prefWidth="1145.0">
+                           <columns>
+                              <TableColumn prefWidth="125.0" text="Brand" />
+                              <TableColumn prefWidth="125.0" text="Model" />
+                              <TableColumn prefWidth="125.0" text="Color" />
+                              <TableColumn prefWidth="125.0" text="Engyne Type" />
+                              <TableColumn prefWidth="125.0" text="Horse Power" />
+                              <TableColumn prefWidth="125.0" text="Price" />
+                              <TableColumn prefWidth="125.0" text="Miles" />
+                              <TableColumn prefWidth="125.0" text="Car Condition" />
+                              <TableColumn prefWidth="155.0" text="" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
