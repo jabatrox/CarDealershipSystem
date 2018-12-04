@@ -149,11 +149,12 @@ public class CustomerController implements Initializable{
 				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+"! "
 						+ "is incorrect. Only cars that were previously bought from us are accepted").show();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 conn.close();
+			conn.close();
+		 	} catch (SQLException e) {
+		 		// TODO Auto-generated catch block
+		 		e.printStackTrace();
+		 	}
+		 
 	 }
 
 
