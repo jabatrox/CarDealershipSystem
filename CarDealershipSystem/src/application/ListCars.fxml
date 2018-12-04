@@ -18,7 +18,7 @@
             <Font name="PT Sans" size="25.0" />
          </font>
       </Text>
-      <ChoiceBox fx:id="sellCarOptions" layoutX="842.0" layoutY="7.0" prefWidth="150.0">
+      <ChoiceBox fx:id="sellCarOptions" layoutX="842.0" layoutY="7.0" prefWidth="150.0" value="All Cars">
       <items>
         <FXCollections fx:factory="observableArrayList">
             <String fx:value="All Cars" />
@@ -29,14 +29,14 @@
       </ChoiceBox>
       <TableView layoutY="48.0" prefHeight="553.0" prefWidth="1000.0">
         <columns>
-          <TableColumn prefWidth="125.0" text="Brand" />
-          <TableColumn prefWidth="125.0" text="Model" />
-          <TableColumn prefWidth="125.0" text="Color" />
-          <TableColumn prefWidth="125.0" text="Engyne Type" />
-          <TableColumn prefWidth="125.0" text="Horse Power" />
-          <TableColumn prefWidth="125.0" text="Price" />
-          <TableColumn prefWidth="125.0" text="Miles" />
-          <TableColumn prefWidth="125.0" text="Car Condition" />
+          <TableColumn prefWidth="125.0" text="BRAND" />
+          <TableColumn prefWidth="125.0" text="MODEL" />
+          <TableColumn prefWidth="125.0" text="COLOR" />
+          <TableColumn prefWidth="125.0" text="ENGINE TYPE" />
+          <TableColumn prefWidth="125.0" text="HORSEPOWER" />
+          <TableColumn prefWidth="125.0" text="PRICE" />
+          <TableColumn prefWidth="125.0" text="MILES" />
+          <TableColumn prefWidth="125.0" text="CAR CONDITION" />
         </columns>
       </TableView>
    </children>
