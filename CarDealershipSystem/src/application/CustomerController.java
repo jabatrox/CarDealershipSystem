@@ -70,7 +70,6 @@ public class CustomerController implements Initializable{
 		final Customer customer = (Customer) customer1;
 		String name = "Welcome "+customer.getFirstName();
 		customerWelcomeId.setText(name);
-		requestButton.addEventHandler(, customer.sellCar(CarID));
 	 }
 	 public void ListAvailableCars(ActionEvent event) throws Exception{
 			Stage primaryStage = new Stage();

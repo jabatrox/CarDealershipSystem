@@ -6,7 +6,7 @@ import classes.CarDetails.EngineType;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja González
+ * @author Javier Soler, Borja Gonzï¿½lez
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: FactoryDeposit.java
@@ -45,7 +45,8 @@ public class FactoryDeposit {
 				0,
 				false,
 				true,
-				true
+				true,
+				0
 				);
 		return newCar.getCarID();
 		
