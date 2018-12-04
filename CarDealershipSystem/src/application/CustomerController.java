@@ -150,16 +150,11 @@ public class CustomerController implements Initializable{
 				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+"! "
 						+ "is incorrect. Only cars that were previously bought from us are accepted").show();
 			}
-			
-			stmt.executeUpdate("INSERT INTO carDetails (conID,factID,carBrand,carModel"
-					+ ",carColor,engineType,horsePower,price,kilometers,sold,exposed,"
-					+ "carCondition,year) VALUES ('"+ci+"','"+fi+"','"+br+"','"+mo+"','"+co+"',"
-					+ "'"+et+"','"+hp+"','"+pr+"','"+mi+"','"+0+"','"+0+"','"+0+"','"+ye+"')");
-			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 conn.close();
 	 }
 
 

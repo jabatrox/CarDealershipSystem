@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja González
+ * @author Javier Soler, Borja Gonzï¿½lez
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Customer.java
@@ -38,13 +38,13 @@ public class Customer extends Agent implements CustomerOperations {
 	}
 
 	@Override
-	public void buyCar(int carID) {
+	public void buyCar(CarDetails car) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void sellCar(int CarID) {
+	public void sellCar(CarDetails car) {
 		// TODO Auto-generated method stub
 
 	}
