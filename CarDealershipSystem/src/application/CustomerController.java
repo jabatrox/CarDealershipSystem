@@ -142,7 +142,10 @@ public class CustomerController implements Initializable{
 						rs.getBoolean("exposed"),
 						rs.getBoolean("carCondition"),
 						rs.getInt("year"));
-						customer.sellCar(car);
+						if(customer.sellCar(car)) {
+							new Alert(Alert.AlertType.INFORMATION, "Request Complete. Waiting for "
+									+ "an employees aproval").show();
+						}
 				
 			}
 			else {
