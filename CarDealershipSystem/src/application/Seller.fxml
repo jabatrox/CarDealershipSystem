@@ -42,15 +42,17 @@
                      <children>
                         <TableView fx:id="carsTable_bookingDetails" prefHeight="508.0" prefWidth="1145.0">
                            <columns>
-                              <TableColumn prefWidth="125.0" text="Brand" />
-                              <TableColumn prefWidth="125.0" text="Model" />
-                              <TableColumn prefWidth="125.0" text="Color" />
-                              <TableColumn prefWidth="125.0" text="Engyne Type" />
-                              <TableColumn prefWidth="125.0" text="Horse Power" />
-                              <TableColumn prefWidth="125.0" text="Price" />
-                              <TableColumn prefWidth="125.0" text="Miles" />
-                              <TableColumn prefWidth="125.0" text="Car Condition" />
-                              <TableColumn prefWidth="155.0" text="" />
+                              <TableColumn prefWidth="75.0" text="BOOKING&#10;    TYPE" />
+                              <TableColumn prefWidth="250.0" text="CUSTOMER" />
+                              <TableColumn prefWidth="125.0" text="CAR DETAILS">
+                                 <columns>
+                                    <TableColumn prefWidth="200.0" text="BRAND / MODEL" />
+                                    <TableColumn prefWidth="50.0" text="YEAR" />
+                                    <TableColumn prefWidth="90.0" text="KILOMETERS" />
+                                    <TableColumn prefWidth="155.0" text="Year" />
+                                 </columns></TableColumn>
+                              <TableColumn prefWidth="125.0" text="AMOUNT" />
+                              <TableColumn prefWidth="125.0" text="PAYMENT" />
                            </columns>
                         </TableView>
                      </children>
@@ -63,14 +65,14 @@
                      <children>
                         <TableView fx:id="carsTable_Exposed" prefHeight="508.0" prefWidth="1145.0">
                            <columns>
-                              <TableColumn prefWidth="125.0" text="Brand" />
-                              <TableColumn prefWidth="125.0" text="Model" />
-                              <TableColumn prefWidth="125.0" text="Color" />
-                              <TableColumn prefWidth="125.0" text="Engyne Type" />
-                              <TableColumn prefWidth="125.0" text="Horse Power" />
-                              <TableColumn prefWidth="125.0" text="Price" />
-                              <TableColumn prefWidth="125.0" text="Miles" />
-                              <TableColumn prefWidth="125.0" text="Car Condition" />
+                              <TableColumn prefWidth="125.0" text="BRAND" />
+                              <TableColumn prefWidth="125.0" text="MODEL" />
+                              <TableColumn prefWidth="125.0" text="COLOR" />
+                              <TableColumn prefWidth="125.0" text="ENGINE TYPE" />
+                              <TableColumn prefWidth="125.0" text="HORSEPOWERS" />
+                              <TableColumn prefWidth="125.0" text="PRICE" />
+                              <TableColumn prefWidth="125.0" text="KILOMETERS" />
+                              <TableColumn prefWidth="125.0" text="CAR CONDITION" />
                               <TableColumn prefWidth="155.0" text="" />
                            </columns>
                         </TableView>

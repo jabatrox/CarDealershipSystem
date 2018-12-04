@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -67,14 +68,12 @@ public class SellerController implements Initializable {
 				return;
 			}
 			int conCapacity = rs_conCapacity.getInt("carCapacity");
-			System.out.println(conCapacity);
 			
 			int carsExposed = 0;
 			String sql_exposedCars = "SELECT * FROM carDetails WHERE conID='"+seller.getConID()+"' "
 					+ "AND exposed='1'";
 			ResultSet rs_exposedCars = stmt.executeQuery(sql_exposedCars);
 			while(rs_exposedCars.next()) {
-				System.out.println("There are cars");
 				carsExposed++;
 			}
 			int freeSlots = conCapacity-carsExposed;
@@ -118,5 +117,24 @@ public class SellerController implements Initializable {
 			e.printStackTrace();
 		}
 	 }
+	
+	public void acceptCustomerSellCar(ActionEvent event) {
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+//			String sql_acceptBooking = "UPDATE bookingCompleted FROM bookingDetails WHERE bookingID='"+pendingBooking.getBookingID()+"'";
+//			ResultSet rs_acceptBooking = stmt.executeQuery(sql_acceptBooking);
+//			if (!rs_acceptBooking.next()) {
+//				System.out.println("No Data");
+//				return;
+//			}
+			// Pasar a Seller.buyCar(--)
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
