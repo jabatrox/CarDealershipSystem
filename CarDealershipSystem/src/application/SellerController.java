@@ -63,18 +63,15 @@ public class SellerController implements Initializable {
 				return;
 			}
 			int conCapacity = rs_conCapacity.getInt("carCapacity");
+			System.out.println(conCapacity);
 			
 			int carsExposed = 0;
 			String sql_exposedCars = "SELECT * FROM carDetails WHERE conID='"+seller.getConID()+"' "
 					+ "AND exposed='1'";
 			ResultSet rs_exposedCars = stmt.executeQuery(sql_exposedCars);
-			if (!rs_exposedCars.next()) {
-				System.out.println("No data");
-				carsExposed = 0;
-			} else {
-				while(rs_exposedCars.next()) {
-					carsExposed++;
-				}
+			while(rs_exposedCars.next()) {
+				System.out.println("There are cars");
+				carsExposed++;
 			}
 			int freeSlots = conCapacity-carsExposed;
 			carsExposedLabel.setText(carsExposedLabel.getText()+carsExposed);
