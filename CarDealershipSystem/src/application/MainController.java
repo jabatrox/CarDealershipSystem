@@ -101,26 +101,26 @@ public class MainController extends Application {
 			stmt = conn.createStatement();
 			System.out.println("Checking for user in the database...");
 
-			String sql = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+
+			String sql_login = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+
 					"' AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs_login = stmt.executeQuery(sql_login);
 
 			//conn.close();
-			if (!rs.next()) {
+			if (!rs_login.next()) {
 				System.out.println("\\___Login failed: wrong username/password");
 				passwordLoginID.setText("");
 				statusLoginID.setText("Login failed: wrong username/password");
 			}
 			else {
-				System.out.println("User found!");
-				String response = rs.getString("userType");
+				System.out.println("User "+rs_login.getString("userID")+" ("+rs_login.getString("username")+") found!");
+				String response = rs_login.getString("userType");
 								
 				switch(response) {
 					case "c":
 					case "C":
 					{
 						statusLoginID.setText("");
-						String sql_customer = "SELECT * FROM customer WHERE userDB_ID='"+rs.getString("userID")+"'";
+						String sql_customer = "SELECT * FROM customer WHERE userDB_ID='"+rs_login.getString("userID")+"'";
 						ResultSet rs_customer = stmt.executeQuery(sql_customer);
 						if (!rs_customer.next()) {
 							System.out.println("No Data");
@@ -149,7 +149,7 @@ public class MainController extends Application {
 					case "S":
 					{
 						statusLoginID.setText("");
-						String sql_seller = "SELECT * FROM seller WHERE userDB_ID='"+rs.getString("userID")+"'";
+						String sql_seller = "SELECT * FROM seller WHERE userDB_ID='"+rs_login.getString("userID")+"'";
 						ResultSet rs_seller = stmt.executeQuery(sql_seller);
 						if (!rs_seller.next()) {
 							System.out.println("No Data");

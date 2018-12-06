@@ -11,31 +11,38 @@ import java.util.ArrayList;
  */
 public interface SellerOperations {
 	
+	
 	/**
-	 * @param carId
+	 * @param conId
+	 * @return
 	 */
-	public abstract void buyCar(int carId);
+	public abstract ArrayList<PendingBookingRow> checkPendingOperations(int conID);
+	/**
+	 * @param pendingBookingID
+	 */
+	public abstract void buyCar(int bookingID);
 	/**
 	 * @param carId
 	 * @param statusCar
 	 */
-	public abstract void sellCar(int carId, boolean statusCar);
+//	public abstract void sellCar(int carID, boolean statusCar);
+	public abstract void sellCar(int bookingID);
 	/**
 	 * @param bookingId
 	 */
 	public abstract void rejectOperation(int bookingId);
 	/**
-	 * @param carId
-	 */
-	public abstract void addCarExposed(int carId);
-	/**
-	 * @param carId
-	 */
-	public abstract void deleteCarExposed(int carId);
-	/**
 	 * @param conId
 	 * @return
 	 */
-	public abstract ArrayList<BookingDetails> checkPendingOperations(int conId);
+	public abstract ArrayList<CarDetails> checkCarsConcessionaire(int conID);
+	/**
+	 * @param carId
+	 */
+	public abstract void addCarExposed(int carID);
+	/**
+	 * @param carId
+	 */
+	public abstract void deleteCarExposed(int carID);
 
 }

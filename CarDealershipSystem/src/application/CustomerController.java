@@ -24,89 +24,86 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.DBConnect;
 
 public class CustomerController implements Initializable{
-	
+
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();
 	Statement stmt = null;
 	
+	private Customer customer;
+
 	@FXML
 	private Label customerWelcomeId;
-	
+
+//	@FXML
+//	private String userID;
+
 	@FXML
-	private String userID;
-	
-	@FXML
-	private TextField brand,model,color,horsePower,price,miles,year,conID,factID,chassis;
-	
+	private TextField brand, model, color, horsePower, price, miles, year, conID, factID, chassis;
+
 	@FXML
 	private ChoiceBox<String> engineTypes;
-	
+
 	@FXML
 	private ChoiceBox<String> sellCarOptions;
 	
 	@FXML
-	private ListView carListView;
-	
-	@FXML
 	private Button requestButton;
-	
-	private Customer customer;
-	
-	
+
+
 	public CustomerController(){
-	
+
 	}
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
+
 	}
-	
-	void initData(Agent customer1) {
-		final Customer customer = (Customer) customer1;
+
+	void initData(Agent customer_logged_in) {
+		final Customer customer = (Customer) customer_logged_in;
 		String name = "Welcome "+customer.getFirstName();
 		customerWelcomeId.setText(name);
-	 }
-	 public void ListAvailableCars(ActionEvent event) throws Exception{
-			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/ListCars.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
 	}
-	 
-	 public void SellCar(ActionEvent event) throws Exception{
-			Stage primaryStage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("/application/Customer_Sell_Car.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			
-			//try {String cLV = sellCarOptions.getSelectionModel().getSelectedItem();} catch (Exception e) {};
+	
+	public void ListAvailableCars(ActionEvent event) throws Exception{
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/ListCars.fxml"));
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
-	 
-	 public void CustomerPage (ActionEvent event) throws Exception {
-		 Stage primaryStage = new Stage();
-		 Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
-		 Scene scene = new Scene(root);
-		 scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		 primaryStage.setScene(scene);
-		 primaryStage.show();
-	 }
-	 
-	 public void RequestSellCar(ActionEvent event) {
-		 try {
+
+	public void SellCar(ActionEvent event) throws Exception{
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/Customer_Sell_Car.fxml"));
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		//try {String cLV = sellCarOptions.getSelectionModel().getSelectedItem();} catch (Exception e) {};
+	}
+
+	public void CustomerPage (ActionEvent event) throws Exception {
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/application/Customer.fxml"));
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	public void RequestSellCar(ActionEvent event) {
+		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			
+
 			//Check data
 			String br = brand.getText();
 			String mo = model.getText();
@@ -119,13 +116,14 @@ public class CustomerController implements Initializable{
 			String ci = conID.getText();
 			String fi = factID.getText();
 			String chassisId = chassis.getText();
-			
+
 			System.out.println(chassisId);
-			
+
 			int carId = Integer.parseInt(chassisId);
-			
+			////////////////////// COMPROBAR SI SE HA PASADO UN CHASSID ID, SI NO PETA AL HACER SEND REQUEST //////////////////////////
+
 			String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"'";
-			
+
 			ResultSet rs = stmt.executeQuery(sql);
 
 			if (rs.next()) {
@@ -144,38 +142,37 @@ public class CustomerController implements Initializable{
 						rs.getBoolean("exposed"),
 						rs.getBoolean("carCondition"),
 						rs.getInt("year"));
-						if(customer.sellCar(car)) {
-							new Alert(Alert.AlertType.INFORMATION, "Request Complete. Waiting for "
-									+ "an employees approval").show();
-						}
-				
-			}
-			else {
+				if(customer.sellCar(car)) {
+					new Alert(Alert.AlertType.INFORMATION, "Request Complete. Waiting for "
+							+ "an employees approval").show();
+				}
+
+			} else {
 				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
 						+ "is incorrect. Only cars that were previously bought from us are accepted").show();
 			}
 			conn.close();
-		 	} catch (SQLException e) {
-		 		// TODO Auto-generated catch block
-		 		e.printStackTrace();
-		 	}
-		 
-	 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-
-	/**
-	 * @return the userName
-	 */
-	public String getUserID() {
-		return userID;
 	}
 
 
-	/**
-	 * @param userName the userName to set
-	 */
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
+//	/**
+//	 * @return the userName
+//	 */
+//	public String getUserID() {
+//		return userID;
+//	}
+//
+//
+//	/**
+//	 * @param userName the userName to set
+//	 */
+//	public void setUserID(String userID) {
+//		this.userID = userID;
+//	}
 
 }

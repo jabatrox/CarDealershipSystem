@@ -3,141 +3,207 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxWidth="1300.0" prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
+<AnchorPane fx:id="sellingAnchorPane" maxWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="445.0" layoutY="6.0" prefHeight="44.0" prefWidth="410.0" text="Selling Operations" textAlignment="CENTER">
+      <SplitPane fx:id="sellingSplitPane" dividerPositions="0.1277" layoutY="66.0" prefHeight="536.0" prefWidth="1200.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="150.0">
+               <children>
+                  <AnchorPane layoutX="14.0" layoutY="43.0">
+                     <children>
+                        <Label fx:id="carsExposedLabel" text="Cars Exposed: ">
+                           <font>
+                              <Font name="Lucida Sans Regular" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="freeSlotsLabel" layoutY="38.0" text="Free Slots: ">
+                           <font>
+                              <Font name="Lucida Sans Regular" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="1042.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TabPane prefHeight="536.0" prefWidth="1045.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="PENDING BOOKINGS">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="pendingBookingsTable" prefHeight="508.0" prefWidth="1166.0">
+                                       <columns>
+                                          <TableColumn maxWidth="75.0" prefWidth="75.0" resizable="false" style="-fx-alignment: CENTER;" text="BOOKING&#10;    TYPE">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="bookingType" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn maxWidth="150.0" prefWidth="150.0" resizable="false" style="-fx-alignment: CENTER;" text="CUSTOMER">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="custName" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="555.0" text="CAR DETAILS">
+                                             <columns>
+                                                <TableColumn maxWidth="155.0" prefWidth="155.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="BRAND / MODEL">
+                                                   <cellValueFactory>
+                                                      <PropertyValueFactory property="brandModel" />
+                                                   </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn prefWidth="80.0" resizable="false" style="-fx-alignment: CENTER;" text="COLOR">
+                                                   <cellValueFactory>
+                                                      <PropertyValueFactory property="carColor" />
+                                                   </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn prefWidth="50.0" resizable="false" style="-fx-alignment: CENTER;" text="YEAR">
+                                                   <cellValueFactory>
+                                                      <PropertyValueFactory property="year" />
+                                                   </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn maxWidth="90.0" prefWidth="90.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="KILOMETERS">
+                                                   <cellValueFactory>
+                                                      <PropertyValueFactory property="kilometers" />
+                                                   </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn prefWidth="80.0" resizable="false" style="-fx-alignment: CENTER;" text="ENGINE">
+                                                   <cellValueFactory>
+                                                      <PropertyValueFactory property="engine" />
+                                                   </cellValueFactory>
+                                                </TableColumn>
+                                                <TableColumn maxWidth="100.0" prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="HORSEPOWER">
+                                                   <cellValueFactory>
+                                                      <PropertyValueFactory property="horsepower" />
+                                                   </cellValueFactory>
+                                                </TableColumn>
+                                             </columns>
+                                          </TableColumn>
+                                          <TableColumn maxWidth="100.0" prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER;" text="PAYMENT&#10;    TYPE">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="paymentType" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn maxWidth="70.0" prefWidth="70.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="AMOUNT">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="amount" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+            <!--                               <TableColumn prefWidth="95.0" resizable="false" text=""> -->
+            <!--                                  <cellValueFactory><PropertyValueFactory property="acceptOperation" /></cellValueFactory> -->
+            <!--                                  <cellValueFactory><PropertyValueFactory property="denyOperation" /></cellValueFactory> -->
+            <!--                               </TableColumn> -->
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="CARS EXPOSED">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1145.0">
+                                       <columns>
+                                          <TableColumn prefWidth="125.0" resizable="false" text="BRAND">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="carBrand" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="125.0" resizable="false" text="MODEL">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="carModel" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn resizable="false" style="-fx-alignment: CENTER;" text="COLOR">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="carColor" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="120.0" resizable="false" style="-fx-alignment: CENTER;" text="ENGINE TYPE">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="engineType" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="HORSEPOWERS">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="horsePower" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="125.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="PRICE">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="price" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="KILOMETERS">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="kilometers" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+<!--                                           <TableColumn prefWidth="125.0" resizable="false" style="-fx-alignment: CENTER;" text="CAR CONDITION"> -->
+<!--                                              <cellValueFactory> -->
+<!--                                                 <PropertyValueFactory property="carCondition" /> -->
+<!--                                              </cellValueFactory> -->
+<!--                                           </TableColumn> -->
+            <!--                                           <TableColumn prefWidth="145.0" text="EXPOSE"> -->
+            <!--                                              <cellValueFactory> -->
+            <!--                                                 <PropertyValueFactory property="exposeCar" /> -->
+            <!--                                              </cellValueFactory> -->
+            <!--                                           </TableColumn> -->
+                                       </columns>
+                                       <items>
+            							   <FXCollections fx:factory="observableArrayList">
+							   </FXCollections>
+            							</items>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="395.0" layoutY="-3.0" prefHeight="44.0" prefWidth="410.0" text="Selling Operations" textAlignment="CENTER">
          <font>
             <Font name="Lucida Sans Unicode" size="24.0" />
-         </font></Label>
-      <Label fx:id="sellerWelcomeName" layoutX="14.0" layoutY="10.0" text="Label">
-         <font>
-            <Font name="Lucida Sans Regular" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="sellerWelcomeID" layoutX="14.0" layoutY="30.0" text="Label">
-         <font>
-            <Font name="Lucida Sans Regular" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="carsExposedLabel" layoutX="14.0" layoutY="109.0" text="Cars Exposed: ">
-         <font>
-            <Font name="Lucida Sans Regular" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="freeSlotsLabel" layoutX="14.0" layoutY="147.0" text="Free Slots: ">
-         <font>
-            <Font name="Lucida Sans Regular" size="14.0" />
-         </font>
-      </Label>
-      <TabPane layoutX="155.0" layoutY="65.0" prefHeight="536.0" prefWidth="1145.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="PENDING BOOKINGS">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="pendingBookingsTable" prefHeight="508.0" prefWidth="1166.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="BOOKING&#10;    TYPE">
-                                 <cellValueFactory><PropertyValueFactory property="bookingType" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="200.0" text="CUSTOMER">
-                                 <cellValueFactory><PropertyValueFactory property="custName" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="555.0" text="CAR DETAILS">
-                                 <columns>
-                                    <TableColumn prefWidth="155.0" text="BRAND / MODEL">
-                                       <cellValueFactory><PropertyValueFactory property="brandModel" /></cellValueFactory>
-                                    </TableColumn>
-                                    <TableColumn prefWidth="80.0" text="COLOR">
-                                       <cellValueFactory><PropertyValueFactory property="carColor" /></cellValueFactory>
-                                    </TableColumn>
-                                    <TableColumn prefWidth="50.0" text="YEAR">
-                                       <cellValueFactory><PropertyValueFactory property="year" /></cellValueFactory>
-                                    </TableColumn>
-                                    <TableColumn prefWidth="90.0" text="KILOMETERS">
-                                       <cellValueFactory><PropertyValueFactory property="kilometers" /></cellValueFactory>
-                                    </TableColumn>
-                                    <TableColumn prefWidth="80.0" text="ENGINE">
-                                       <cellValueFactory><PropertyValueFactory property="engine" /></cellValueFactory>
-                                    </TableColumn>
-                                    <TableColumn prefWidth="100.0" text="HORSEPOWER">
-                                       <cellValueFactory><PropertyValueFactory property="horsepower" /></cellValueFactory>
-                                    </TableColumn>
-                                 </columns>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="PAYMENT&#10;    TYPE">
-                                 <cellValueFactory><PropertyValueFactory property="paymentType" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="95" text="AMOUNT">
-                                 <cellValueFactory><PropertyValueFactory property="amount" /></cellValueFactory>
-                              </TableColumn>
-<!--                               <TableColumn prefWidth="95.0" resizable="false" text=""> -->
-<!--                                  <cellValueFactory><PropertyValueFactory property="acceptOperation" /></cellValueFactory> -->
-<!--                                  <cellValueFactory><PropertyValueFactory property="denyOperation" /></cellValueFactory> -->
-<!--                               </TableColumn> -->
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="CARS EXPOSED">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1145.0">
-                           <columns>
-                              <TableColumn prefWidth="125.0" text="BRAND">
-                                 <cellValueFactory><PropertyValueFactory property="carBrand" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="MODEL">
-                                 <cellValueFactory><PropertyValueFactory property="carModel" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="COLOR">
-                                 <cellValueFactory><PropertyValueFactory property="carColor" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="ENGINE TYPE">
-                                 <cellValueFactory><PropertyValueFactory property="engineType" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="HORSEPOWERS">
-                                 <cellValueFactory><PropertyValueFactory property="horsePower" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="PRICE">
-                                 <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="KILOMETERS">
-                                 <cellValueFactory><PropertyValueFactory property="kilometers" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="125.0" text="CAR CONDITION">
-                                 <cellValueFactory><PropertyValueFactory property="carCondition" /></cellValueFactory>
-                              </TableColumn>
-                              <TableColumn prefWidth="145.0" text="EXPOSE">
-                                 <cellValueFactory><PropertyValueFactory property="exposeCar" /></cellValueFactory>
-                              </TableColumn>
-                           </columns>
-                           <items>
-							   <FXCollections fx:factory="observableArrayList">
-							   </FXCollections>
-							</items>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-      <Button fx:id="updateButton" layoutX="1211.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateTableViews" prefHeight="36.0" prefWidth="75.0" text="Update">
+      <VBox layoutX="14.0" layoutY="10.0" spacing="2.0">
+         <children>
+            <Label fx:id="sellerWelcomeName" text="Seller name">
+               <font>
+                  <Font name="Lucida Sans Regular" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="sellerWelcomeID" text="Seller ID">
+               <font>
+                  <Font name="Lucida Sans Regular" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="updateButton" layoutX="1111.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateTableViews" prefHeight="36.0" prefWidth="75.0" text="Update">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Button>
+      <Label fx:id="concessionaireIDLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="34.0" text="Concessionaire:" textAlignment="CENTER">
+         <font>
+            <Font name="Lucida Sans Unicode" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
