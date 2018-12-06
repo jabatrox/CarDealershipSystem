@@ -24,5 +24,11 @@ public interface CustomerOperations {
 	 * @param CarId
 	 */
 	public abstract boolean sellCar(CarDetails car); 
+	
+	/**
+	 * @param conId
+	 * @return
+	 */
+	public abstract ArrayList<CarDetails> checkCars(String option);
 
 }

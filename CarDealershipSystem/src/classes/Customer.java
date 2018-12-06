@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import classes.CarDetails.EngineType;
 import models.DBConnect;
 
 /**
@@ -20,6 +21,11 @@ public class Customer extends Agent implements CustomerOperations {
 	String address;
 	String email;
 	String phone;
+	
+	Connection conn = null;
+	DBConnect openDBconn = new DBConnect();
+	Statement stmt = null;
+	
 	
 	/**
 	 * Generates a new Customer.
@@ -85,6 +91,49 @@ public class Customer extends Agent implements CustomerOperations {
 				e.printStackTrace();
 			}
 		return x;
+	}
+	
+	@Override
+	public ArrayList<CarDetails> checkCars(String option) {
+		// TODO Auto-generated method stub
+		ArrayList<CarDetails> conCars = new ArrayList<>();
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_conCars;
+			if (option.equals("All Cars")) {
+				sql_conCars = "SELECT * FROM carDetails WHERE sold='0'";
+			}
+			else if (option.equals("New Cars")) {
+				sql_conCars = "SELECT * FROM carDetails WHERE sold='0' AND carCondition='1'";
+			}
+			else {
+				sql_conCars = "SELECT * FROM carDetails WHERE sold='0' AND carCondition='0'";
+			}
+			ResultSet rs_conCars = stmt.executeQuery(sql_conCars);
+			while(rs_conCars.next()) {
+				System.out.println("Available car "+rs_conCars.getInt("carID")+" found!");
+				conCars.add(new CarDetails(rs_conCars.getInt("carID"),
+		            		rs_conCars.getInt("conID"),
+		            		rs_conCars.getInt("factID"),
+		            		rs_conCars.getString("carBrand").toUpperCase(),
+		            		rs_conCars.getString("carModel").toUpperCase(),
+		            		rs_conCars.getString("carColor").toUpperCase(),
+		            		EngineType.valueOf(rs_conCars.getString("engineType")),
+		            		rs_conCars.getInt("horsePower"),
+		            		rs_conCars.getDouble("price"),
+		            		rs_conCars.getInt("kilometers"),
+		            		rs_conCars.getBoolean("sold"),
+		            		rs_conCars.getBoolean("exposed"),
+		            		rs_conCars.getBoolean("carCondition"),
+		            		rs_conCars.getInt("year")));
+			}		
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conCars;
 	}
 
 	/**
