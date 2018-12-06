@@ -98,8 +98,16 @@ public class Seller extends Agent implements SellerOperations{
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			String sql_acceptBookingBuyCar = "UPDATE bookingDetails SET bookingCompleted ='1' WHERE bookingID='"+bookingID+"'";
+			String sql_acceptBookingBuyCar = "UPDATE bookingDetails SET bookingCompleted='1' WHERE bookingID='"+bookingID+"'";
 			stmt.executeUpdate(sql_acceptBookingBuyCar);
+			String sql_getBookingCarID = "SELECT bookingDetails.carID FROM bookingDetails WHERE bookingID='"+bookingID+"'";
+			ResultSet rs_getBookingCarID = stmt.executeQuery(sql_getBookingCarID);
+			if (!rs_getBookingCarID.next()) {
+				System.out.println("No Data");
+				return;
+			}
+			String sql_setCarNotSold = "UPDATE CarDetails SET sold='1', exposed='0' WHERE carID='"+rs_getBookingCarID.getString("carID")+"'";
+			stmt.executeUpdate(sql_setCarNotSold);
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -164,7 +172,7 @@ public class Seller extends Agent implements SellerOperations{
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
 
-			String sql_conCars = "SELECT * FROM carDetails WHERE conID='"+conID+"'";
+			String sql_conCars = "SELECT * FROM carDetails WHERE conID='"+conID+"' AND sold='0'";
 			ResultSet rs_conCars = stmt.executeQuery(sql_conCars);
 			while(rs_conCars.next()) {
 				System.out.println("Available car "+rs_conCars.getInt("carID")+" found!");
