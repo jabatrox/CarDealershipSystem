@@ -19,7 +19,7 @@ public interface CustomerOperations {
 	/**
 	 * @param carId
 	 */
-	public abstract void buyCar(CarDetails car);
+	public abstract void buyCar(CarDetails car, int custID);
 	/**
 	 * @param CarId
 	 */

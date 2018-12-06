@@ -131,7 +131,8 @@ public class MainController extends Application {
 								rs_customer.getString("lastName"),
 								rs_customer.getString("address"),
 								rs_customer.getString("email"),
-								rs_customer.getString("phone"));
+								rs_customer.getString("phone"),
+								rs_customer.getInt("userDB_ID"));
 
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Customer.fxml"));
 						Stage stage_customer = new Stage();

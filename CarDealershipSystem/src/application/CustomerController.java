@@ -1,12 +1,16 @@
 package application;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +27,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -35,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.DBConnect;
@@ -73,7 +80,18 @@ public class CustomerController implements Initializable{
 	private TableView<CarDetails> carsExposedCustomerTable;
 	
 	private ObservableList<CarDetails> carsExposedTable_data = FXCollections.observableArrayList();
-
+	
+	@FXML
+	private TextField updateFirstName, updateLastName, updateAddress, updateEmail, updatePhone;
+	
+	@FXML
+	private TextField oldPass, newPass1, newPass2;
+	
+	@FXML
+	private Text newPassField;
+	
+	@FXML
+	private Text firstNameUpdateLabel, lastNameUpdateLabel, addressUpdateLabel, emailUpdateLabel, phoneUpdateLabel, passwordUpdateLabel;
 
 	public CustomerController(){
 
@@ -105,6 +123,27 @@ public class CustomerController implements Initializable{
 			addBuyButtonToTable();
 		}
 		
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+
+			String sql = "SELECT * FROM customer WHERE custID='"+customer.getAgentID()+"'";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				updateFirstName.setText(rs.getString("firstName"));
+				updateLastName.setText(rs.getString("lastName"));
+				updateAddress.setText(rs.getString("address"));
+				updateEmail.setText(rs.getString("email"));
+				updatePhone.setText(rs.getString("phone"));
+			}
+			
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		firstTimeRun = false;
 	}
@@ -130,7 +169,17 @@ public class CustomerController implements Initializable{
 						setOnMousePressed(new EventHandler<MouseEvent>() {
 				            @Override
 				            public void handle(MouseEvent event) {
-				                getTableView().getItems().get(getIndex()).getCarID();
+				            	Alert alert = new Alert(AlertType.CONFIRMATION);
+				            	alert.setTitle("Confirmation Dialog");
+				            	alert.setHeaderText("Confirming operation");
+				            	alert.setContentText("Are you sure you want to buy this car?");
+				            	 Optional<ButtonType> result = alert.showAndWait();
+				            	 if (result.get() == ButtonType.OK){
+				            	     customer.buyCar(getTableView().getItems().get(getIndex()), customer.getAgentID());
+				            	 } else {
+				            	     new Alert(Alert.AlertType.INFORMATION, "Operation cancelled");
+				            	 }
+				    
 				            }            
 				        });
 					}
@@ -142,48 +191,6 @@ public class CustomerController implements Initializable{
 		carsExposedCustomerTable.getColumns().add(buyColBtn);
 		buyColBtn.setStyle("-fx-alignment: CENTER");
 	}
-	/*private void addBuyButtonToTable() {
-		final ImageView buyButton;
-		
-		buyButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/buy_round.png"),20,20,false,false));
-		
-		TableColumn<CarDetails, Void> buyColBtn = new TableColumn<CarDetails, Void>("");
-
-		Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>> cellFactory = 
-				new Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>>() {
-			@Override
-			public TableCell<CarDetails, Void> call(final TableColumn<CarDetails, Void> param) {
-				final TableCell<CarDetails, Void> cell = new TableCell<CarDetails, Void>() {
-					
-					//private final ImageView actionButton = new ImageView();
-					{
-						buyButton.setOnMouseClicked(event -> {
-							System.out.println("Buy car");
-				        });
-						/*actionButton.setOnAction((ActionEvent event) -> {
-							//int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
-							//7String pendingBookingType = getTableView().getItems().get(getIndex()).getBookingType();
-							System.out.println("Buy car");
-							//acceptSaleCar(pendingBookingID, pendingBookingType);
-						});
-					}
-
-					public void updateItem(Void item, boolean empty) {
-						super.updateItem(item, empty);
-						if (empty) {
-							setGraphic(null);
-						} else {
-							setGraphic(buyButton);
-						}
-					}
-				};
-				return cell;
-			}
-		};
-		buyColBtn.setCellFactory(cellFactory);
-		carsExposedCustomerTable.getColumns().add(buyColBtn);
-		buyColBtn.setStyle("-fx-alignment: CENTER");
-	}*/
 	
 	public void ListAvailableCars(ActionEvent event) throws Exception{
 		Stage primaryStage = new Stage();
@@ -311,6 +318,205 @@ public class CustomerController implements Initializable{
 	
 	public void loadTable() {
 		initData(customer);
+	}
+	
+	public void updateUserInfo() {
+		System.out.println("\nUpdating new user...");
+		
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			// Check if all fields have content
+			System.out.println("\\___Checking fields...");
+			System.out.printf("    \\___Checking firstname... ");
+			checkNamesAddress(updateFirstName, firstNameUpdateLabel);
+			System.out.printf("    \\___Checking lastname... ");
+			checkNamesAddress(updateLastName, lastNameUpdateLabel);
+			System.out.printf("    \\___Checking address... ");
+			checkNamesAddress(updateAddress, addressUpdateLabel);
+			System.out.printf("    \\___Checking email... ");
+			checkEmail(updateEmail, emailUpdateLabel);
+			System.out.printf("    \\___Checking phone... ");
+			checkPhone(updatePhone, phoneUpdateLabel);
+
+				
+			String sql_usersDB = "UPDATE customer (firstName, lastName, address, email, phone) VALUES "
+							+ "('"+updateFirstName.getText()+"',"
+							+ "('"+updateLastName.getText()+"',"
+							+ "('"+updateAddress.getText()+"',"
+							+ "('"+updateEmail.getText()+"',"
+							+ "('"+updatePhone.getText()+"' WHERE custID='"+customer.getAgentID()+"'";
+			stmt.executeUpdate(sql_usersDB);
+			
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return; 
+		}
+		System.out.println("User updated.");
+	}
+	
+	public void checkNamesAddress(TextField input, Text inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		input.setStyle(null);
+		System.out.println("OK");
+	}
+	
+	public void checkEmail(TextField input, Text inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		// Regex pattern to valid email address
+	    String EMAIL_REGEX="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+	    Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+	    Matcher matcher = pattern.matcher(input.getText());
+	    if (!matcher.matches()) {
+	    	input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Incorrect email format").show();
+	    	throw new IllegalArgumentException(" ---> Incorrect email format.");
+	    }
+	    input.setStyle(null);
+	    System.out.println("OK");
+	}
+	
+	public void checkPhone(TextField input, Text inputLabel) throws IllegalArgumentException {
+		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		if (!input.getText().matches("\\d{9,13}")) {
+			if (input.getText().length() < 9 || input.getText().length() > 13) {
+				input.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Incorrect phone format: phone length is not valid").show();
+				throw new IllegalArgumentException(" ---> Incorrect phone format: phone length is not valid.");
+			}
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Incorrect phone format: must be numbers 0-9").show();
+			throw new IllegalArgumentException(" ---> Incorrect phone format: must be numbers 0-9.");
+		}
+		input.setStyle(null);
+		System.out.println("OK");
+	}
+	
+	public void updateUserPassword() {
+		if (oldPass.getText().equals("")) {
+			new Alert(Alert.AlertType.ERROR, "Please introduce your current password").show();
+		}else {
+			String oldPassword="";
+			try {
+				oldPassword = get_SecurePassword(oldPass.getText());
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				conn = openDBconn.connect();
+				stmt = conn.createStatement();
+				
+				
+				String sql3 = "SELECT hashPass FROM usersDB WHERE userID='"+customer.getUserDB_ID()+"'";
+				
+
+				ResultSet rs = stmt.executeQuery(sql3);
+				
+				if (rs.next()) {
+					System.out.printf(rs.getString("hashPass"));
+					if (rs.getString("hashPass").equals(oldPassword)) {
+						System.out.printf("    \\___Checking password... ");
+						if (newPass1.getText().equals(newPass2.getText())) {
+							if(checkPassword(newPass1, newPassField)) {
+								try {
+									String new_pass = get_SecurePassword(newPass1.getText());
+									String sql_new = "UPDATE usersDB SET hashPass='"+new_pass+"' WHERE userID='"+customer.getAgentID()+"'";
+									stmt.executeUpdate(sql_new);
+									
+								} catch (UnsupportedEncodingException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+							}
+						}else {
+							new Alert(Alert.AlertType.ERROR, "The confirmed password does not match the new password");
+						}
+					}else {
+						new Alert(Alert.AlertType.ERROR, "The password you introduced does not match your current password");
+					}
+				}
+				conn.close();
+			}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public boolean checkPassword(TextField input, Text inputLabel) throws IllegalArgumentException {
+		Boolean x = false;
+		if (input.getText().isEmpty()) {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+					+ "All fields must be filled").show();
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+		}
+		String password = input.getText();
+		boolean isAtLeast8   = password.length() >= 8; //Checks for at least 8 characters
+		boolean hasUppercase = !password.equals(password.toLowerCase()); //Checks for at least one uppercase characters
+		boolean hasLowercase = !password.equals(password.toUpperCase()); //Checks for at least one lowercase characters
+		boolean hasSpecial   = !password.matches("[A-Za-z0-9 ]*"); //Checks for at least non-alphanumeric character
+		boolean noConditions = !(password.contains("AND ") || password.contains("NOT ")); //Check that it doesn't contain AND or NOT
+		
+		if (isAtLeast8 && hasUppercase && hasLowercase && hasSpecial && noConditions) {
+			try {
+				get_SecurePassword(password);
+				x = true;
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			input.setStyle("-fx-border-color: red;");
+			new Alert(Alert.AlertType.ERROR, "Invalid password: must have at least 8 characters, with one uppercase, "
+					+ "one lowercase, and one non-alphanumeric character").show();
+			throw new IllegalArgumentException(" ---> Invalid password: must have at least 8 characters, with one uppercase, "
+					+ "one lowercase, and one non-alphanumeric character.");
+		}
+		input.setStyle(null);
+		System.out.println("OK");
+		return x;
+	}
+	
+	public static String get_SecurePassword(String passwordToHash) throws UnsupportedEncodingException {
+		String generatedPassword = passwordToHash;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+			byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
+			StringBuilder sb = new StringBuilder();
+			for(int i=0; i< bytes.length ;i++){
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			generatedPassword = sb.toString();
+		} 
+		catch (NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}
+//		System.out.println(generatedPassword);
+		return generatedPassword;
+
 	}
 	
 

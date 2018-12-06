@@ -147,7 +147,27 @@
             </Tab>
             <Tab text="My Profile">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane maxWidth="820.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="820.0">
+                     <children>
+                        <TextField fx:id="updateFirstName" layoutX="197.0" layoutY="70.0" />
+                        <TextField fx:id="updateLastName" layoutX="197.0" layoutY="111.0" />
+                        <TextField fx:id="updatePhone" layoutX="197.0" layoutY="233.0" />
+                        <TextField fx:id="updateAddress" layoutX="197.0" layoutY="152.0" />
+                        <TextField fx:id="updateEmail" layoutX="197.0" layoutY="193.0" />
+                        <Text fx:id="firstNameRegisterLabelfirstNameRegisterLabel" layoutX="84.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                        <Text fx:id="lastNameRegisterLabellastNameRegisterLabel" layoutX="84.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+                        <Text fx:id="addressRegisterLabeladdressRegisterLabel" layoutX="84.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
+                        <Text fx:id="emailRegisterLabelemailRegisterLabel" layoutX="84.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+                        <Text fx:id="phoneRegisterLabelphoneRegisterLabel" layoutX="84.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Numner" />
+                        <Button layoutX="84.0" layoutY="282.0" mnemonicParsing="false" onAction="#updateUserInfo" text="Update" />
+                        <TextField fx:id="oldPass" layoutX="478.0" layoutY="70.0" />
+                        <TextField fx:id="newPass1" layoutX="478.0" layoutY="111.0" />
+                        <TextField fx:id="newPass2" layoutX="478.0" layoutY="152.0" />
+                        <Button fx:id="oldPassText" layoutX="478.0" layoutY="193.0" mnemonicParsing="false" onAction="#updateUserPassword" text="Update Password" />
+                        <Text layoutX="658.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password" />
+                        <Text fx:id="newPassField" layoutX="658.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
+                        <Text layoutX="658.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm New Password" />
+                     </children></AnchorPane>
               </content>
             </Tab>
          </tabs>

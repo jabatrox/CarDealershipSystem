@@ -5,8 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import classes.CarDetails.EngineType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import models.DBConnect;
 
 /**
@@ -21,6 +28,7 @@ public class Customer extends Agent implements CustomerOperations {
 	String address;
 	String email;
 	String phone;
+	int userDB_ID;
 	
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();
@@ -36,11 +44,12 @@ public class Customer extends Agent implements CustomerOperations {
 	 * @param email
 	 * @param phone
 	 */
-	public Customer(int custID, String firstName, String lastName, String address, String email, String phone) {
+	public Customer(int custID, String firstName, String lastName, String address, String email, String phone, int userDB_ID) {
 		super(custID, firstName, lastName);
 		this.address = address;
 		this.email = email;
 		this.phone = phone;
+		this.userDB_ID = userDB_ID;
 	}
 
 	@Override
@@ -50,8 +59,77 @@ public class Customer extends Agent implements CustomerOperations {
 	}
 
 	@Override
-	public void buyCar(CarDetails car) {
+	public void buyCar(CarDetails car, int customerID) {
 		// TODO Auto-generated method stub
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Paymet Type");
+		alert.setHeaderText("Choose betwwen a unique or an installment payment");
+		alert.setContentText("Installment payments will be divided in 48 payments (2 years).");
+
+		ButtonType buttonTypeOne = new ButtonType("Unique");
+		ButtonType buttonTypeTwo = new ButtonType("Installment");
+
+		alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
+		int paymentType = 0;
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == buttonTypeOne){
+		    paymentType = 0;
+		} else if (result.get() == buttonTypeTwo) {
+		    paymentType = 1;
+		}
+		
+		
+		List<String> choices = new ArrayList<>();
+		choices.add("Black");
+		choices.add("Blue");
+		choices.add("Green");
+		choices.add("Grey");
+		choices.add("Purple");
+		choices.add("Red");
+		choices.add("White");
+		choices.add("Yellow");
+
+		ChoiceDialog<String> dialog = new ChoiceDialog<>("Black", choices);
+		dialog.setTitle("Color Choice");
+		dialog.setHeaderText("Ahead you can view all the colors available for this car");
+		dialog.setContentText("Choose your color:");
+
+		// Traditional way to get the response value.
+		Optional<String> color = dialog.showAndWait();
+		if (color.isPresent()){
+		    System.out.println("Your choice: " + color.get());
+		}
+
+		Connection conn = null;
+		DBConnect openDBconn = new DBConnect();
+		Statement stmt = null;
+		
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+		
+			
+		
+			String sql = "INSERT INTO bookingDetails (bookingType, custID, "
+					+ "sellerID, carID, bookingCompleted, paymentType, amount) VALUES "
+				+ "('0',"
+				+ "'"+customerID+"',"
+				+ "'"+car.getConID()+"',"
+				+ "'"+car.getCarID()+"',"
+				+ "'0',"
+				+ "'"+paymentType+"',"
+				+ "'"+(int) car.getPrice()+"')";
+
+		
+			if(0==stmt.executeUpdate(sql)) {
+				System.out.print("Car operation (buy) has been registered"); 
+			}
+			conn.close();
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 	}
 
@@ -135,7 +213,7 @@ public class Customer extends Agent implements CustomerOperations {
 		}
 		return conCars;
 	}
-
+	
 	/**
 	 * @return the address
 	 */
@@ -177,5 +255,21 @@ public class Customer extends Agent implements CustomerOperations {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	/**
+	 * @return the userDB_ID
+	 */
+	public int getUserDB_ID() {
+		return userDB_ID;
+	}
+
+	/**
+	 * @param userDB_ID the userDB_ID to set
+	 */
+	public void setUserDB_ID(int userDB_ID) {
+		this.userDB_ID = userDB_ID;
+	}
+	
+	
 
 }
