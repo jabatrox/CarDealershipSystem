@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,18 +110,41 @@ public class Customer extends Agent implements CustomerOperations {
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-		
+			
+			String sql_car = "INSERT INTO carDetails (conID, factID, "
+					+ "carBrand, carModel, carColor, engineType, horsePower,"
+					+ " price, kilometers, sold, exposed, carCondition, year)" 
+					+ " VALUES ('"+car.getConID()+"','"+car.getFactID()+"','"+car.getCarBrand()+"', "
+					+ "'"+car.getCarModel()+"', '"+color.get()+"', '"+car.getEngineType().toString()+"'"
+					+ ",'"+car.getHorsePower()+"', '"+(int)car.getPrice()+"',"
+					+ " '"+car.getKilometers()+"', '0', '0', '0', '"+Calendar.getInstance().get(Calendar.YEAR)+"');SELECT SCOPE_IDENTITY();";
+			
+			ResultSet rs = stmt.executeQuery(sql_car);
+			String new_car_id = "";
+			if(rs.next()) {
+				new_car_id = rs.getString("");
+			}
+			else {
+				System.out.print("No result");
+				return;
+			}
+			
+			long bookingTimeMillis = System.currentTimeMillis();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");    
+			Date resultdate = new Date(bookingTimeMillis);
+			String bookingTime = sdf.format(resultdate);
 			
 		
 			String sql = "INSERT INTO bookingDetails (bookingType, custID, "
-					+ "sellerID, carID, bookingCompleted, paymentType, amount) VALUES "
+					+ "sellerID, carID, bookingCompleted, paymentType, amount, bookingTime) VALUES "
 				+ "('0',"
 				+ "'"+customerID+"',"
 				+ "'"+car.getConID()+"',"
-				+ "'"+car.getCarID()+"',"
+				+ "'"+new_car_id+"',"
 				+ "'0',"
 				+ "'"+paymentType+"',"
-				+ "'"+(int) car.getPrice()+"')";
+				+ "'"+(int) car.getPrice()+"',"
+						+ "'"+bookingTime+"')";
 
 		
 			if(0==stmt.executeUpdate(sql)) {
