@@ -9,21 +9,21 @@ package classes;
  */
 public class CarDetails {
 	
-	int carID;
-	int conID; 
-	int factID;
-	String carBrand;
-	String carModel;
-	String carColor;
+	private int carID;
+	private int conID; 
+	private int factID;
+	private String carBrand;
+	private String carModel;
+	private String carColor;
 	public enum EngineType{ELECTRIC, HYBRID, GASOLINE, DIESEL};
-	EngineType engineType;
-	int horsePower;
-	double price;
-	int kilometers;
-	boolean sold;
-	boolean exposed;
-	boolean carCondition;
-	int year;
+	private EngineType engineType;
+	private int horsePower;
+	private double price;
+	private int kilometers;
+	private boolean sold;
+	private boolean exposed;
+	private boolean carCondition;
+	private int year;
 	
 	/**
 	 * @param carID

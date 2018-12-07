@@ -138,7 +138,8 @@ public class DaoModel {
 			    					"  carID INTEGER NOT NULL REFERENCES carDetails(carID),\n" + 
 			    					"  bookingCompleted TINYINT NOT NULL,\n" + 
 			    					"  paymentType INTEGER NOT NULL,\n" + 
-			    					"  amount INTEGER NOT NULL,\n" + 
+			    					"  amount INTEGER NOT NULL,\n" +
+			    					"  bookingTime VARCHAR(50) NOT NULL,\n" +
 			    					"  PRIMARY KEY(bookingID)\n" + 
 			    					");";
 			                break;

@@ -1,9 +1,11 @@
 package classes;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import classes.CarDetails.EngineType;
@@ -22,7 +24,7 @@ public class Seller extends Agent implements SellerOperations{
 	DBConnect openDBconn = new DBConnect();
 	Statement stmt = null;
 	
-	int conID;
+	private int conID;
 	
 	
 	/**
@@ -95,10 +97,15 @@ public class Seller extends Agent implements SellerOperations{
 	@Override
 	public void buyCar(int bookingID) {
 		// TODO Auto-generated method stub
+		long bookingTimeMillis = System.currentTimeMillis();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");    
+		Date resultdate = new Date(bookingTimeMillis);
+		String bookingTime = sdf.format(resultdate);
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			String sql_acceptBookingBuyCar = "UPDATE bookingDetails SET bookingCompleted='1' WHERE bookingID='"+bookingID+"'";
+			String sql_acceptBookingBuyCar = "UPDATE bookingDetails SET bookingCompleted='1', bookingTime='"+bookingTime+"' "
+					+  "WHERE bookingID='"+bookingID+"'";
 			stmt.executeUpdate(sql_acceptBookingBuyCar);
 			String sql_getBookingCarID = "SELECT bookingDetails.carID FROM bookingDetails WHERE bookingID='"+bookingID+"'";
 			ResultSet rs_getBookingCarID = stmt.executeQuery(sql_getBookingCarID);
@@ -106,13 +113,16 @@ public class Seller extends Agent implements SellerOperations{
 				System.out.println("No Data");
 				return;
 			}
-			String sql_setCarNotSold = "UPDATE CarDetails SET sold='1', exposed='0' WHERE carID='"+rs_getBookingCarID.getString("carID")+"'";
+			
+			String sql_setCarNotSold = "UPDATE CarDetails SET sold='1', exposed='0' "
+					+ "WHERE carID='"+rs_getBookingCarID.getString("carID")+"'";
 			stmt.executeUpdate(sql_setCarNotSold);
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Booking accepted on: "+bookingTime);
 	}
 
 	
@@ -120,6 +130,10 @@ public class Seller extends Agent implements SellerOperations{
 //	public void sellCar(int carID, boolean statusCar) {
 	public void sellCar(int bookingID) {
 		// TODO Auto-generated method stub
+		long bookingTimeMillis = System.currentTimeMillis();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");    
+		Date resultdate = new Date(bookingTimeMillis);
+		String bookingTime = sdf.format(resultdate);
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
@@ -145,6 +159,7 @@ public class Seller extends Agent implements SellerOperations{
 //			int factID = conID;//.getFact();
 ////			FactoryDeposit.produceCar(carID, null, null, null, null, carID, carID);
 //		}
+		System.out.println("Booking accepted on: "+bookingTime);
 	}
 
 	

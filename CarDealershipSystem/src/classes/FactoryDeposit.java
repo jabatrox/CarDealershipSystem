@@ -13,8 +13,8 @@ import classes.CarDetails.EngineType;
  */
 public class FactoryDeposit {
 	
-	int factID;
-	int carCapacity;
+	private int factID;
+	private int carCapacity;
 		
 	/**
 	 * @param factID

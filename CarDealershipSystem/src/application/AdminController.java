@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import classes.*;
@@ -29,37 +30,32 @@ public class AdminController implements Initializable {
 	
 	@FXML
 	private TableView<FactoryDeposit> factoryDepositsTable;
+	private ObservableList<FactoryDeposit> factoryDepositsTable_data = FXCollections.observableArrayList();
+	
 	@FXML
 	private TableView<Concessionaire> concessionairesFromFactoriesTable;
-	
-	private ObservableList<FactoryDeposit> factoryDepositsTable_data = FXCollections.observableArrayList();
 	private ObservableList<Concessionaire> concessionairesFromFactoriesTable_data = FXCollections.observableArrayList();
 	
 	@FXML
 	private TableView<Concessionaire> concessionairesSalesHistoryTable;
+	private ObservableList<FactoryDeposit> concessionairesSalesHistoryTable_data = FXCollections.observableArrayList();
+	
 	@FXML
 	private TableView<PendingBookingRow> bookingsHistoryFromConcessionaireTable;
-	
-	private ObservableList<FactoryDeposit> concessionairesSalesHistoryTable_data = FXCollections.observableArrayList();
 	private ObservableList<PendingBookingRow> bookingsHistoryFromConcessionaireTable_data = FXCollections.observableArrayList();
+	
+	
+	public AdminController() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		Label factoryDepositsTableLabel = new Label("THERE ARE NO FACTORIES CURRENTLY.\n\nPLEASE ADD A NEW ONE");
-		factoryDepositsTableLabel.setAlignment(Pos.CENTER);
-		factoryDepositsTable.setPlaceholder(factoryDepositsTableLabel);
-		Label concessionairesFromFactoriesTableLabel = new Label("THERE ARE NO CONCESSIONAIRES FOR THIS FACTORY CURRENTLY."
-				+ "\n\nPLEASE ADD A NEW ONE");
-		concessionairesFromFactoriesTableLabel.setAlignment(Pos.CENTER);
-		concessionairesFromFactoriesTable.setPlaceholder(concessionairesFromFactoriesTableLabel);
-		Label concessionairesSalesHistoryTableLabel = new Label("THERE ARE NO CONCESSIONAIRES CURRENTLY.\n\nPLEASE ADD A NEW ONE");
-		concessionairesSalesHistoryTableLabel.setAlignment(Pos.CENTER);
-		concessionairesSalesHistoryTable.setPlaceholder(concessionairesSalesHistoryTableLabel);
-		Label bookingsHistoryFromConcessionaireTableLabel = new Label("THERE ARE NO BOOKINGS FOR THIS CONCESSIONAIRE CURRENTLY."
-				+ "\n\nPLEASE ADD A NEW ONE");
-		bookingsHistoryFromConcessionaireTableLabel.setAlignment(Pos.CENTER);
-		bookingsHistoryFromConcessionaireTable.setPlaceholder(bookingsHistoryFromConcessionaireTableLabel);
+		factoryDepositsTable.setPlaceholder(new Label("THERE ARE NO FACTORIES CURRENTLY"));
+		concessionairesFromFactoriesTable.setPlaceholder(new Label("THERE ARE NO CONCESSIONAIRES FOR THIS FACTORY CURRENTLY"));
+		concessionairesSalesHistoryTable.setPlaceholder(new Label("THERE ARE NO CONCESSIONAIRES CURRENTLY"));
+		bookingsHistoryFromConcessionaireTable.setPlaceholder(new Label("THERE ARE NO BOOKINGS FOR THIS CONCESSIONAIRE CURRENTLY"));
 	}
 	
 	void initData(Agent admin_logged_in) {
@@ -68,6 +64,20 @@ public class AdminController implements Initializable {
 		int admin_ID = admin.getAgentID();
 		adminWelcomeName.setText(admin_name.toUpperCase());
 		adminWelcomeID.setText("ADMIN ID: "+admin_ID);
+		
+		factoryDepositsTable.getItems().clear();
+//		ArrayList<CarDetails> conCars = customer.checkCars(option);
+//		for (CarDetails conCar : conCars) {
+//			carsExposedTable_data.add(conCar);
+//		}
+		factoryDepositsTable.setItems(factoryDepositsTable_data);
+		
+//		if (!carsExposedCustomerTable.getItems().isEmpty() && firstTimeRun) {
+//			formatCarConditionInTable();
+//			addBuyButtonToTable();
+//		}
+		
+		
 	}
 
 }

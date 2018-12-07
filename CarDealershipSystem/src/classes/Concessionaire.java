@@ -9,11 +9,11 @@ package classes;
  */
 public class Concessionaire {
 
-	int conID; // (foreign key "buildingID" from "Concessionaire" or "FactoryDeposit")
+	private int conID; // (foreign key "buildingID" from "Concessionaire" or "FactoryDeposit")
 	//ArrayList<Integer> sellers = new ArrayList<>();
-	int carCapacity;
+	private int carCapacity;
 	//ArrayList<CarDetails> carsExposed;
-	int factID;
+	private int factID;
 	
 	/**
 	 * Generates a new Concessionaire with a certain ID and capacity.

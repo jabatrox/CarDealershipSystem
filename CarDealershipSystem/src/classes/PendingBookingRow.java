@@ -2,17 +2,17 @@ package classes;
 
 public class PendingBookingRow {
 	
-	int bookingID;
-	String bookingType;
-	String custName;
-	String brandModel;
-	String carColor;
-	int year;
-	int kilometers;
-	String engine;
-	String horsepower;
-	String paymentType;
-	int amount;
+	private int bookingID;
+	private String bookingType;
+	private String custName;
+	private String brandModel;
+	private String carColor;
+	private int year;
+	private int kilometers;
+	private String engine;
+	private String horsepower;
+	private String paymentType;
+	private int amount;
 	
 	
 	public PendingBookingRow(int bookingID, String bookingType, String custName, String brandModel, String carColor,

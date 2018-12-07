@@ -9,9 +9,9 @@ package classes;
  */
 public class Agent {
 	
-	int agentID;
-	String firstName;
-	String lastName;
+	private int agentID;
+	private String firstName;
+	private String lastName;
 
 	/**
 	 * @param agentID

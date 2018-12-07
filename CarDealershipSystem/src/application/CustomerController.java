@@ -75,11 +75,6 @@ public class CustomerController implements Initializable{
 	private Button requestButton;
 	
 	@FXML
-	private TableView<CarDetails> carsExposedCustomerTable;
-	
-	private ObservableList<CarDetails> carsExposedTable_data = FXCollections.observableArrayList();
-	
-	@FXML
 	private TextField updateFirstName, updateLastName, updateAddress, updateEmail, updatePhone;
 	
 	@FXML
@@ -90,9 +85,14 @@ public class CustomerController implements Initializable{
 	
 	@FXML
 	private Text firstNameUpdateLabel, lastNameUpdateLabel, addressUpdateLabel, emailUpdateLabel, phoneUpdateLabel, passwordUpdateLabel;
+	
+	@FXML
+	private TableView<CarDetails> carsExposedCustomerTable;
+	private ObservableList<CarDetails> carsExposedTable_data = FXCollections.observableArrayList();
+	
 
 	public CustomerController(){
-
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

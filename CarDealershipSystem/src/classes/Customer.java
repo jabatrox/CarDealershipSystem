@@ -25,10 +25,10 @@ import models.DBConnect;
  */
 public class Customer extends Agent implements CustomerOperations {
 	
-	String address;
-	String email;
-	String phone;
-	int userDB_ID;
+	private String address;
+	private String email;
+	private String phone;
+	private int userDB_ID;
 	
 	Connection conn = null;
 	DBConnect openDBconn = new DBConnect();

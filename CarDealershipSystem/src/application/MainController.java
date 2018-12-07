@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import classes.*;
+import models.DaoModel;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +44,8 @@ public class MainController extends Application {
 	}
 	
 	public static void main(String[] args) {
+		DaoModel dao = new DaoModel();
+		dao.createTable();
 		launch(args);
 	}
 
@@ -113,7 +117,7 @@ public class MainController extends Application {
 				statusLoginID.setText("Login failed: wrong username/password");
 			}
 			else {
-				System.out.println("User "+rs_login.getString("userID")+" ("+rs_login.getString("username")+") found!");
+				System.out.println("User \""+rs_login.getString("username")+"\" (ID: "+rs_login.getString("userID")+") found!");
 				String response = rs_login.getString("userType");
 								
 				switch(response) {

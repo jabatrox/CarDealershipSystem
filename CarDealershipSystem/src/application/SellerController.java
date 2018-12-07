@@ -58,11 +58,12 @@ public class SellerController implements Initializable {
 	
 	@FXML
 	private TableView<PendingBookingRow> pendingBookingsTable;
+	private ObservableList<PendingBookingRow> pendingBookingsTable_data = FXCollections.observableArrayList();
+	
 	@FXML
 	private TableView<CarDetails> carsExposedTable;
-	
-	private ObservableList<PendingBookingRow> pendingBookingsTable_data = FXCollections.observableArrayList();
 	private ObservableList<CarDetails> carsExposedTable_data = FXCollections.observableArrayList();
+	
 	
 	public SellerController() {
 		// TODO Auto-generated constructor stub
