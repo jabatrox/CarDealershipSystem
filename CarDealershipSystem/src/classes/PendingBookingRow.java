@@ -15,6 +15,19 @@ public class PendingBookingRow {
 	private int amount;
 	
 	
+	/**
+	 * @param bookingID
+	 * @param bookingType
+	 * @param custName
+	 * @param brandModel
+	 * @param carColor
+	 * @param year
+	 * @param kilometers
+	 * @param engine
+	 * @param horsepower
+	 * @param paymentType
+	 * @param amount
+	 */
 	public PendingBookingRow(int bookingID, String bookingType, String custName, String brandModel, String carColor,
 			int year, int kilometers, String engine, String horsepower, String paymentType, int amount) {
 		this.bookingID = bookingID;

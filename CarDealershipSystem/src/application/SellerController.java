@@ -116,7 +116,7 @@ public class SellerController implements Initializable {
 			}
 			carsExposedTable_data.add(conCar);
 		}
-		/*int */freeSlots = conCapacity-carsExposed;
+		freeSlots = conCapacity-carsExposed;
 		carsExposedLabel.setText("Cars Exposed: "+carsExposed);
 		freeSlotsLabel.setText("Free Slots: "+freeSlots);
 		carsExposedTable.setItems(carsExposedTable_data);
@@ -141,13 +141,10 @@ public class SellerController implements Initializable {
 	 }
 	
 	private void addButtonToTable(boolean buttonType) {
-//		final ImageView imageButton;
 		final Image imageButton;
 		if (buttonType) {
-//			imageButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false));
 			imageButton = new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false);
 		} else {
-//			imageButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false));
 			imageButton = new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false);
 		}
 		
@@ -159,23 +156,7 @@ public class SellerController implements Initializable {
 			public TableCell<PendingBookingRow, Void> call(final TableColumn<PendingBookingRow, Void> param) {
 				final TableCell<PendingBookingRow, Void> cell = new TableCell<PendingBookingRow, Void>() {
 					
-//					private final Button actionButton = new Button("", imageButton);
 					private ImageView imageView = new ImageView();
-					
-					/*{
-						actionButton.setOnAction((ActionEvent event) -> {
-							if (buttonType) {
-								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
-								String pendingBookingType = getTableView().getItems().get(getIndex()).getBookingType();
-								System.out.println("Accept pending booking with bookingID=" + pendingBookingID);
-								acceptSaleCar(pendingBookingID, pendingBookingType);
-							} else {
-								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
-								System.out.println("Reject pending booking with bookingID=" + pendingBookingID);
-								rejectSaleCar(pendingBookingID);
-							}
-						});
-					}*/
 
 					@Override
 					public void updateItem(Void item, boolean empty) {
@@ -183,23 +164,22 @@ public class SellerController implements Initializable {
 						if (empty) {
 							setGraphic(null);
 						} else {
-//							setGraphic(actionButton);
 							imageView.setImage(imageButton);
 							setGraphic(imageView);
 						}
 						setOnMousePressed(new EventHandler<MouseEvent>() {
 				            @Override
 				            public void handle(MouseEvent event) {
-				            	String alertConfirmDeny = "";
+				            	String alertAcceptDeny = "";
 				            	if (buttonType) {
-				            		alertConfirmDeny = "confirm";
+				            		alertAcceptDeny = "accept";
 								} else {
-									alertConfirmDeny = "reject";
+									alertAcceptDeny = "reject";
 								}
 				            	Alert alert = new Alert(AlertType.CONFIRMATION);
 				            	alert.setTitle("Confirmation Dialog");
 				            	alert.setHeaderText("Confirming operation");
-				            	alert.setContentText("Are you sure you "+alertConfirmDeny+" this operation?");
+				            	alert.setContentText("Are you sure you "+alertAcceptDeny+" this operation?");
 				            	Optional<ButtonType> result = alert.showAndWait();
 				            	if (result.get() == ButtonType.OK){
 				            		if (buttonType) {
@@ -278,7 +258,6 @@ public class SellerController implements Initializable {
 					private final CheckBox exposeToggleButton = new CheckBox();
 					{
 						exposeToggleButton.setOnAction((ActionEvent event) -> {
-//							if (freeSlots != 0) {
 								if(exposeToggleButton.isSelected()) {
 									if (freeSlots != 0) {
 										int exposedCarID = getTableView().getItems().get(getIndex()).getCarID();

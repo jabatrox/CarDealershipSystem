@@ -1,5 +1,14 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import classes.CarDetails.EngineType;
+import models.DBConnect;
+
 /**
  * --------------------------------------------------
  * @author Javier Soler, Borja González
@@ -9,6 +18,10 @@ package classes;
  */
 public class Admin extends Agent implements AdminOperations {
 
+	Connection conn = null;
+	DBConnect openDBconn = new DBConnect();
+	Statement stmt = null;
+	
 	/**
 	 * @param agentID
 	 * @param firstName
@@ -16,6 +29,42 @@ public class Admin extends Agent implements AdminOperations {
 	 */
 	public Admin(int adminID, String firstName, String lastName) {
 		super(adminID, firstName, lastName);
+	}
+	
+	@Override
+	public ArrayList<AllFactoryDepositsInfoRow> getAllFactoryDeposits() {
+		// TODO Auto-generated method stub
+		ArrayList<AllFactoryDepositsInfoRow> allFactoryDeposits = new ArrayList<>();
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			String sql_factoryDeposits = "SELECT * FROM factoryDeposit";
+			ResultSet rs_factoryDeposits = stmt.executeQuery(sql_factoryDeposits);
+			
+			while(rs_factoryDeposits.next()) {
+				System.out.println("FactoryDeposit with factID="+rs_factoryDeposits.getInt("factID")+" found!");
+				allFactoryDeposits.add(new AllFactoryDepositsInfoRow(rs_factoryDeposits.getInt("factID"),
+						rs_factoryDeposits.getInt("carCapacity"), 0));
+			}
+			for (AllFactoryDepositsInfoRow factoryDepositInfo : allFactoryDeposits) {
+				String sql_factoryDepositsInfo = "SELECT COUNT(*) AS totalCarsProduced "
+						+ "FROM factoryDeposit, carDetails "
+						+ "WHERE carDetails.factID='"+factoryDepositInfo.getFactID()+"'";
+				ResultSet rs_factoryDepositsInfo = stmt.executeQuery(sql_factoryDepositsInfo);
+				int carsProduced = 0;
+				while (rs_factoryDepositsInfo.next()) {
+					System.out.println("\\___having produced "+rs_factoryDepositsInfo.getString("totalCarsProduced")+" cars.");
+					carsProduced = rs_factoryDepositsInfo.getInt("totalCarsProduced");
+				}
+				factoryDepositInfo.setCarsProduced(carsProduced);
+			}
+			conn.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allFactoryDeposits;
 	}
 
 	@Override
@@ -31,6 +80,43 @@ public class Admin extends Agent implements AdminOperations {
 	public void deleteFactory(int factID) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public ArrayList<ConcessionairesFromFactoriesRow> getAllConcessionairesFromFactory(int factID) {
+		// TODO Auto-generated method stub
+		ArrayList<ConcessionairesFromFactoriesRow> allConcessionairesFromFactory = new ArrayList<>();
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			String sql_concessionaires = "SELECT * FROM concessionaire WHERE factID='"+factID+"'";
+			ResultSet rs_concessionaires = stmt.executeQuery(sql_concessionaires);
+			
+			while(rs_concessionaires.next()) {
+				System.out.println("Concessionaire with conID="+rs_concessionaires.getInt("conID")+" found!");
+				System.out.println("\\___belonging to factID="+factID+".");
+				allConcessionairesFromFactory.add(new ConcessionairesFromFactoriesRow(rs_concessionaires.getInt("conID"),
+						rs_concessionaires.getInt("carCapacity"), 0));
+			}
+			for (ConcessionairesFromFactoriesRow concessionaireFromFactory : allConcessionairesFromFactory) {
+				String sql_factoryDepositsInfo = "SELECT COUNT(*) AS totalSellersInConcessionaire "
+						+ "FROM seller, concessionaire "
+						+ "WHERE seller.conID='"+concessionaireFromFactory.getConID()+"'";
+				ResultSet rs_factoryDepositsInfo = stmt.executeQuery(sql_factoryDepositsInfo);
+				int numberOfSellers = 0;
+				while (rs_factoryDepositsInfo.next()) {
+					System.out.println("\\___and having produced "+rs_factoryDepositsInfo.getString("totalSellersInConcessionaire")+" sellers.");
+					numberOfSellers = rs_factoryDepositsInfo.getInt("totalSellersInConcessionaire");
+				}
+				concessionaireFromFactory.setNumberOfSellers(numberOfSellers);
+			}
+			conn.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allConcessionairesFromFactory;
 	}
 
 	@Override
