@@ -243,7 +243,7 @@ public class CustomerController implements Initializable{
 			int carId = Integer.parseInt(chassisId);
 			////////////////////// COMPROBAR SI SE HA PASADO UN CHASSID ID, SI NO PETA AL HACER SEND REQUEST //////////////////////////
 
-			String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"'";
+			String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"' AND carCondition='0'";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
