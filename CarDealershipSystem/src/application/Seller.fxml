@@ -39,13 +39,13 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="1014.0" prefHeight="534.0" prefWidth="1014.0">
                <children>
-                  <TabPane prefHeight="536.0" prefWidth="1014.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="536.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="PENDING BOOKINGS">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="pendingBookingsTable" prefHeight="508.0" prefWidth="1014.0">
+                                    <TableView fx:id="pendingBookingsTable" prefHeight="508.0" prefWidth="1200.0">
                                        <columns>
                                           <TableColumn maxWidth="75.0" prefWidth="75.0" resizable="false" style="-fx-alignment: CENTER;" text="BOOKING&#10;    TYPE">
                                              <cellValueFactory>
@@ -115,7 +115,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1014.0">
+                                    <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1200.0">
                                        <columns>
                                           <TableColumn prefWidth="157.0" resizable="false" text="BRAND">
                                              <cellValueFactory>
@@ -197,7 +197,7 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="closeButton" layoutX="1080.0" layoutY="15.0" mnemonicParsing="false" onAction="#logoutCloseWindowAction" prefHeight="36.0" prefWidth="75.0" text="Logout">
+      <Button fx:id="closeButton" layoutX="1083.0" layoutY="15.0" mnemonicParsing="false" onAction="#logoutCloseWindowAction" prefHeight="36.0" prefWidth="75.0" text="Logout">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
