@@ -114,7 +114,7 @@ public class Seller extends Agent implements SellerOperations{
 				return;
 			}
 			
-			String sql_setCarNotSold = "UPDATE CarDetails SET sold='1', exposed='0' "
+			String sql_setCarNotSold = "UPDATE CarDetails SET sold='0', exposed='0' "
 					+ "WHERE carID='"+rs_getBookingCarID.getString("carID")+"'";
 			stmt.executeUpdate(sql_setCarNotSold);
 			conn.close();
