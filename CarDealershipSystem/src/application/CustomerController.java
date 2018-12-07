@@ -72,7 +72,7 @@ public class CustomerController implements Initializable{
 	private ComboBox<String> buyCarOptions;
 	
 	@FXML
-	private Button requestButton;
+	private Button requestButton, closeButton;
 	
 	@FXML
 	private TextField updateFirstName, updateLastName, updateAddress, updateEmail, updatePhone;
@@ -109,7 +109,7 @@ public class CustomerController implements Initializable{
 		customerWelcomeID.setText("CUSTOMER ID: "+cust_id);
 		
 		String option = buyCarOptions.getSelectionModel().getSelectedItem();
-		System.out.println(option);
+		System.out.println("Showing "+option);
 		carsExposedCustomerTable.getItems().clear();
 		ArrayList<CarDetails> conCars = customer.checkCars(option);
 		for (CarDetails conCar : conCars) {
@@ -531,6 +531,12 @@ public class CustomerController implements Initializable{
 //		System.out.println(generatedPassword);
 		return generatedPassword;
 
+	}
+	
+	@FXML
+	public void logoutCloseWindowAction(ActionEvent event) {
+	    Stage stage = (Stage) closeButton.getScene().getWindow();
+	    stage.close();
 	}
 	
 

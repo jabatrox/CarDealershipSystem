@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
@@ -58,44 +59,19 @@ public class MainController extends Application {
 	@FXML
 	private Label statusLoginID;
 	@FXML
-	private TextField usernameLoginID;
+	private TextField usernameLoginID, passwordLoginID;
+	
 	@FXML
-	private TextField passwordLoginID;
+	private TextField firstNameRegisterID, lastNameRegisterID, addressRegisterID, emailRegisterID;
+	@FXML
+	private TextField phoneRegisterID, usernameRegisterID, passwordRegisterID;
+	@FXML
+	private Label firstNameRegisterLabel, lastNameRegisterLabel, addressRegisterLabel, emailRegisterLabel;
+	@FXML
+	private Label phoneRegisterLabel, usernameRegisterLabel, passwordRegisterLabel;
 
 	@FXML
-	private TextField firstNameRegisterID;
-	@FXML
-	private Label firstNameRegisterLabel;
-
-	@FXML
-	private TextField lastNameRegisterID;	
-	@FXML
-	private Label lastNameRegisterLabel;
-
-	@FXML
-	private TextField addressRegisterID;
-	@FXML
-	private Label addressRegisterLabel;
-
-	@FXML
-	private TextField emailRegisterID;
-	@FXML
-	private Label emailRegisterLabel;
-
-	@FXML
-	private TextField phoneRegisterID;
-	@FXML
-	private Label phoneRegisterLabel;
-
-	@FXML
-	private TextField usernameRegisterID;
-	@FXML
-	private Label usernameRegisterLabel;
-
-	@FXML
-	private TextField passwordRegisterID;
-	@FXML
-	private Label passwordRegisterLabel;
+	private Button loginButton, registerButton;
 	
 	
 	public void Login (ActionEvent event) throws Exception{
@@ -144,6 +120,8 @@ public class MainController extends Application {
 						Region root = (Region) loader.load();
 						CustomerController cController = loader.<CustomerController>getController();
 						cController.initData(customer);
+						Stage stage = (Stage) loginButton.getScene().getWindow();
+					    stage.close();
 
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -171,6 +149,8 @@ public class MainController extends Application {
 						Region root = (Region) loader.load();
 						SellerController sController = loader.<SellerController>getController();
 						sController.initData(seller);
+						Stage stage = (Stage) loginButton.getScene().getWindow();
+					    stage.close();
 						
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -197,6 +177,8 @@ public class MainController extends Application {
 						Region root = (Region) loader.load();
 						AdminController aController = loader.<AdminController>getController();
 						aController.initData(admin);
+						Stage stage = (Stage) loginButton.getScene().getWindow();
+					    stage.close();
 						
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

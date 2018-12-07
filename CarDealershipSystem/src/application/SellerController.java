@@ -32,6 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.DBConnect;
 
@@ -54,7 +55,7 @@ public class SellerController implements Initializable {
 //	private SplitPane sellingSplitPane;
 	
 	@FXML
-	private Button updateButton;
+	private Button updateButton, closeButton;
 	
 	@FXML
 	private TableView<PendingBookingRow> pendingBookingsTable;
@@ -357,6 +358,12 @@ public class SellerController implements Initializable {
 	
 	public void updateTableViews(ActionEvent event) {
 		initData(seller);
+	}
+	
+	@FXML
+	public void logoutCloseWindowAction(ActionEvent event) {
+	    Stage stage = (Stage) closeButton.getScene().getWindow();
+	    stage.close();
 	}
 
 }

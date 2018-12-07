@@ -197,7 +197,7 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="updateButton" layoutX="1080.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateTableViews" prefHeight="36.0" prefWidth="75.0" text="Update">
+      <Button fx:id="closeButton" layoutX="1080.0" layoutY="15.0" mnemonicParsing="false" onAction="#logoutCloseWindowAction" prefHeight="36.0" prefWidth="75.0" text="Logout">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
@@ -207,5 +207,10 @@
             <Font name="Lucida Sans Unicode" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="updateButton1" layoutX="996.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateTableViews" prefHeight="36.0" prefWidth="75.0" text="Update">
+         <font>
+            <Font name="Lucida Sans Unicode" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

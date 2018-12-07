@@ -213,5 +213,10 @@
             </Tab>
          </tabs>
       </TabPane>
+      <Button fx:id="closeButton" layoutX="867.0" layoutY="15.0" mnemonicParsing="false" onAction="#logoutCloseWindowAction" prefHeight="36.0" prefWidth="75.0" text="Logout">
+         <font>
+            <Font name="Lucida Sans Unicode" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

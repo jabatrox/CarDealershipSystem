@@ -12,12 +12,12 @@
    <children>
       <Group layoutX="149.0" layoutY="210.0">
          <children>
-            <Button fx:id="loginId" mnemonicParsing="false" onAction="#Login" text="Login">
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#Login" text="Login">
                <font>
                   <Font size="12.0" />
                </font>
             </Button>
-            <Button fx:id="registerId" layoutX="53.0" mnemonicParsing="false" onAction="#RegisterPage" text="Register">
+            <Button fx:id="registerButton" layoutX="53.0" mnemonicParsing="false" onAction="#RegisterPage" text="Register">
                <font>
                   <Font size="12.0" />
                </font>

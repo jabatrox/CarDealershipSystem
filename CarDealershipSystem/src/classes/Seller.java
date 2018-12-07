@@ -144,7 +144,7 @@ public class Seller extends Agent implements SellerOperations{
 				System.out.println("No Data");
 				return;
 			}
-//			int sellCarID = rs_getBookingCarID.getInt("carID");
+			int sellCarID = rs_getBookingCarID.getInt("carID");
 			
 			
 			String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted ='1' WHERE bookingID='"+bookingID+"'";
