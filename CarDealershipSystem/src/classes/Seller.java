@@ -168,12 +168,27 @@ public class Seller extends Agent implements SellerOperations{
             		rs_bookingCarDetail.getInt("year"));
 			if (bookingCarDetail.isCarCondition()) {
 //				FactoryDeposit.
-				/*String sql_bookingFactoryDeposit = "SELECT * FROM factoryDeposit WHERE carID='"+this.getConID()+"'";
-				ResultSet rs_bookingCarDetail = stmt.executeQuery(sql_bookingCarDetail);
-				if (!rs_bookingCarDetail.next()) {
+				String sql_bookingFactoryDeposit = "SELECT * FROM factoryDeposit WHERE factID='"+bookingCarDetail.getFactID()+"'";
+				ResultSet rs_bookingFactoryDeposit = stmt.executeQuery(sql_bookingFactoryDeposit);
+				if (!rs_bookingFactoryDeposit.next()) {
 					System.out.println("No Data");
 					return;
-				}*/
+				}
+				/*FactoryDeposit bookingCarDetail = new CarDetails(rs_bookingCarDetail.getInt("carID"),
+	            		rs_bookingCarDetail.getInt("conID"),
+	            		rs_bookingCarDetail.getInt("factID"),
+	            		rs_bookingCarDetail.getString("carBrand").toUpperCase(),
+	            		rs_bookingCarDetail.getString("carModel").toUpperCase(),
+	            		rs_bookingCarDetail.getString("carColor").toUpperCase(),
+	            		EngineType.valueOf(rs_bookingCarDetail.getString("engineType")),
+	            		rs_bookingCarDetail.getInt("horsePower"),
+	            		rs_bookingCarDetail.getDouble("price"),
+	            		rs_bookingCarDetail.getInt("kilometers"),
+	            		rs_bookingCarDetail.getBoolean("sold"),
+	            		rs_bookingCarDetail.getBoolean("exposed"),
+	            		rs_bookingCarDetail.getBoolean("carCondition"),
+	            		rs_bookingCarDetail.getInt("year"));*/
+				CarDetails newProducedCar = FactoryDeposit.produceCar(bookingCarDetail);
 				
 			} else {
 				bookingCarDetail.setSold(true);
