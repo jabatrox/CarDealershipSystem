@@ -218,18 +218,6 @@ public class SellerController implements Initializable {
 
 				            }            
 				        });
-//						actionButton.setOnAction((ActionEvent event) -> {
-//							if (buttonType) {
-//								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
-//								String pendingBookingType = getTableView().getItems().get(getIndex()).getBookingType();
-//								System.out.println("Accept pending booking with bookingID=" + pendingBookingID);
-//								acceptSaleCar(pendingBookingID, pendingBookingType);
-//							} else {
-//								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
-//								System.out.println("Reject pending booking with bookingID=" + pendingBookingID);
-//								rejectSaleCar(pendingBookingID);
-//							}
-//						});
 					}
 				};
 				return cell;
@@ -335,8 +323,7 @@ public class SellerController implements Initializable {
 		if (pendingBookingType.equals("BUYING")) {
 			seller.buyCar(pendingBookingID);
 		} else {
-//			seller.sellCar(carID, statusCar);
-			seller.sellCar(pendingBookingID); //////// IN PROGRESS
+			seller.sellCar(pendingBookingID);
 		}
 		initData(seller);
 	}

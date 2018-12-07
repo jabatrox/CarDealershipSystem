@@ -127,7 +127,6 @@ public class Seller extends Agent implements SellerOperations{
 
 	
 	@Override
-//	public void sellCar(int carID, boolean statusCar) {
 	public void sellCar(int bookingID) {
 		// TODO Auto-generated method stub
 		long bookingTimeMillis = System.currentTimeMillis();
@@ -174,22 +173,14 @@ public class Seller extends Agent implements SellerOperations{
 					System.out.println("No Data");
 					return;
 				}
-				/*FactoryDeposit bookingCarDetail = new CarDetails(rs_bookingCarDetail.getInt("carID"),
-	            		rs_bookingCarDetail.getInt("conID"),
-	            		rs_bookingCarDetail.getInt("factID"),
-	            		rs_bookingCarDetail.getString("carBrand").toUpperCase(),
-	            		rs_bookingCarDetail.getString("carModel").toUpperCase(),
-	            		rs_bookingCarDetail.getString("carColor").toUpperCase(),
-	            		EngineType.valueOf(rs_bookingCarDetail.getString("engineType")),
-	            		rs_bookingCarDetail.getInt("horsePower"),
-	            		rs_bookingCarDetail.getDouble("price"),
-	            		rs_bookingCarDetail.getInt("kilometers"),
-	            		rs_bookingCarDetail.getBoolean("sold"),
-	            		rs_bookingCarDetail.getBoolean("exposed"),
-	            		rs_bookingCarDetail.getBoolean("carCondition"),
-	            		rs_bookingCarDetail.getInt("year"));*/
 				CarDetails newProducedCar = FactoryDeposit.produceCar(bookingCarDetail);
-				
+				System.out.println("NEW CAR PRODUCED "+newProducedCar.getCarID());
+				newProducedCar.setSold(true);
+				newProducedCar.setCarCondition(false);
+				String sql_updateNewCarBookingSellCar = "UPDATE bookingDetails SET carID='"+newProducedCar.getCarID()+"', "
+						+ "bookingTime='"+bookingTime+"' "
+						+  "WHERE bookingID='"+bookingID+"'";
+				stmt.executeUpdate(sql_updateNewCarBookingSellCar);
 			} else {
 				bookingCarDetail.setSold(true);
 				bookingCarDetail.setExposed(false);
@@ -197,8 +188,6 @@ public class Seller extends Agent implements SellerOperations{
 						+  "WHERE bookingID='"+bookingID+"'";
 				stmt.executeUpdate(sql_acceptBookingSellCar);
 			}
-			
-			
 			String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted ='1' WHERE bookingID='"+bookingID+"'";
 			stmt.executeUpdate(sql_acceptBookingSellCar);
 			conn.close();
@@ -206,11 +195,6 @@ public class Seller extends Agent implements SellerOperations{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		boolean accepted = true; // Take it from the DB
-//		if (accepted && statusCar) {
-//			int factID = conID;//.getFact();
-////			FactoryDeposit.produceCar(carID, null, null, null, null, carID, carID);
-//		}
 		System.out.println("Booking accepted on: "+bookingTime);
 	}
 

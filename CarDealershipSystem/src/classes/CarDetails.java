@@ -15,9 +15,9 @@ import models.DBConnect;
  */
 public class CarDetails {
 	
-	Connection conn = null;
+	Connection conn;
 	DBConnect openDBconn = new DBConnect();
-	Statement stmt = null;
+	Statement stmt;
 	
 	private int carID;
 	private int conID; 
@@ -224,7 +224,9 @@ public class CarDetails {
 		this.sold = sold;
 		int soldValue = sold ? 1 : 0;
 		try {
-			String sql_setCarSold = "UPDATE CarDetails SET sold='"+soldValue+"' WHERE carID='"+this.getCarID()+"'";
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_setCarSold = "UPDATE carDetails SET sold='"+soldValue+"' WHERE carID='"+this.getCarID()+"'";
 			stmt.executeUpdate(sql_setCarSold);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -246,7 +248,9 @@ public class CarDetails {
 		this.exposed = exposed;
 		int exposedValue = sold ? 1 : 0;
 		try {
-			String sql_setCarExposed = "UPDATE CarDetails SET sold='"+exposedValue+"' WHERE carID='"+this.getCarID()+"'";
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_setCarExposed = "UPDATE carDetails SET sold='"+exposedValue+"' WHERE carID='"+this.getCarID()+"'";
 			stmt.executeUpdate(sql_setCarExposed);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -266,6 +270,17 @@ public class CarDetails {
 	 */
 	public void setCarCondition(boolean condition) {
 		this.carCondition = condition;
+		int conditionValue = sold ? 1 : 0;
+		System.out.println("conditionValue="+conditionValue);
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_setCarSold = "UPDATE carDetails SET carCondition='"+conditionValue+"' WHERE carID='"+this.getCarID()+"'";
+			stmt.executeUpdate(sql_setCarSold);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

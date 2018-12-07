@@ -94,34 +94,6 @@ public class FactoryDeposit {
 		return newBookingCarDetail;
 	}
 	
-/*	public static int produceCar(int conID, String carBrand, String carModel, String carColor,
-			EngineType engineType, int horsePower, double price) {
-		
-		// Generate random ID (just for initial development)
-		Random rand = new Random();
-		int carID = rand.nextInt(6) + 5;
-		
-		
-		CarDetails newCar = new CarDetails(
-				carID,
-				conID,
-//				FactoryDeposit.this.getFactID(),
-				carBrand,
-				carModel,
-				carColor,
-				engineType,
-				horsePower,
-				price,
-				0,
-				false,
-				true,
-				true,
-				0
-				);
-		return newCar.getCarID();
-		
-	}*/
-	
 	/**
 	 * @return the factID
 	 */
