@@ -329,7 +329,7 @@ public class MainController extends Application {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
 			
-			String sql = "SELECT username FROM usersDB WHERE userName='"+username+"'";
+			String sql = "SELECT username FROM usersDB WHERE userName='"+username+"' COLLATE SQL_Latin1_General_CP1_CS_AS";
 			ResultSet rs = stmt.executeQuery(sql);
 			if (rs.next()) {
 				input.setStyle("-fx-border-color: red;");
