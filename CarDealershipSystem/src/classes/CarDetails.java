@@ -1,5 +1,11 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import models.DBConnect;
+
 /**
  * --------------------------------------------------
  * @author Javier Soler, Borja Gonz�lez
@@ -8,6 +14,10 @@ package classes;
  * File name: CarDetails.java
  */
 public class CarDetails {
+	
+	Connection conn = null;
+	DBConnect openDBconn = new DBConnect();
+	Statement stmt = null;
 	
 	private int carID;
 	private int conID; 
@@ -212,6 +222,14 @@ public class CarDetails {
 	 */
 	public void setSold(boolean sold) {
 		this.sold = sold;
+		int soldValue = sold ? 1 : 0;
+		try {
+			String sql_setCarSold = "UPDATE CarDetails SET sold='"+soldValue+"' WHERE carID='"+this.getCarID()+"'";
+			stmt.executeUpdate(sql_setCarSold);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -226,6 +244,14 @@ public class CarDetails {
 	 */
 	public void setExposed(boolean exposed) {
 		this.exposed = exposed;
+		int exposedValue = sold ? 1 : 0;
+		try {
+			String sql_setCarExposed = "UPDATE CarDetails SET sold='"+exposedValue+"' WHERE carID='"+this.getCarID()+"'";
+			stmt.executeUpdate(sql_setCarExposed);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

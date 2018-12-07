@@ -146,6 +146,43 @@ public class Seller extends Agent implements SellerOperations{
 			}
 			int sellCarID = rs_getBookingCarID.getInt("carID");
 			
+			String sql_bookingCarDetail = "SELECT * FROM carDetails WHERE carID='"+sellCarID+"'";
+			ResultSet rs_bookingCarDetail = stmt.executeQuery(sql_bookingCarDetail);
+			if (!rs_bookingCarDetail.next()) {
+				System.out.println("No Data");
+				return;
+			}
+			CarDetails bookingCarDetail = new CarDetails(rs_bookingCarDetail.getInt("carID"),
+            		rs_bookingCarDetail.getInt("conID"),
+            		rs_bookingCarDetail.getInt("factID"),
+            		rs_bookingCarDetail.getString("carBrand").toUpperCase(),
+            		rs_bookingCarDetail.getString("carModel").toUpperCase(),
+            		rs_bookingCarDetail.getString("carColor").toUpperCase(),
+            		EngineType.valueOf(rs_bookingCarDetail.getString("engineType")),
+            		rs_bookingCarDetail.getInt("horsePower"),
+            		rs_bookingCarDetail.getDouble("price"),
+            		rs_bookingCarDetail.getInt("kilometers"),
+            		rs_bookingCarDetail.getBoolean("sold"),
+            		rs_bookingCarDetail.getBoolean("exposed"),
+            		rs_bookingCarDetail.getBoolean("carCondition"),
+            		rs_bookingCarDetail.getInt("year"));
+			if (bookingCarDetail.isCarCondition()) {
+//				FactoryDeposit.
+//				String sql_bookingCarDetail = "SELECT * FROM carDetails WHERE carID='"+sellCarID+"'";
+//				ResultSet rs_bookingCarDetail = stmt.executeQuery(sql_bookingCarDetail);
+//				if (!rs_bookingCarDetail.next()) {
+//					System.out.println("No Data");
+//					return;
+//				}
+				
+			} else {
+				bookingCarDetail.setSold(true);
+				bookingCarDetail.setExposed(false);
+				String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted='1', bookingTime='"+bookingTime+"' "
+						+  "WHERE bookingID='"+bookingID+"'";
+				stmt.executeUpdate(sql_acceptBookingSellCar);
+			}
+			
 			
 			String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted ='1' WHERE bookingID='"+bookingID+"'";
 			stmt.executeUpdate(sql_acceptBookingSellCar);
@@ -205,7 +242,7 @@ public class Seller extends Agent implements SellerOperations{
 		            		rs_conCars.getBoolean("exposed"),
 		            		rs_conCars.getBoolean("carCondition"),
 		            		rs_conCars.getInt("year")));
-			}		
+			}
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
