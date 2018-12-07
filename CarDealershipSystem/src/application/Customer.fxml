@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -18,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
+<AnchorPane prefHeight="600.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.CustomerController">
    <children>
-      <VBox layoutX="24.0" layoutY="20.0" prefHeight="38.0" prefWidth="150.0" spacing="2.0">
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="150.0" spacing="2.0">
          <children>
             <Label fx:id="customerWelcomeName" text="Customer name">
                <font>
@@ -34,18 +33,18 @@
             </Label>
          </children>
       </VBox>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="7.0" prefHeight="44.0" prefWidth="410.0" text="Customer Operations" textAlignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="11.0" prefHeight="44.0" prefWidth="410.0" text="Customer Operations" textAlignment="CENTER">
          <font>
             <Font name="Lucida Sans Unicode" size="24.0" />
          </font>
       </Label>
-      <TabPane layoutY="64.0" prefHeight="536.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="64.0" prefHeight="536.0" prefWidth="956.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Available Cars">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="1000.0">
                      <children>
-                        <TableView fx:id="carsExposedCustomerTable" layoutX="170.0" prefHeight="508.0" prefWidth="975.0">
+                        <TableView fx:id="carsExposedCustomerTable" layoutX="170.0" prefHeight="508.0" prefWidth="786.0">
                            <columns>
                               <TableColumn prefWidth="125.0" resizable="false" text="BRAND">
                                  <cellValueFactory>
@@ -62,7 +61,7 @@
                                     <PropertyValueFactory property="carColor" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="120.0" resizable="false" style="-fx-alignment: CENTER;" text="ENGINE TYPE">
+                              <TableColumn prefWidth="95.0" resizable="false" style="-fx-alignment: CENTER;" text="ENGINE TYPE">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="engineType" />
                                  </cellValueFactory>
@@ -72,12 +71,12 @@
                                     <PropertyValueFactory property="horsePower" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="125.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="PRICE">
+                              <TableColumn prefWidth="70.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="PRICE">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="price" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="KILOMETERS">
+                              <TableColumn prefWidth="90.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="KILOMETERS">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="kilometers" />
                                  </cellValueFactory>
@@ -87,8 +86,11 @@
                               <FXCollections fx:factory="observableArrayList" />
                            </items>
                         </TableView>
-                        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What are you looking for? New or used cars?" wrappingWidth="150.0" />
-                        <ComboBox fx:id="buyCarOptions" layoutX="14.0" layoutY="56.0" onAction="#loadTable" prefWidth="150.0" value="All Cars">
+                        <Text layoutX="11.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What are you looking for? New or used cars?" wrappingWidth="150.0">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <ComboBox fx:id="buyCarOptions" layoutX="11.0" layoutY="56.0" onAction="#loadTable" prefWidth="150.0" value="All Cars">
                         <items>
                               <FXCollections fx:factory="observableArrayList">
                               	 <String fx:value="Used Cars" />
@@ -103,34 +105,64 @@
             </Tab>
             <Tab text="Sell Your Car">
                <content>
-                  <AnchorPane prefHeight="400.0" prefWidth="700.0">
+                  <AnchorPane prefHeight="507.0" prefWidth="1000.0">
                      <children>
-                        <Label layoutX="371.0" layoutY="33.0" text="Introduce the details of the car you want to sell">
+                        <Label layoutX="296.0" layoutY="33.0" text="Introduce your car information">
                            <font>
                               <Font name="Lucida Sans Unicode" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="brand" layoutX="346.0" layoutY="103.0" />
-                        <TextField fx:id="horsePower" layoutX="346.0" layoutY="271.0" />
-                        <TextField fx:id="color" layoutX="346.0" layoutY="187.0" />
-                        <TextField fx:id="model" layoutX="346.0" layoutY="145.0" />
-                        <Text layoutX="247.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brand" />
-                        <Text layoutX="247.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horse Power" />
-                        <Text layoutX="247.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EngineType" />
-                        <Text layoutX="247.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color" />
-                        <Text layoutX="247.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Model" />
-                        <TextField fx:id="price" layoutX="346.0" layoutY="313.0" />
-                        <Text layoutX="247.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selling Price" />
-                        <TextField fx:id="miles" layoutX="786.0" layoutY="103.0" />
-                        <Text layoutX="613.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miles" />
-                        <TextField fx:id="year" layoutX="786.0" layoutY="145.0" />
-                        <Text layoutX="613.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Production Year" />
-                        <Button layoutX="849.0" layoutY="313.0" mnemonicParsing="false" onAction="#RequestSellCar" text="Send Request" userData="1" />
-                        <TextField fx:id="factID" layoutX="786.0" layoutY="229.0" />
-                        <Text layoutX="613.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Factory Number" />
-                        <TextField fx:id="conID" layoutX="786.0" layoutY="187.0" />
-                        <Text layoutX="613.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Concessionaire Number" />
-                        <ChoiceBox fx:id="engineTypes" layoutX="346.0" layoutY="229.0" prefHeight="27.0" prefWidth="167.0" value="Diesel">
+                        <TextField fx:id="brand" layoutX="178.0" layoutY="103.0" />
+                        <TextField fx:id="horsePower" layoutX="178.0" layoutY="271.0" />
+                        <TextField fx:id="color" layoutX="178.0" layoutY="187.0" />
+                        <TextField fx:id="model" layoutX="178.0" layoutY="145.0" />
+                        <Text layoutX="79.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BRAND">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <Text layoutX="79.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HORSEPOWER">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <Text layoutX="79.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENGINE TYPE">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <Text layoutX="79.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="COLOR">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <Text layoutX="79.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODEL">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <TextField fx:id="price" layoutX="178.0" layoutY="313.0" />
+                        <Text layoutX="79.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELLING PRICE">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <TextField fx:id="miles" layoutX="618.0" layoutY="103.0" />
+                        <Text layoutX="445.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KILOMETERS">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <TextField fx:id="year" layoutX="618.0" layoutY="145.0" />
+                        <Text layoutX="445.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRODUCTION YEAR">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <Button layoutX="681.0" layoutY="313.0" mnemonicParsing="false" onAction="#RequestSellCar" text="Send Request" userData="1" />
+                        <TextField fx:id="factID" layoutX="618.0" layoutY="229.0" />
+                        <Text layoutX="445.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FACTORY NUMBER">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <TextField fx:id="conID" layoutX="618.0" layoutY="187.0" />
+                        <Text layoutX="445.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONCESSIONAIRE NUMBER">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
+                        <ChoiceBox fx:id="engineTypes" layoutX="178.0" layoutY="229.0" prefHeight="27.0" prefWidth="149.0" value="Diesel">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="Hybrid" />
@@ -140,34 +172,42 @@
                               </FXCollections>
                            </items>
                         </ChoiceBox>
-                        <TextField fx:id="chassis" layoutX="786.0" layoutY="271.0" />
-                        <Text layoutX="612.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chassis Number" />
+                        <TextField fx:id="chassis" layoutX="618.0" layoutY="271.0" />
+                        <Text layoutX="445.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHASSIS NUMBER">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font></Text>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
             <Tab text="My Profile">
               <content>
-                <AnchorPane maxWidth="820.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="820.0">
+                <AnchorPane maxWidth="1000.0" minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="1000.0">
                      <children>
-                        <TextField fx:id="updateFirstName" layoutX="197.0" layoutY="70.0" />
-                        <TextField fx:id="updateLastName" layoutX="197.0" layoutY="111.0" />
-                        <TextField fx:id="updatePhone" layoutX="197.0" layoutY="233.0" />
-                        <TextField fx:id="updateAddress" layoutX="197.0" layoutY="152.0" />
-                        <TextField fx:id="updateEmail" layoutX="197.0" layoutY="193.0" />
-                        <Text fx:id="firstNameRegisterLabelfirstNameRegisterLabel" layoutX="84.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-                        <Text fx:id="lastNameRegisterLabellastNameRegisterLabel" layoutX="84.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
-                        <Text fx:id="addressRegisterLabeladdressRegisterLabel" layoutX="84.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
-                        <Text fx:id="emailRegisterLabelemailRegisterLabel" layoutX="84.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-                        <Text fx:id="phoneRegisterLabelphoneRegisterLabel" layoutX="84.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Numner" />
-                        <Button layoutX="84.0" layoutY="282.0" mnemonicParsing="false" onAction="#updateUserInfo" text="Update" />
-                        <Button fx:id="oldPassText" layoutX="478.0" layoutY="193.0" mnemonicParsing="false" onAction="#updateUserPassword" text="Update Password" />
-                        <Text layoutX="658.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password" />
-                        <Text fx:id="newPassField" layoutX="658.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
-                        <Text layoutX="658.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm New Password" />
-                        <PasswordField fx:id="oldPass" layoutX="478.0" layoutY="70.0" />
-                        <PasswordField fx:id="newPass1" layoutX="478.0" layoutY="111.0" />
-                        <PasswordField fx:id="newPass2" layoutX="478.0" layoutY="152.0" />
+                        <TextField fx:id="updateFirstName" layoutX="192.0" layoutY="103.0" />
+                        <TextField fx:id="updateLastName" layoutX="192.0" layoutY="144.0" />
+                        <TextField fx:id="updatePhone" layoutX="192.0" layoutY="266.0" />
+                        <TextField fx:id="updateAddress" layoutX="192.0" layoutY="185.0" />
+                        <TextField fx:id="updateEmail" layoutX="192.0" layoutY="226.0" />
+                        <Text fx:id="firstNameRegisterLabelfirstNameRegisterLabel" layoutX="79.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                        <Text fx:id="lastNameRegisterLabellastNameRegisterLabel" layoutX="79.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+                        <Text fx:id="addressRegisterLabeladdressRegisterLabel" layoutX="79.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
+                        <Text fx:id="emailRegisterLabelemailRegisterLabel" layoutX="79.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+                        <Text fx:id="phoneRegisterLabelphoneRegisterLabel" layoutX="79.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Numner" />
+                        <Button layoutX="79.0" layoutY="315.0" mnemonicParsing="false" onAction="#updateUserInfo" text="Update" />
+                        <TextField fx:id="oldPass" layoutX="473.0" layoutY="103.0" />
+                        <TextField fx:id="newPass1" layoutX="473.0" layoutY="144.0" />
+                        <TextField fx:id="newPass2" layoutX="473.0" layoutY="185.0" />
+                        <Button fx:id="oldPassText" layoutX="473.0" layoutY="226.0" mnemonicParsing="false" onAction="#updateUserPassword" text="Update Password" />
+                        <Text layoutX="653.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password" />
+                        <Text fx:id="newPassField" layoutX="653.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
+                        <Text layoutX="653.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm New Password" />
+                        <Label layoutX="267.0" layoutY="33.0" text="Update your user information">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="20.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </content>
             </Tab>

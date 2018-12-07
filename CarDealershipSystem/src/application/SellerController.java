@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.sun.javafx.tk.Toolkit;
@@ -14,18 +15,22 @@ import classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import models.DBConnect;
@@ -45,8 +50,8 @@ public class SellerController implements Initializable {
 	
 	@FXML
 	private AnchorPane sellingAnchorPane;
-	@FXML
-	private SplitPane sellingSplitPane;
+//	@FXML
+//	private SplitPane sellingSplitPane;
 	
 	@FXML
 	private Button updateButton;
@@ -134,11 +139,14 @@ public class SellerController implements Initializable {
 	 }
 	
 	private void addButtonToTable(boolean buttonType) {
-		final ImageView imageButton;
+//		final ImageView imageButton;
+		final Image imageButton;
 		if (buttonType) {
-			imageButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false));
+//			imageButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false));
+			imageButton = new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false);
 		} else {
-			imageButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false));
+//			imageButton = new ImageView(new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false));
+			imageButton = new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false);
 		}
 		
 		TableColumn<PendingBookingRow, Void> acceptDenyColBtn = new TableColumn<PendingBookingRow, Void>("");
@@ -149,8 +157,10 @@ public class SellerController implements Initializable {
 			public TableCell<PendingBookingRow, Void> call(final TableColumn<PendingBookingRow, Void> param) {
 				final TableCell<PendingBookingRow, Void> cell = new TableCell<PendingBookingRow, Void>() {
 					
-					private final Button actionButton = new Button("", imageButton);
-					{
+//					private final Button actionButton = new Button("", imageButton);
+					private ImageView imageView = new ImageView();
+					
+					/*{
 						actionButton.setOnAction((ActionEvent event) -> {
 							if (buttonType) {
 								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
@@ -163,7 +173,7 @@ public class SellerController implements Initializable {
 								rejectSaleCar(pendingBookingID);
 							}
 						});
-					}
+					}*/
 
 					@Override
 					public void updateItem(Void item, boolean empty) {
@@ -171,8 +181,53 @@ public class SellerController implements Initializable {
 						if (empty) {
 							setGraphic(null);
 						} else {
-							setGraphic(actionButton);
+//							setGraphic(actionButton);
+							imageView.setImage(imageButton);
+							setGraphic(imageView);
 						}
+						setOnMousePressed(new EventHandler<MouseEvent>() {
+				            @Override
+				            public void handle(MouseEvent event) {
+				            	String alertConfirmDeny = "";
+				            	if (buttonType) {
+				            		alertConfirmDeny = "confirm";
+								} else {
+									alertConfirmDeny = "reject";
+								}
+				            	Alert alert = new Alert(AlertType.CONFIRMATION);
+				            	alert.setTitle("Confirmation Dialog");
+				            	alert.setHeaderText("Confirming operation");
+				            	alert.setContentText("Are you sure you "+alertConfirmDeny+" this operation?");
+				            	Optional<ButtonType> result = alert.showAndWait();
+				            	if (result.get() == ButtonType.OK){
+				            		if (buttonType) {
+					            		int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
+										String pendingBookingType = getTableView().getItems().get(getIndex()).getBookingType();
+										System.out.println("Accept pending booking with bookingID=" + pendingBookingID);
+										acceptSaleCar(pendingBookingID, pendingBookingType);
+									} else {
+										int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
+										System.out.println("Reject pending booking with bookingID=" + pendingBookingID);
+										rejectSaleCar(pendingBookingID);
+									}
+				            	} else {
+				            		new Alert(Alert.AlertType.INFORMATION, "Operation cancelled");
+				            	}
+
+				            }            
+				        });
+//						actionButton.setOnAction((ActionEvent event) -> {
+//							if (buttonType) {
+//								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
+//								String pendingBookingType = getTableView().getItems().get(getIndex()).getBookingType();
+//								System.out.println("Accept pending booking with bookingID=" + pendingBookingID);
+//								acceptSaleCar(pendingBookingID, pendingBookingType);
+//							} else {
+//								int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
+//								System.out.println("Reject pending booking with bookingID=" + pendingBookingID);
+//								rejectSaleCar(pendingBookingID);
+//							}
+//						});
 					}
 				};
 				return cell;

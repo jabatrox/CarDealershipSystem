@@ -9,13 +9,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="sellingAnchorPane" maxWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
+<AnchorPane fx:id="sellingAnchorPane" maxWidth="1200.0" prefHeight="602.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
    <children>
-      <SplitPane fx:id="sellingSplitPane" dividerPositions="0.1277" layoutY="66.0" prefHeight="536.0" prefWidth="1200.0">
+      <SplitPane dividerPositions="0.1277" layoutY="66.0" prefHeight="536.0" prefWidth="1169.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="150.0">
                <children>
@@ -33,17 +34,18 @@
                         </Label>
                      </children>
                   </AnchorPane>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-35.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="1042.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="1014.0" prefHeight="534.0" prefWidth="1014.0">
                <children>
-                  <TabPane prefHeight="536.0" prefWidth="1045.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane prefHeight="536.0" prefWidth="1014.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="PENDING BOOKINGS">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="pendingBookingsTable" prefHeight="508.0" prefWidth="1166.0">
+                                    <TableView fx:id="pendingBookingsTable" prefHeight="508.0" prefWidth="1014.0">
                                        <columns>
                                           <TableColumn maxWidth="75.0" prefWidth="75.0" resizable="false" style="-fx-alignment: CENTER;" text="BOOKING&#10;    TYPE">
                                              <cellValueFactory>
@@ -99,10 +101,10 @@
                                                 <PropertyValueFactory property="amount" />
                                              </cellValueFactory>
                                           </TableColumn>
-            <!--                               <TableColumn prefWidth="95.0" resizable="false" text=""> -->
-            <!--                                  <cellValueFactory><PropertyValueFactory property="acceptOperation" /></cellValueFactory> -->
-            <!--                                  <cellValueFactory><PropertyValueFactory property="denyOperation" /></cellValueFactory> -->
-            <!--                               </TableColumn> -->
+                              <!--                               <TableColumn prefWidth="95.0" resizable="false" text=""> -->
+                              <!--                                  <cellValueFactory><PropertyValueFactory property="acceptOperation" /></cellValueFactory> -->
+                              <!--                                  <cellValueFactory><PropertyValueFactory property="denyOperation" /></cellValueFactory> -->
+                              <!--                               </TableColumn> -->
                                        </columns>
                                     </TableView>
                                  </children>
@@ -113,14 +115,14 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1145.0">
+                                    <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1014.0">
                                        <columns>
-                                          <TableColumn prefWidth="125.0" resizable="false" text="BRAND">
+                                          <TableColumn prefWidth="157.0" resizable="false" text="BRAND">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="carBrand" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="125.0" resizable="false" text="MODEL">
+                                          <TableColumn prefWidth="157.0" resizable="false" text="MODEL">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="carModel" />
                                              </cellValueFactory>
@@ -135,7 +137,7 @@
                                                 <PropertyValueFactory property="engineType" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="HORSEPOWER">
+                                          <TableColumn prefWidth="100.0" resizable="false" style="-fx-alignment: CENTER_RIGHT;" text="HORSEPOWERS">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="horsePower" />
                                              </cellValueFactory>
@@ -150,7 +152,6 @@
                                                 <PropertyValueFactory property="kilometers" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="STATE" />
 <!--                                           <TableColumn prefWidth="125.0" resizable="false" style="-fx-alignment: CENTER;" text="CAR CONDITION"> -->
 <!--                                              <cellValueFactory> -->
 <!--                                                 <PropertyValueFactory property="carCondition" /> -->
@@ -177,12 +178,12 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="395.0" layoutY="-3.0" prefHeight="44.0" prefWidth="410.0" text="Selling Operations" textAlignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="381.0" layoutY="-3.0" prefHeight="44.0" prefWidth="410.0" text="Selling Operations" textAlignment="CENTER">
          <font>
             <Font name="Lucida Sans Unicode" size="24.0" />
          </font>
       </Label>
-      <VBox layoutX="14.0" layoutY="10.0" spacing="2.0">
+      <VBox layoutX="14.0" layoutY="15.0" spacing="2.0">
          <children>
             <Label fx:id="sellerWelcomeName" text="Seller name">
                <font>
@@ -196,12 +197,12 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="updateButton" layoutX="1111.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateTableViews" prefHeight="36.0" prefWidth="75.0" text="Update">
+      <Button fx:id="updateButton" layoutX="1080.0" layoutY="15.0" mnemonicParsing="false" onAction="#updateTableViews" prefHeight="36.0" prefWidth="75.0" text="Update">
          <font>
             <Font name="Lucida Sans Unicode" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="concessionaireIDLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="34.0" text="Concessionaire:" textAlignment="CENTER">
+      <Label fx:id="concessionaireIDLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="517.0" layoutY="34.0" text="Concessionaire:" textAlignment="CENTER">
          <font>
             <Font name="Lucida Sans Unicode" size="18.0" />
          </font>

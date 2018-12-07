@@ -52,9 +52,9 @@ public class CustomerController implements Initializable{
 	DBConnect openDBconn = new DBConnect();
 	Statement stmt = null;
 	
-	private Image buyButton;
-	
 	private Customer customer;
+	private boolean firstTimeRun = true;
+	private Image buyButton;
 
 	@FXML
 	private Label customerWelcomeName, customerWelcomeID;
@@ -73,8 +73,6 @@ public class CustomerController implements Initializable{
 	
 	@FXML
 	private Button requestButton;
-	
-	private boolean firstTimeRun = true;
 	
 	@FXML
 	private TableView<CarDetails> carsExposedCustomerTable;
@@ -99,7 +97,8 @@ public class CustomerController implements Initializable{
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		buyCarOptions.setStyle("-fx-font: 12px \"Lucida Sans Unicode\";");
+		carsExposedCustomerTable.setPlaceholder(new Label("THERE ARE NO CARS AVAILABLE FOR SELLING"));
 	}
 
 	void initData(Agent customer_logged_in) {
