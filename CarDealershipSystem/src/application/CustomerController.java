@@ -329,15 +329,15 @@ public class CustomerController implements Initializable{
 			// Check if all fields have content
 			System.out.println("\\___Checking fields...");
 			System.out.printf("    \\___Checking firstname... ");
-			checkNamesAddress(updateFirstName, firstNameUpdateLabel);
+			MainController.checkNamesAddress(updateFirstName, firstNameUpdateLabel);
 			System.out.printf("    \\___Checking lastname... ");
-			checkNamesAddress(updateLastName, lastNameUpdateLabel);
+			MainController.checkNamesAddress(updateLastName, lastNameUpdateLabel);
 			System.out.printf("    \\___Checking address... ");
-			checkNamesAddress(updateAddress, addressUpdateLabel);
+			MainController.checkNamesAddress(updateAddress, addressUpdateLabel);
 			System.out.printf("    \\___Checking email... ");
-			checkEmail(updateEmail, emailUpdateLabel);
+			MainController.checkEmail(updateEmail, emailUpdateLabel);
 			System.out.printf("    \\___Checking phone... ");
-			checkPhone(updatePhone, phoneUpdateLabel);
+			MainController.checkPhone(updatePhone, phoneUpdateLabel);
 
 				
 			String sql_usersDB = "UPDATE customer SET firstName="
@@ -365,65 +365,13 @@ public class CustomerController implements Initializable{
 		
 	}
 	
-	public void checkNamesAddress(TextField input, Text inputLabel) throws IllegalArgumentException {
-		if (input.getText().isEmpty()) {
-			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
-					+ "All fields must be filled").show();
-			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
-		}
-		input.setStyle(null);
-		System.out.println("OK");
-	}
-	
-	public void checkEmail(TextField input, Text inputLabel) throws IllegalArgumentException {
-		if (input.getText().isEmpty()) {
-			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
-					+ "All fields must be filled").show();
-			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
-		}
-		// Regex pattern to valid email address
-	    String EMAIL_REGEX="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
-	    Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
-	    Matcher matcher = pattern.matcher(input.getText());
-	    if (!matcher.matches()) {
-	    	input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Incorrect email format").show();
-	    	throw new IllegalArgumentException(" ---> Incorrect email format.");
-	    }
-	    input.setStyle(null);
-	    System.out.println("OK");
-	}
-	
-	public void checkPhone(TextField input, Text inputLabel) throws IllegalArgumentException {
-		if (input.getText().isEmpty()) {
-			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
-					+ "All fields must be filled").show();
-			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
-		}
-		if (!input.getText().matches("\\d{9,13}")) {
-			if (input.getText().length() < 9 || input.getText().length() > 13) {
-				input.setStyle("-fx-border-color: red;");
-				new Alert(Alert.AlertType.ERROR, "Incorrect phone format: phone length is not valid").show();
-				throw new IllegalArgumentException(" ---> Incorrect phone format: phone length is not valid.");
-			}
-			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Incorrect phone format: must be numbers 0-9").show();
-			throw new IllegalArgumentException(" ---> Incorrect phone format: must be numbers 0-9.");
-		}
-		input.setStyle(null);
-		System.out.println("OK");
-	}
-	
 	public void updateUserPassword() {
 		if (oldPass.getText().equals("")) {
 			new Alert(Alert.AlertType.ERROR, "Please introduce your current password").show();
 		}else {
 			String oldPassword="";
 			try {
-				oldPassword = get_SecurePassword(oldPass.getText());
+				oldPassword = MainController.get_SecurePassword(oldPass.getText());
 			} catch (UnsupportedEncodingException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -447,7 +395,7 @@ public class CustomerController implements Initializable{
 						if (newPass1.getText().equals(newPass2.getText())) {
 							if(checkPassword(newPass1, newPassField)) {
 								try {
-									String new_pass = get_SecurePassword(newPass1.getText());
+									String new_pass = MainController.get_SecurePassword(newPass1.getText());
 									String sql_new = "UPDATE usersDB SET hashPass='"+new_pass+"' WHERE userID='"+customer.getUserDB_ID()+"'";
 									if(1==stmt.executeUpdate(sql_new)){
 										new Alert(Alert.AlertType.INFORMATION, "Your new password has been set").show();
@@ -495,7 +443,7 @@ public class CustomerController implements Initializable{
 		
 		if (isAtLeast8 && hasUppercase && hasLowercase && hasSpecial && noConditions) {
 			try {
-				get_SecurePassword(password);
+				MainController.get_SecurePassword(password);
 				x = true;
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
@@ -511,26 +459,6 @@ public class CustomerController implements Initializable{
 		input.setStyle(null);
 		System.out.println("OK");
 		return x;
-	}
-	
-	public static String get_SecurePassword(String passwordToHash) throws UnsupportedEncodingException {
-		String generatedPassword = passwordToHash;
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-			byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
-			StringBuilder sb = new StringBuilder();
-			for(int i=0; i< bytes.length ;i++){
-				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			generatedPassword = sb.toString();
-		} 
-		catch (NoSuchAlgorithmException e){
-			e.printStackTrace();
-		}
-//		System.out.println(generatedPassword);
-		return generatedPassword;
-
 	}
 	
 	@FXML

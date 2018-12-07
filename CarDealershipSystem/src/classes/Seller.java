@@ -168,12 +168,12 @@ public class Seller extends Agent implements SellerOperations{
             		rs_bookingCarDetail.getInt("year"));
 			if (bookingCarDetail.isCarCondition()) {
 //				FactoryDeposit.
-//				String sql_bookingCarDetail = "SELECT * FROM carDetails WHERE carID='"+sellCarID+"'";
-//				ResultSet rs_bookingCarDetail = stmt.executeQuery(sql_bookingCarDetail);
-//				if (!rs_bookingCarDetail.next()) {
-//					System.out.println("No Data");
-//					return;
-//				}
+				/*String sql_bookingFactoryDeposit = "SELECT * FROM factoryDeposit WHERE carID='"+this.getConID()+"'";
+				ResultSet rs_bookingCarDetail = stmt.executeQuery(sql_bookingCarDetail);
+				if (!rs_bookingCarDetail.next()) {
+					System.out.println("No Data");
+					return;
+				}*/
 				
 			} else {
 				bookingCarDetail.setSold(true);

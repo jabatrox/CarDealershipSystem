@@ -38,14 +38,14 @@
             </PasswordField>
          </children>
       </AnchorPane>
-      <Label contentDisplay="CENTER" layoutX="20.0" layoutY="21.0" text="Car Dealership System" textAlignment="CENTER" textOverrun="CLIP">
+      <Label contentDisplay="CENTER" layoutX="18.0" layoutY="21.0" text="Car Dealership System" textAlignment="CENTER" textOverrun="CLIP">
          <font>
-            <Font name="PT Sans" size="26.0" />
+            <Font name="Lucida Sans Unicode" size="24.0" />
          </font>
       </Label>
       <Label fx:id="statusLoginID" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="66.0" prefHeight="17.0" prefWidth="224.0" textAlignment="CENTER" textFill="#d71010">
          <font>
-            <Font size="12.0" />
+            <Font name="Lucida Sans Unicode" size="12.0" />
          </font>
       </Label>
    </children>

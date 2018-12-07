@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.DBConnect;
 
@@ -50,9 +51,9 @@ public class MainController extends Application {
 		launch(args);
 	}
 
-	Connection conn = null;
-	DBConnect openDBconn = new DBConnect();
-	Statement stmt = null;
+	static Connection conn = null;
+	static DBConnect openDBconn = new DBConnect();
+	static Statement stmt = null;
 	
 	static String nL = System.getProperty("line.separator");
 	
@@ -66,9 +67,9 @@ public class MainController extends Application {
 	@FXML
 	private TextField phoneRegisterID, usernameRegisterID, passwordRegisterID;
 	@FXML
-	private Label firstNameRegisterLabel, lastNameRegisterLabel, addressRegisterLabel, emailRegisterLabel;
+	private Text firstNameRegisterLabel, lastNameRegisterLabel, addressRegisterLabel, emailRegisterLabel;
 	@FXML
-	private Label phoneRegisterLabel, usernameRegisterLabel, passwordRegisterLabel;
+	private Text phoneRegisterLabel, usernameRegisterLabel, passwordRegisterLabel;
 
 	@FXML
 	private Button loginButton, registerButton;
@@ -265,7 +266,7 @@ public class MainController extends Application {
 		System.out.println("New user added.");
 	}
 	
-	public void checkNamesAddress(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public static void checkNamesAddress(TextField input, Text inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
@@ -276,7 +277,7 @@ public class MainController extends Application {
 		System.out.println("OK");
 	}
 	
-	public void checkEmail(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public static void checkEmail(TextField input, Text inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
@@ -296,7 +297,7 @@ public class MainController extends Application {
 	    System.out.println("OK");
 	}
 	
-	public void checkPhone(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public static void checkPhone(TextField input, Text inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
@@ -317,7 +318,7 @@ public class MainController extends Application {
 		System.out.println("OK");
 	}
 
-	public void CheckUserName(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public static void CheckUserName(TextField input, Text inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
@@ -347,7 +348,7 @@ public class MainController extends Application {
 		}
 	}
 	
-	public void checkPassword(TextField input, Label inputLabel) throws IllegalArgumentException {
+	public static void checkPassword(TextField input, Text inputLabel) throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
