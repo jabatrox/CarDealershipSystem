@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="sellingAnchorPane" maxWidth="1200.0" prefHeight="602.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
+<AnchorPane fx:id="sellingAnchorPane" maxWidth="1200.0" prefHeight="602.0" prefWidth="1169.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SellerController">
    <children>
       <SplitPane dividerPositions="0.1277" layoutY="66.0" prefHeight="536.0" prefWidth="1169.0">
         <items>
@@ -37,7 +37,7 @@
                   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="-35.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="1014.0" prefHeight="534.0" prefWidth="1014.0">
+          <AnchorPane maxWidth="1034.0" minHeight="0.0" minWidth="1034.0" prefHeight="534.0" prefWidth="1034.0">
                <children>
                   <TabPane prefHeight="536.0" prefWidth="1014.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
@@ -115,7 +115,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView fx:id="carsExposedTable" prefHeight="508.0" prefWidth="1014.0">
+                                    <TableView fx:id="carsExposedTable" maxHeight="508.0" maxWidth="1034.0" prefHeight="508.0" prefWidth="1034.0">
                                        <columns>
                                           <TableColumn prefWidth="157.0" resizable="false" text="BRAND">
                                              <cellValueFactory>

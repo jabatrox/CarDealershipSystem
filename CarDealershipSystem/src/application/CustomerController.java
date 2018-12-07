@@ -41,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -66,7 +67,7 @@ public class CustomerController implements Initializable{
 	private TextField brand, model, color, horsePower, price, miles, year, conID, factID, chassis;
 
 	@FXML
-	private ChoiceBox<String> engineTypes;
+	private TextField engineTypes;
 
 	@FXML
 	private ComboBox<String> buyCarOptions;
@@ -90,7 +91,9 @@ public class CustomerController implements Initializable{
 	private TableView<CarDetails> carsExposedCustomerTable;
 	private ObservableList<CarDetails> carsExposedTable_data = FXCollections.observableArrayList();
 	
-
+	private boolean carFound = false;
+	private ResultSet rs_carFound;
+	
 	public CustomerController(){
 		// TODO Auto-generated constructor stub
 	}
@@ -220,63 +223,98 @@ public class CustomerController implements Initializable{
 		primaryStage.show();
 	}
 
-	public void RequestSellCar(ActionEvent event) {
+	public void findCar(ActionEvent event) {
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
 
-			//Check data
-			String br = brand.getText();
-			String mo = model.getText();		
-			String co = color.getText();
-			String et = engineTypes.getSelectionModel().getSelectedItem();
-			String hp = horsePower.getText();
-			String pr = price.getText();
-			String mi = miles.getText();
-			String ye = year.getText();
-			String ci = conID.getText();
-			String fi = factID.getText();
 			String chassisId = chassis.getText();
 
 			System.out.println(chassisId);
-
+			
 			int carId = Integer.parseInt(chassisId);
-			////////////////////// COMPROBAR SI SE HA PASADO UN CHASSID ID, SI NO PETA AL HACER SEND REQUEST //////////////////////////
 
-			String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"' AND carCondition='0'";
-
-			ResultSet rs = stmt.executeQuery(sql);
-
-			if (rs.next()) {
-				CarDetails car = new CarDetails(carId,
-						rs.getInt("conID"),
-						rs.getInt("factID"),
-						rs.getString("carBrand"),
-						rs.getString("carModel"),
-						co,
-						EngineType.valueOf(rs.getString("engineType")),
-						rs.getInt("horsePower"),
-						Double.parseDouble(pr),
-						Integer.parseInt(mi),
-						rs.getBoolean("sold"),
-						rs.getBoolean("exposed"),
-						rs.getBoolean("carCondition"),
-						rs.getInt("year"));
-				if(customer.sellCar(car)) {
-					new Alert(Alert.AlertType.INFORMATION, "Request Complete. Waiting for "
-							+ "an employees approval").show();
-				}
-
-			} else {
-				new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
-						+ "is incorrect. Only cars that were previously bought from us are accepted").show();
+			if (chassisId.isEmpty()) {
+				new Alert(Alert.AlertType.WARNING, "Please input your Chassis Id").show();
+				return;
 			}
-			conn.close();
+			else {
+				String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"' AND sold='1'";
+	
+				rs_carFound = stmt.executeQuery(sql);
+	
+				if (rs_carFound.next()) {
+					
+					carFound = true;
+					brand.setText(rs_carFound.getString("carBrand"));
+					model.setText(rs_carFound.getString("carModel"));
+					color.setText(rs_carFound.getString("carColor"));
+					engineTypes.setText(rs_carFound.getString("engineType"));
+					horsePower.setText(rs_carFound.getString("horsePower"));
+					year.setText(rs_carFound.getString("year"));
+					conID.setText(rs_carFound.getString("conID"));
+					factID.setText(rs_carFound.getString("factID"));
+	
+				} else {
+					new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
+							+ "is incorrect. Only cars that were previously in our dealership are eligible").show();
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	}
+	
+	public void RequestSellCar(ActionEvent action) {
+		if(carFound) {
+			if (color.getText().isEmpty() || miles.getText().isEmpty() || price.getText().isEmpty()) {
+				new Alert(Alert.AlertType.WARNING, "Either color,miles or price is empty").show();
+			}
+			else if (!price.getText().matches("[0-9]+") || Integer.parseInt(price.getText())>=0) {
+				new Alert(Alert.AlertType.WARNING, "Price has to be a number").show();
+				price.setStyle("-fx-border-color: red;");
+			}
+			else if (!miles.getText().matches("[0-9]+") || Integer.parseInt(miles.getText())<=0) {
+				new Alert(Alert.AlertType.WARNING, "Miles has to be a number and greater than 0").show();
+				miles.setStyle("-fx-border-color: red;");
+			}
+			else {
+			CarDetails car = new CarDetails();
+			try {
+				car = new CarDetails(rs_carFound.getInt("carID"),
+						rs_carFound.getInt("conID"),
+						rs_carFound.getInt("factID"),
+						rs_carFound.getString("carBrand"),
+						rs_carFound.getString("carModel"),
+						color.getText(),
+						EngineType.valueOf(rs_carFound.getString("engineType")),
+						rs_carFound.getInt("horsePower"),
+						Double.parseDouble(price.getText()),
+						Integer.parseInt(miles.getText()),
+						rs_carFound.getBoolean("sold"),
+						rs_carFound.getBoolean("exposed"),
+						rs_carFound.getBoolean("carCondition"),
+						rs_carFound.getInt("year"));
+				
+				conn.close();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(customer.sellCar(car)) {
+				new Alert(Alert.AlertType.INFORMATION, "Request Complete. Waiting for "
+						+ "an employees approval").show();
+			}
+		}
+		}
+		else {
+			new Alert(Alert.AlertType.ERROR,"Please search for a valid chassis ID").show();
+		}
+		
 	}
 	
 	private void formatCarConditionInTable() {

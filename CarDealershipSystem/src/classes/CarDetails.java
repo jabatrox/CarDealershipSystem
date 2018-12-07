@@ -69,6 +69,10 @@ public class CarDetails {
 		this.carCondition = carCondition;
 		this.year = year;
 	}
+	
+	public CarDetails() {
+		
+	}
 
 	/**
 	 * @return the carID

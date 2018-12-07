@@ -173,15 +173,22 @@ public class Customer extends Agent implements CustomerOperations {
 			stmt = conn.createStatement();
 		
 			//BookingDetails bookD = new BookingDetails(car.getPrice(),);
+			long bookingTimeMillis = System.currentTimeMillis();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");    
+			Date resultdate = new Date(bookingTimeMillis);
+			String bookingTime = sdf.format(resultdate);
 		
-			String sql = "INSERT INTO bookingDetails () VALUES "
+			String sql = "INSERT INTO bookingDetails (bookingType, "
+					+ "custID, sellerID, carID, bookingCompleted, "
+					+ "paymentType, amount, bookingTime) VALUES "
 				+ "('1',"
 				+ "'"+this.getAgentID()+"',"
 				+ "'"+car.getConID()+"',"
 				+ "'"+car.getCarID()+"',"
 				+ "'0',"
 				+ "'0',"
-				+ "'"+car.getPrice()+"')";
+				+ "'"+(int)car.getPrice()+"',"
+				+ "'"+bookingTime+"')";
 
 		
 			if(0==stmt.executeUpdate(sql))
