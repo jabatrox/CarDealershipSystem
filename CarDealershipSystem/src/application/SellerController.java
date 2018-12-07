@@ -209,8 +209,9 @@ public class SellerController implements Initializable {
 										acceptSaleCar(pendingBookingID, pendingBookingType);
 									} else {
 										int pendingBookingID = getTableView().getItems().get(getIndex()).getBookingID();
+										String pendingBookingType = getTableView().getItems().get(getIndex()).getBookingType();
 										System.out.println("Reject pending booking with bookingID=" + pendingBookingID);
-										rejectSaleCar(pendingBookingID);
+										rejectSaleCar(pendingBookingID, pendingBookingType);
 									}
 				            	} else {
 				            		new Alert(Alert.AlertType.INFORMATION, "Operation cancelled");
@@ -328,8 +329,8 @@ public class SellerController implements Initializable {
 		initData(seller);
 	}
 	
-	public void rejectSaleCar(int pendingBookingID) {
-		seller.rejectOperation(pendingBookingID);
+	public void rejectSaleCar(int pendingBookingID, String pendingBookingType) {
+		seller.rejectOperation(pendingBookingID, pendingBookingType);
 		initData(seller);
 	}
 	

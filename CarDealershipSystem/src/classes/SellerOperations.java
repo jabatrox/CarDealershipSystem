@@ -30,7 +30,7 @@ public interface SellerOperations {
 	/**
 	 * @param bookingId
 	 */
-	public abstract void rejectOperation(int bookingId);
+	public abstract void rejectOperation(int bookingID, String bookingType);
 	/**
 	 * @param conId
 	 * @return

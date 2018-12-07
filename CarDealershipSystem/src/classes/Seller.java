@@ -166,7 +166,6 @@ public class Seller extends Agent implements SellerOperations{
             		rs_bookingCarDetail.getBoolean("carCondition"),
             		rs_bookingCarDetail.getInt("year"));
 			if (bookingCarDetail.isCarCondition()) {
-//				FactoryDeposit.
 				String sql_bookingFactoryDeposit = "SELECT * FROM factoryDeposit WHERE factID='"+bookingCarDetail.getFactID()+"'";
 				ResultSet rs_bookingFactoryDeposit = stmt.executeQuery(sql_bookingFactoryDeposit);
 				if (!rs_bookingFactoryDeposit.next()) {
@@ -200,11 +199,22 @@ public class Seller extends Agent implements SellerOperations{
 
 	
 	@Override
-	public void rejectOperation(int bookingID) {
+	public void rejectOperation(int bookingID, String bookingType) {
 		// TODO Auto-generated method stub
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
+			if (bookingType.equals("SELLING")) {
+				String sql_getBookingCarID = "SELECT bookingDetails.carID FROM bookingDetails WHERE bookingID='"+bookingID+"'";
+				ResultSet rs_getBookingCarID = stmt.executeQuery(sql_getBookingCarID);
+				if (!rs_getBookingCarID.next()) {
+					System.out.println("No Data");
+					return;
+				}
+				int toBeDeletedCarID = rs_getBookingCarID.getInt("carID");
+				String sql_deleteCarDetail = "DELETE FROM carDetails WHERE carID='"+toBeDeletedCarID+"'";
+				stmt.executeUpdate(sql_deleteCarDetail);
+			}
 			String sql_deleteBooking = "DELETE FROM bookingDetails WHERE bookingID='"+bookingID+"'";
 			stmt.executeUpdate(sql_deleteBooking);
 			conn.close();
