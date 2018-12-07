@@ -101,8 +101,9 @@ public class MainController extends Application {
 			stmt = conn.createStatement();
 			System.out.println("Checking for user in the database...");
 
-			String sql_login = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+
-					"' AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
+			String sql_login = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+"' "
+					+ "COLLATE SQL_Latin1_General_CP1_CS_AS "
+					+ "AND hashPass='"+get_SecurePassword(passwordLoginID.getText())+"'";
 			ResultSet rs_login = stmt.executeQuery(sql_login);
 
 			//conn.close();
@@ -177,12 +178,26 @@ public class MainController extends Application {
 					case "A":
 					{
 						statusLoginID.setText("");
-						Stage primaryStage = new Stage();
-						Parent root = FXMLLoader.load(getClass().getResource("/application/Admin.fxml"));
+						String sql_admin = "SELECT * FROM admin WHERE userDB_ID='"+rs_login.getString("userID")+"'";
+						ResultSet rs_admin = stmt.executeQuery(sql_admin);
+						if (!rs_admin.next()) {
+							System.out.println("No Data");
+							return;
+						}
+						Agent admin = new Admin(Integer.parseInt(rs_admin.getString("adminID")),
+								rs_admin.getString("firstName"),
+								rs_admin.getString("lastName"));
+						
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Admin.fxml"));
+						Stage stage_admin = new Stage();
+						Region root = (Region) loader.load();
+						AdminController aController = loader.<AdminController>getController();
+						aController.initData(admin);
+						
 						Scene scene = new Scene(root);
 						scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-						primaryStage.setScene(scene);
-						primaryStage.show();
+						stage_admin.setScene(scene);
+						stage_admin.show();
 						break;
 					}
 				}
