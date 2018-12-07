@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -160,13 +161,13 @@
                         <Text fx:id="emailRegisterLabelemailRegisterLabel" layoutX="84.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
                         <Text fx:id="phoneRegisterLabelphoneRegisterLabel" layoutX="84.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Numner" />
                         <Button layoutX="84.0" layoutY="282.0" mnemonicParsing="false" onAction="#updateUserInfo" text="Update" />
-                        <TextField fx:id="oldPass" layoutX="478.0" layoutY="70.0" />
-                        <TextField fx:id="newPass1" layoutX="478.0" layoutY="111.0" />
-                        <TextField fx:id="newPass2" layoutX="478.0" layoutY="152.0" />
                         <Button fx:id="oldPassText" layoutX="478.0" layoutY="193.0" mnemonicParsing="false" onAction="#updateUserPassword" text="Update Password" />
                         <Text layoutX="658.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Password" />
                         <Text fx:id="newPassField" layoutX="658.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password" />
                         <Text layoutX="658.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm New Password" />
+                        <PasswordField fx:id="oldPass" layoutX="478.0" layoutY="70.0" />
+                        <PasswordField fx:id="newPass1" layoutX="478.0" layoutY="111.0" />
+                        <PasswordField fx:id="newPass2" layoutX="478.0" layoutY="152.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

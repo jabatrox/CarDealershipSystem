@@ -341,13 +341,20 @@ public class CustomerController implements Initializable{
 			checkPhone(updatePhone, phoneUpdateLabel);
 
 				
-			String sql_usersDB = "UPDATE customer (firstName, lastName, address, email, phone) VALUES "
-							+ "('"+updateFirstName.getText()+"',"
-							+ "('"+updateLastName.getText()+"',"
-							+ "('"+updateAddress.getText()+"',"
-							+ "('"+updateEmail.getText()+"',"
-							+ "('"+updatePhone.getText()+"' WHERE custID='"+customer.getAgentID()+"'";
-			stmt.executeUpdate(sql_usersDB);
+			String sql_usersDB = "UPDATE customer SET firstName="
+					+ "'"+updateFirstName.getText()+"',lastName="
+					+ "'"+updateLastName.getText()+"',address="
+					+ "'"+updateAddress.getText()+"',email="
+					+ "'"+updateEmail.getText()+"',phone="
+					+ "'"+updatePhone.getText()+"' WHERE custID="
+					+ "'"+customer.getAgentID()+"'";
+			if (1==stmt.executeUpdate(sql_usersDB)){
+				new Alert(Alert.AlertType.INFORMATION, "Your new information has been updated").show();
+				
+			}
+			else {
+				new Alert(Alert.AlertType.INFORMATION, "There was an error while trying to update your profile").show();
+			}
 			
 			conn.close();
 		} catch (SQLException e) {
@@ -356,6 +363,7 @@ public class CustomerController implements Initializable{
 			return; 
 		}
 		System.out.println("User updated.");
+		
 	}
 	
 	public void checkNamesAddress(TextField input, Text inputLabel) throws IllegalArgumentException {
@@ -432,15 +440,22 @@ public class CustomerController implements Initializable{
 				ResultSet rs = stmt.executeQuery(sql3);
 				
 				if (rs.next()) {
-					System.out.printf(rs.getString("hashPass"));
+					System.out.printf("HashPass: "+rs.getString("hashPass")+"\n");
+
+					System.out.println("Old password: "+oldPassword);
 					if (rs.getString("hashPass").equals(oldPassword)) {
 						System.out.printf("    \\___Checking password... ");
 						if (newPass1.getText().equals(newPass2.getText())) {
 							if(checkPassword(newPass1, newPassField)) {
 								try {
 									String new_pass = get_SecurePassword(newPass1.getText());
-									String sql_new = "UPDATE usersDB SET hashPass='"+new_pass+"' WHERE userID='"+customer.getAgentID()+"'";
-									stmt.executeUpdate(sql_new);
+									String sql_new = "UPDATE usersDB SET hashPass='"+new_pass+"' WHERE userID='"+customer.getUserDB_ID()+"'";
+									if(1==stmt.executeUpdate(sql_new)){
+										new Alert(Alert.AlertType.INFORMATION, "Your new password has been set").show();
+									}
+									else {
+										new Alert(Alert.AlertType.INFORMATION, "There was an error while trying to update your password").show();
+									}
 									
 								} catch (UnsupportedEncodingException e) {
 									// TODO Auto-generated catch block
@@ -449,10 +464,10 @@ public class CustomerController implements Initializable{
 								
 							}
 						}else {
-							new Alert(Alert.AlertType.ERROR, "The confirmed password does not match the new password");
+							new Alert(Alert.AlertType.ERROR, "The confirmed password does not match the new password").show();;
 						}
-					}else {
-						new Alert(Alert.AlertType.ERROR, "The password you introduced does not match your current password");
+					} else {
+						new Alert(Alert.AlertType.ERROR, "The password you introduced does not match your current password").show();;
 					}
 				}
 				conn.close();
