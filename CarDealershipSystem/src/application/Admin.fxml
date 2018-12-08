@@ -8,10 +8,12 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="600.0" maxWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminController">
    <children>
@@ -40,7 +42,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="factoryDepositsTable" layoutX="1.0" prefHeight="504.0" prefWidth="386.0">
+                        <TableView fx:id="factoryDepositsTable" layoutX="1.0" prefHeight="504.0" prefWidth="345.0">
                            <columns>
                               <TableColumn prefWidth="90.0" resizable="false" style="-fx-alignment: CENTER;" text="FACTORY ID">
                                  <cellValueFactory>
@@ -57,21 +59,60 @@
                                     <PropertyValueFactory property="carsProduced" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="75.0" text="Column X" />
                            </columns>
                            <items>
                               <FXCollections fx:factory="observableArrayList" />
                            </items>
                         </TableView>
-                        <TableView fx:id="concessionairesFromFactoriesTable" layoutX="405.0" prefHeight="504.0" prefWidth="399.0">
+                        <TableView fx:id="concessionairesFromFactoriesTable" layoutX="369.0" prefHeight="504.0" prefWidth="399.0">
                           <columns>
-                            <TableColumn prefWidth="140.0" text="CONCESSIONAIRE ID" />
-                            <TableColumn minWidth="0.0" prefWidth="106.0" text="CAR CAPACITY" />
-                              <TableColumn prefWidth="81.0" text="Nº SELLERS" />
+                            <TableColumn prefWidth="140.0" text="CONCESSIONAIRE ID">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="conID" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                            <TableColumn minWidth="0.0" prefWidth="106.0" text="CAR CAPACITY">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="carCapacity" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn prefWidth="81.0" text="Nº SELLERS">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="numberOfSellers" />
+                                 </cellValueFactory>
+                              </TableColumn>
                               <TableColumn prefWidth="75.0" text="Column X" />
                           </columns>
                         </TableView>
-                        <Separator layoutX="386.0" orientation="VERTICAL" prefHeight="503.0" prefWidth="23.0" />
+                        <Separator layoutX="346.0" layoutY="1.0" orientation="VERTICAL" prefHeight="503.0" prefWidth="23.0" />
+                        <TextField fx:id="factoryCapacity" layoutX="880.0" layoutY="48.0" promptText="car capacity" />
+                        <Text layoutX="849.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW FACTORY">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="801.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="concessionaireCapacity" layoutX="880.0" layoutY="165.0" promptText="car capacity" />
+                        <Text layoutX="826.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD NEW CONCESSIONAIRE">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="801.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="concessionaireFactoryID" layoutX="880.0" layoutY="207.0" promptText="factory ID" />
+                        <Text layoutX="801.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fact. ID">
+                           <font>
+                              <Font name="Lucida Sans Unicode" size="12.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
                </content>
@@ -82,17 +123,17 @@
                      <children>
                         <TableView fx:id="concessionairesSalesHistoryTable" prefHeight="504.0" prefWidth="399.0">
                            <columns>
-                              <TableColumn prefWidth="140.0" text="CONCESSIONAIRE ID" >
+                              <TableColumn prefWidth="140.0" text="CONCESSIONAIRE ID">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="conID" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn minWidth="0.0" prefWidth="106.0" text="CAR CAPACITY" >
+                              <TableColumn minWidth="0.0" prefWidth="106.0" text="CAR CAPACITY">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="carCapacity" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="81.0" text="Nº SELLERS" >
+                              <TableColumn prefWidth="81.0" text="Nº SELLERS">
                                  <cellValueFactory>
                                     <PropertyValueFactory property="numberOfSellers" />
                                  </cellValueFactory>

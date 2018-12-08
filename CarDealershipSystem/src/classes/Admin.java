@@ -79,7 +79,16 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void deleteFactory(int factID) {
 		// TODO Auto-generated method stub
-		
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_deleteFactoryDeposit = "DELETE FROM factoryDeposit WHERE factID='"+factID+"'";
+			stmt.executeUpdate(sql_deleteFactoryDeposit);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -100,14 +109,14 @@ public class Admin extends Agent implements AdminOperations {
 						rs_concessionaires.getInt("carCapacity"), 0));
 			}
 			for (ConcessionairesFromFactoriesRow concessionaireFromFactory : allConcessionairesFromFactory) {
-				String sql_factoryDepositsInfo = "SELECT COUNT(*) AS totalSellersInConcessionaire "
+				String sql_concessionaireFromFactoryInfo = "SELECT COUNT(*) AS totalSellersInConcessionaire "
 						+ "FROM seller, concessionaire "
 						+ "WHERE seller.conID='"+concessionaireFromFactory.getConID()+"'";
-				ResultSet rs_factoryDepositsInfo = stmt.executeQuery(sql_factoryDepositsInfo);
+				ResultSet rs_concessionaireFromFactoryInfo = stmt.executeQuery(sql_concessionaireFromFactoryInfo);
 				int numberOfSellers = 0;
-				while (rs_factoryDepositsInfo.next()) {
-					System.out.println("\\___and having produced "+rs_factoryDepositsInfo.getString("totalSellersInConcessionaire")+" sellers.");
-					numberOfSellers = rs_factoryDepositsInfo.getInt("totalSellersInConcessionaire");
+				while (rs_concessionaireFromFactoryInfo.next()) {
+					System.out.println("\\___and having "+rs_concessionaireFromFactoryInfo.getString("totalSellersInConcessionaire")+" sellers.");
+					numberOfSellers = rs_concessionaireFromFactoryInfo.getInt("totalSellersInConcessionaire");
 				}
 				concessionaireFromFactory.setNumberOfSellers(numberOfSellers);
 			}

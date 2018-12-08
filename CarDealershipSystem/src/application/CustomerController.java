@@ -34,6 +34,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -79,7 +80,7 @@ public class CustomerController implements Initializable{
 	private TextField updateFirstName, updateLastName, updateAddress, updateEmail, updatePhone;
 	
 	@FXML
-	private TextField oldPass, newPass1, newPass2;
+	private PasswordField oldPass, newPass1, newPass2;
 	
 	@FXML
 	private Text newPassField;
@@ -244,8 +245,8 @@ public class CustomerController implements Initializable{
 				rs_carFound = stmt.executeQuery(sql);
 	
 				if (rs_carFound.next()) {
-					
 					carFound = true;
+					
 					brand.setText(rs_carFound.getString("carBrand"));
 					model.setText(rs_carFound.getString("carModel"));
 					color.setText(rs_carFound.getString("carColor"));
@@ -254,7 +255,6 @@ public class CustomerController implements Initializable{
 					year.setText(rs_carFound.getString("year"));
 					conID.setText(rs_carFound.getString("conID"));
 					factID.setText(rs_carFound.getString("factID"));
-	
 				} else {
 					new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
 							+ "is incorrect. Only cars that were previously in our dealership are eligible").show();

@@ -4,20 +4,29 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.DBConnect;
@@ -33,6 +42,9 @@ public class AdminController implements Initializable {
 	
 	@FXML
 	private Label adminWelcomeID, adminWelcomeName;
+	
+	@FXML
+	private TextField factoryCapacity, concessionaireCapacity, concessionaireFactoryID;
 	
 	@FXML
 	private Button closeButton;
@@ -62,7 +74,7 @@ public class AdminController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		factoryDepositsTable.setPlaceholder(new Label("THERE ARE NO FACTORIES CURRENTLY"));
-		concessionairesFromFactoriesTable.setPlaceholder(new Label("THERE ARE NO CONCESSIONAIRES FOR THIS FACTORY CURRENTLY"));
+		concessionairesFromFactoriesTable.setPlaceholder(new Label("NO FACTORY SELECTED OR THERE ARE NO\nCONCESSIONAIRES FOR THIS FACTORY CURRENTLY"));
 		concessionairesSalesHistoryTable.setPlaceholder(new Label("THERE ARE NO CONCESSIONAIRES CURRENTLY"));
 		bookingsHistoryFromConcessionaireTable.setPlaceholder(new Label("THERE ARE NO BOOKINGS FOR THIS CONCESSIONAIRE CURRENTLY"));
 	}
@@ -75,7 +87,7 @@ public class AdminController implements Initializable {
 		adminWelcomeID.setText("ADMIN ID: "+admin_ID);
 		
 		fillFactoryDepositsTable();
-//		fillConcessionairesFromFactoriesTable();
+//		fillConcessionairesFromFactoriesTable(1);
 	}
 	
 	private void fillFactoryDepositsTable() {
@@ -93,7 +105,7 @@ public class AdminController implements Initializable {
 			    }
 			});
 //			fillConcessionairesFromFactoriesTable();
-//			addBuyButtonToTable();
+			addButtonToFactoryDepositTable();
 		}
 		
 		firstTimeRun = false;
@@ -112,16 +124,21 @@ public class AdminController implements Initializable {
 //			addBuyButtonToTable();
 //		}
 		
-		
-		/*Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>> cellFactory = 
-				new Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>>() {
+		firstTimeRun = false;
+	}
+	
+	private void addButtonToFactoryDepositTable() {
+		final Image imageButton = new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false);
+
+		TableColumn<AllFactoryDepositsInfoRow, Void> deleteFactoryDepositColBtn = new TableColumn<AllFactoryDepositsInfoRow, Void>("");
+
+		Callback<TableColumn<AllFactoryDepositsInfoRow, Void>, TableCell<AllFactoryDepositsInfoRow, Void>> cellFactory = 
+				new Callback<TableColumn<AllFactoryDepositsInfoRow, Void>, TableCell<AllFactoryDepositsInfoRow, Void>>() {
 			@Override
-			public TableCell<CarDetails, Void> call(final TableColumn<CarDetails, Void> param) {
-				final TableCell<CarDetails, Void> cell = new TableCell<CarDetails, Void>() {
+			public TableCell<AllFactoryDepositsInfoRow, Void> call(final TableColumn<AllFactoryDepositsInfoRow, Void> param) {
+				final TableCell<AllFactoryDepositsInfoRow, Void> cell = new TableCell<AllFactoryDepositsInfoRow, Void>() {
 					
-					private final Label carCondition = new Label();
-					{
-					}
+					private ImageView imageView = new ImageView();
 
 					@Override
 					public void updateItem(Void item, boolean empty) {
@@ -129,19 +146,36 @@ public class AdminController implements Initializable {
 						if (empty) {
 							setGraphic(null);
 						} else {
-							setGraphic(carCondition);
-							if (getTableView().getItems().get(getIndex()).isCarCondition()) {
-								carCondition.setText("NEW");
-							} else {
-								carCondition.setText("USED");
-							}
+							imageView.setImage(imageButton);
+							setGraphic(imageView);
 						}
+						setOnMousePressed(new EventHandler<MouseEvent>() {
+				            @Override
+				            public void handle(MouseEvent event) {
+				            	Alert alert = new Alert(AlertType.CONFIRMATION);
+				            	alert.setTitle("Confirmation Dialog");
+				            	alert.setHeaderText("Confirming operation");
+				            	alert.setContentText("Are you sure you want to delete this factory?");
+				            	Optional<ButtonType> result = alert.showAndWait();
+				            	if (result.get() == ButtonType.OK){
+				            		int factoryDepositID = getTableView().getItems().get(getIndex()).getFactID();
+									System.out.println("Deleting factory with factoryID=" +factoryDepositID);
+									admin.deleteFactory(factoryDepositID);
+									initData(admin);
+				            	} else {
+				            		new Alert(Alert.AlertType.INFORMATION, "Operation cancelled");
+				            	}
+
+				            }            
+				        });
 					}
 				};
 				return cell;
 			}
-		};*/
-		
+		};
+		deleteFactoryDepositColBtn.setCellFactory(cellFactory);
+		factoryDepositsTable.getColumns().add(deleteFactoryDepositColBtn);
+		deleteFactoryDepositColBtn.setStyle("-fx-alignment: CENTER");
 	}
 	
 	@FXML
