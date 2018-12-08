@@ -245,8 +245,8 @@ public class CustomerController implements Initializable{
 				rs_carFound = stmt.executeQuery(sql);
 	
 				if (rs_carFound.next()) {
-					
 					carFound = true;
+					
 					brand.setText(rs_carFound.getString("carBrand"));
 					model.setText(rs_carFound.getString("carModel"));
 					color.setText(rs_carFound.getString("carColor"));
@@ -255,7 +255,6 @@ public class CustomerController implements Initializable{
 					year.setText(rs_carFound.getString("year"));
 					conID.setText(rs_carFound.getString("conID"));
 					factID.setText(rs_carFound.getString("factID"));
-	
 				} else {
 					new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
 							+ "is incorrect. Only cars that were previously in our dealership are eligible").show();
