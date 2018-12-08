@@ -143,9 +143,11 @@ public class SellerController implements Initializable {
 	private void addButtonToTable(boolean buttonType) {
 		final Image imageButton;
 		if (buttonType) {
-			imageButton = new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false);
+//			imageButton = new Image(getClass().getResourceAsStream("../../resources/Accept.png"),15,15,false,false);
+			imageButton = new Image(ResourceLoader.load("../../resources/Accept.png"),15,15,false,false);
 		} else {
-			imageButton = new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false);
+//			imageButton = new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false);
+			imageButton = new Image(ResourceLoader.load("../../resources/Deny.png"),15,15,false,false);
 		}
 		
 		TableColumn<PendingBookingRow, Void> acceptDenyColBtn = new TableColumn<PendingBookingRow, Void>("");
