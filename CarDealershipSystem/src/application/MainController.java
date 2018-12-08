@@ -266,23 +266,28 @@ public class MainController extends Application {
 		System.out.println("New user added.");
 	}
 	
-	public static void checkNamesAddress(TextField input, Text inputLabel) throws IllegalArgumentException {
+	public static void checkNamesAddress(TextField input, Text inputLabel) 
+			throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+			new Alert(Alert.AlertType.ERROR, "Missing field "
+			+inputLabel.getText()+"! "
 					+ "All fields must be filled").show();
-			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+			throw new IllegalArgumentException(" ---> Missing field "
+					+inputLabel.getText()+"! All fields must be filled.");
 		}
 		input.setStyle(null);
 		System.out.println("OK");
 	}
 	
-	public static void checkEmail(TextField input, Text inputLabel) throws IllegalArgumentException {
+	public static void checkEmail(TextField input, Text inputLabel) 
+			throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
 			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
 					+ "All fields must be filled").show();
-			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()
+			+"! All fields must be filled.");
 		}
 		// Regex pattern to valid email address
 	    String EMAIL_REGEX="^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
@@ -297,22 +302,29 @@ public class MainController extends Application {
 	    System.out.println("OK");
 	}
 	
-	public static void checkPhone(TextField input, Text inputLabel) throws IllegalArgumentException {
+	public static void checkPhone(TextField input, Text inputLabel) 
+			throws IllegalArgumentException {
 		if (input.getText().isEmpty()) {
 			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Missing field "+inputLabel.getText()+"! "
+			new Alert(Alert.AlertType.ERROR, "Missing field "
+			+inputLabel.getText()+"! "
 					+ "All fields must be filled").show();
-			throw new IllegalArgumentException(" ---> Missing field "+inputLabel.getText()+"! All fields must be filled.");
+			throw new IllegalArgumentException(" ---> Missing field "
+					+inputLabel.getText()+"! All fields must be filled.");
 		}
 		if (!input.getText().matches("\\d{9,13}")) {
 			if (input.getText().length() < 9 || input.getText().length() > 13) {
 				input.setStyle("-fx-border-color: red;");
-				new Alert(Alert.AlertType.ERROR, "Incorrect phone format: phone length is not valid").show();
-				throw new IllegalArgumentException(" ---> Incorrect phone format: phone length is not valid.");
+				new Alert(Alert.AlertType.ERROR, "Incorrect phone format: "
+						+ "phone length is not valid").show();
+				throw new IllegalArgumentException(" ---> Incorrect phone "
+						+ "format: phone length is not valid.");
 			}
 			input.setStyle("-fx-border-color: red;");
-			new Alert(Alert.AlertType.ERROR, "Incorrect phone format: must be numbers 0-9").show();
-			throw new IllegalArgumentException(" ---> Incorrect phone format: must be numbers 0-9.");
+			new Alert(Alert.AlertType.ERROR, "Incorrect phone format: must "
+					+ "be numbers 0-9").show();
+			throw new IllegalArgumentException(" ---> Incorrect phone "
+					+ "format: must be numbers 0-9.");
 		}
 		input.setStyle(null);
 		System.out.println("OK");
@@ -396,7 +408,6 @@ public class MainController extends Application {
 		catch (NoSuchAlgorithmException e){
 			e.printStackTrace();
 		}
-//		System.out.println(generatedPassword);
 		return generatedPassword;
 
 	}
