@@ -5,8 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import classes.CarDetails.EngineType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 import models.DBConnect;
 
 /**
@@ -68,12 +72,21 @@ public class Admin extends Agent implements AdminOperations {
 	}
 
 	@Override
-	public void createFactory() {
+	public void createFactory(int carCapacity) {
 		// TODO Auto-generated method stub
 		// ID por autoincrement y elegir carCapacity
-		FactoryDeposit fact = new FactoryDeposit(0, 40);
-		createConcessionaire(40, fact.getFactID());
-		
+		System.out.println("Adding new factory with carCapacity="+carCapacity);
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_newFactoryDeposit = "INSERT INTO factoryDeposit (carCapacity) VALUES ('"+carCapacity+"')";
+			stmt.executeUpdate(sql_newFactoryDeposit);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("\\___Added");
 	}
 
 	@Override
@@ -82,8 +95,44 @@ public class Admin extends Agent implements AdminOperations {
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			String sql_deleteFactoryDeposit = "DELETE FROM factoryDeposit WHERE factID='"+factID+"'";
-			stmt.executeUpdate(sql_deleteFactoryDeposit);
+			
+			String sql_numberOfFactoryDeposits = "SELECT COUNT(*) AS numberOfFactoryDeposits FROM factoryDeposit";
+			ResultSet rs_numberOfFactoryDeposits = stmt.executeQuery(sql_numberOfFactoryDeposits);
+			int numberOfFactoryDeposits = 0;
+			while (rs_numberOfFactoryDeposits.next()) {
+				numberOfFactoryDeposits = rs_numberOfFactoryDeposits.getInt("numberOfFactoryDeposits");
+			}
+			if (numberOfFactoryDeposits == 1) {
+				new Alert(Alert.AlertType.ERROR, "There is only one factory left, you can't delete it!").show();
+			} else {
+				List<Integer> factoryDepositsID = new ArrayList<>();
+				String sql_factoryDeposits = "SELECT * FROM factoryDeposit WHERE factID<>'"+factID+"'";
+				ResultSet rs_factoryDeposits = stmt.executeQuery(sql_factoryDeposits);
+				while(rs_factoryDeposits.next()) {
+					System.out.println("FactoryDeposit with factID="+rs_factoryDeposits.getInt("factID")+" found!");
+					factoryDepositsID.add(rs_factoryDeposits.getInt("factID"));
+				}
+
+				ChoiceDialog<Integer> dialog = new ChoiceDialog<Integer>(factoryDepositsID.get(0), factoryDepositsID);
+				dialog.setTitle("Factory Choice");
+				dialog.setHeaderText("Select a factory from the list to move all concessionaires and cars to it");
+				dialog.setContentText("Factory:");
+
+				// Get the response value.
+				Optional<Integer> factoryID = dialog.showAndWait();
+				if (factoryID.isPresent()){
+				    System.out.println("Your choice: " + factoryID.get());
+				    // Update concessionaires and carDetails to the new factoryDeposit
+					String sql_changeConcessionairesToNewFactory = "UPDATE concessionaire SET factID='"+factoryID+"' "
+							+ "WHERE factID='"+factID+"';"
+							+ "\n"
+							+ "UPDATE carDetails SET factID='"+factoryID+"' "
+							+ "WHERE factID='"+factID+"';";
+					stmt.executeUpdate(sql_changeConcessionairesToNewFactory);
+				}
+				String sql_deleteFactoryDeposit = "DELETE FROM factoryDeposit WHERE factID='"+factID+"'";
+				stmt.executeUpdate(sql_deleteFactoryDeposit);
+			}
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

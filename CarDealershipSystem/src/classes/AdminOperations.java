@@ -19,7 +19,7 @@ public interface AdminOperations {
 	/**
 	 * 
 	 */
-	public abstract void createFactory();
+	public abstract void createFactory(int carCapacity);
 	/**
 	 * @param factID
 	 */

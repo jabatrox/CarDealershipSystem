@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -45,6 +46,8 @@ public class AdminController implements Initializable {
 	
 	@FXML
 	private TextField factoryCapacity, concessionaireCapacity, concessionaireFactoryID;
+	@FXML
+	private ImageView addFactory, addConcessionaire;
 	
 	@FXML
 	private Button closeButton;
@@ -176,6 +179,128 @@ public class AdminController implements Initializable {
 		deleteFactoryDepositColBtn.setCellFactory(cellFactory);
 		factoryDepositsTable.getColumns().add(deleteFactoryDepositColBtn);
 		deleteFactoryDepositColBtn.setStyle("-fx-alignment: CENTER");
+	}
+	
+	@FXML
+	public void addNewFactory() throws IllegalArgumentException {
+		try {
+			if (factoryCapacity.getText().isEmpty()) {
+		    	factoryCapacity.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Missing car capacity! Please select a car capacity.").show();
+				throw new IllegalArgumentException(" ---> Missing car capacity! Please select a car capacity.");
+			}
+			if (factoryCapacity.getText().matches("\\d{1,}")) {
+				int newFactoryCapacity = Integer.parseInt(factoryCapacity.getText());
+				if (newFactoryCapacity <= 0) {
+					factoryCapacity.setStyle("-fx-border-color: red;");
+					new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
+					throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
+				}
+			} else {
+				factoryCapacity.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
+				throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
+			}
+			factoryCapacity.setStyle(null);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		admin.createFactory(Integer.parseInt(factoryCapacity.getText()));
+		initData(admin);
+	}
+	
+	@FXML
+	public void addNewConcessionaire(ActionEvent event) {
+		
+		try {
+			if (concessionaireFactoryID.getText().isEmpty()) {
+		    	factoryCapacity.setStyle("-fx-border-color: red;");
+//				new Alert(Alert.AlertType.ERROR, "Missing car capacity! Please select a car capacity.").show();
+//				throw new IllegalArgumentException(" ---> Missing car capacity! Please select a car capacity.");
+			}
+			if (factoryCapacity.getText().matches("\\d{1,}")) {
+				int newFactoryCapacity = Integer.parseInt(factoryCapacity.getText());
+				if (newFactoryCapacity <= 0) {
+					factoryCapacity.setStyle("-fx-border-color: red;");
+					new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
+					throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
+				}
+			} else {
+				factoryCapacity.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
+				throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
+			}
+			factoryCapacity.setStyle(null);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		
+		
+		try {
+			if (factoryCapacity.getText().isEmpty()) {
+		    	factoryCapacity.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Missing car capacity! Please select a car capacity.").show();
+				throw new IllegalArgumentException(" ---> Missing car capacity! Please select a car capacity.");
+			}
+			if (factoryCapacity.getText().matches("\\d{1,}")) {
+				int newFactoryCapacity = Integer.parseInt(factoryCapacity.getText());
+				if (newFactoryCapacity <= 0) {
+					factoryCapacity.setStyle("-fx-border-color: red;");
+					new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
+					throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
+				}
+			} else {
+				factoryCapacity.setStyle("-fx-border-color: red;");
+				new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
+				throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
+			}
+			factoryCapacity.setStyle(null);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		admin.createFactory(Integer.parseInt(factoryCapacity.getText()));
+/*		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+
+			String chassisId = chassis.getText();
+
+			System.out.println(chassisId);
+			
+			int carId = Integer.parseInt(chassisId);
+
+			if (chassisId.isEmpty()) {
+				new Alert(Alert.AlertType.WARNING, "Please input your Chassis Id").show();
+				return;
+			}
+			else {
+				String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"' AND sold='1'";
+	
+				rs_carFound = stmt.executeQuery(sql);
+	
+				if (rs_carFound.next()) {
+					carFound = true;
+					
+					brand.setText(rs_carFound.getString("carBrand"));
+					model.setText(rs_carFound.getString("carModel"));
+					color.setText(rs_carFound.getString("carColor"));
+					engineTypes.setText(rs_carFound.getString("engineType"));
+					horsePower.setText(rs_carFound.getString("horsePower"));
+					year.setText(rs_carFound.getString("year"));
+					conID.setText(rs_carFound.getString("conID"));
+					factID.setText(rs_carFound.getString("factID"));
+				} else {
+					new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
+							+ "is incorrect. Only cars that were previously in our dealership are eligible").show();
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 	
 	@FXML
