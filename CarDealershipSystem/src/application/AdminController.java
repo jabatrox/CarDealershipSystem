@@ -15,8 +15,11 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import models.DBConnect;
 
 public class AdminController implements Initializable {
@@ -35,12 +38,12 @@ public class AdminController implements Initializable {
 	private Button closeButton;
 	
 	@FXML
-	private TableView<FactoryDeposit> factoryDepositsTable;
-	private ObservableList<FactoryDeposit> factoryDepositsTable_data = FXCollections.observableArrayList();
+	private TableView<AllFactoryDepositsInfoRow> factoryDepositsTable;
+	private ObservableList<AllFactoryDepositsInfoRow> factoryDepositsTable_data = FXCollections.observableArrayList();
 	
 	@FXML
-	private TableView<Concessionaire> concessionairesFromFactoriesTable;
-	private ObservableList<Concessionaire> concessionairesFromFactoriesTable_data = FXCollections.observableArrayList();
+	private TableView<ConcessionairesFromFactoriesRow> concessionairesFromFactoriesTable;
+	private ObservableList<ConcessionairesFromFactoriesRow> concessionairesFromFactoriesTable_data = FXCollections.observableArrayList();
 	
 	@FXML
 	private TableView<Concessionaire> concessionairesSalesHistoryTable;
@@ -71,18 +74,73 @@ public class AdminController implements Initializable {
 		adminWelcomeName.setText(admin_name.toUpperCase());
 		adminWelcomeID.setText("ADMIN ID: "+admin_ID);
 		
+		fillFactoryDepositsTable();
+//		fillConcessionairesFromFactoriesTable();
+	}
+	
+	private void fillFactoryDepositsTable() {
 		factoryDepositsTable.getItems().clear();
-//		ArrayList<CarDetails> conCars = customer.checkCars(option);
-//		for (CarDetails conCar : conCars) {
-//			carsExposedTable_data.add(conCar);
-//		}
+		ArrayList<AllFactoryDepositsInfoRow> allFactoryDeposits = admin.getAllFactoryDeposits();
+		for (AllFactoryDepositsInfoRow factoryDeposit : allFactoryDeposits) {
+			factoryDepositsTable_data.add(factoryDeposit);
+		}
 		factoryDepositsTable.setItems(factoryDepositsTable_data);
+		
+		if (!factoryDepositsTable.getItems().isEmpty() && firstTimeRun) {
+			factoryDepositsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			    if (newSelection != null) {
+			    	fillConcessionairesFromFactoriesTable(newSelection.getFactID());
+			    }
+			});
+//			fillConcessionairesFromFactoriesTable();
+//			addBuyButtonToTable();
+		}
+		
+		firstTimeRun = false;
+	}
+	
+	private void fillConcessionairesFromFactoriesTable(int factID) {
+		concessionairesFromFactoriesTable.getItems().clear();
+		ArrayList<ConcessionairesFromFactoriesRow> allConcessionairesFromFactory = admin.getAllConcessionairesFromFactory(factID);
+		for (ConcessionairesFromFactoriesRow concessionaireFromFactory : allConcessionairesFromFactory) {
+			concessionairesFromFactoriesTable_data.add(concessionaireFromFactory);
+		}
+		concessionairesFromFactoriesTable.setItems(concessionairesFromFactoriesTable_data);
 		
 //		if (!carsExposedCustomerTable.getItems().isEmpty() && firstTimeRun) {
 //			formatCarConditionInTable();
 //			addBuyButtonToTable();
 //		}
 		
+		
+		/*Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>> cellFactory = 
+				new Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>>() {
+			@Override
+			public TableCell<CarDetails, Void> call(final TableColumn<CarDetails, Void> param) {
+				final TableCell<CarDetails, Void> cell = new TableCell<CarDetails, Void>() {
+					
+					private final Label carCondition = new Label();
+					{
+					}
+
+					@Override
+					public void updateItem(Void item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+						} else {
+							setGraphic(carCondition);
+							if (getTableView().getItems().get(getIndex()).isCarCondition()) {
+								carCondition.setText("NEW");
+							} else {
+								carCondition.setText("USED");
+							}
+						}
+					}
+				};
+				return cell;
+			}
+		};*/
 		
 	}
 	

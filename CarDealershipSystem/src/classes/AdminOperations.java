@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.ArrayList;
+
 /**
  * --------------------------------------------------
  * @author Javier Soler, Borja González
@@ -9,14 +11,24 @@ package classes;
  */
 public interface AdminOperations {
 	
+	
 	/**
-	 * @param Factory
+	 * @return
+	 */
+	public ArrayList<AllFactoryDepositsInfoRow> getAllFactoryDeposits();
+	/**
+	 * 
 	 */
 	public abstract void createFactory();
 	/**
 	 * @param factID
 	 */
 	public abstract void deleteFactory(int factID);
+	/**
+	 * @param factID
+	 * @return
+	 */
+	public ArrayList<ConcessionairesFromFactoriesRow> getAllConcessionairesFromFactory(int factID);
 	/**
 	 * @param carCapacity
 	 * @param factID

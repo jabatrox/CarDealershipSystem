@@ -42,19 +42,19 @@
                      <children>
                         <TableView fx:id="factoryDepositsTable" layoutX="1.0" prefHeight="504.0" prefWidth="386.0">
                            <columns>
-                              <TableColumn prefWidth="90.0" resizable="false" text="FACTORY ID">
+                              <TableColumn prefWidth="90.0" resizable="false" style="-fx-alignment: CENTER;" text="FACTORY ID">
                                  <cellValueFactory>
-                                    <PropertyValueFactory property="carBrand" />
+                                    <PropertyValueFactory property="factID" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="102.00003051757812" resizable="false" text="CAR CAPACITY">
+                              <TableColumn prefWidth="102.00003051757812" resizable="false" style="-fx-alignment: CENTER;" text="CAR CAPACITY">
                                  <cellValueFactory>
-                                    <PropertyValueFactory property="carModel" />
+                                    <PropertyValueFactory property="carCapacity" />
                                  </cellValueFactory>
                               </TableColumn>
                               <TableColumn prefWidth="119.0" resizable="false" style="-fx-alignment: CENTER;" text="CARS PRODUCED">
                                  <cellValueFactory>
-                                    <PropertyValueFactory property="carColor" />
+                                    <PropertyValueFactory property="carsProduced" />
                                  </cellValueFactory>
                               </TableColumn>
                               <TableColumn prefWidth="75.0" text="Column X" />
@@ -82,9 +82,21 @@
                      <children>
                         <TableView fx:id="concessionairesSalesHistoryTable" prefHeight="504.0" prefWidth="399.0">
                            <columns>
-                              <TableColumn prefWidth="140.0" text="CONCESSIONAIRE ID" />
-                              <TableColumn minWidth="0.0" prefWidth="106.0" text="CAR CAPACITY" />
-                              <TableColumn prefWidth="81.0" text="Nº SELLERS" />
+                              <TableColumn prefWidth="140.0" text="CONCESSIONAIRE ID" >
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="conID" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn minWidth="0.0" prefWidth="106.0" text="CAR CAPACITY" >
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="carCapacity" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn prefWidth="81.0" text="Nº SELLERS" >
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="numberOfSellers" />
+                                 </cellValueFactory>
+                              </TableColumn>
                               <TableColumn prefWidth="75.0" text="Choice" />
                            </columns>
                         </TableView>
