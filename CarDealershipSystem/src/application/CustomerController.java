@@ -271,7 +271,7 @@ public class CustomerController implements Initializable{
 			if (color.getText().isEmpty() || miles.getText().isEmpty() || price.getText().isEmpty()) {
 				new Alert(Alert.AlertType.WARNING, "Either color,miles or price is empty").show();
 			}
-			else if (!price.getText().matches("[0-9]+") || Integer.parseInt(price.getText())>=0) {
+			else if (!price.getText().matches("[0-9]+") || Integer.parseInt(price.getText())<=0) {
 				new Alert(Alert.AlertType.WARNING, "Price has to be a number").show();
 				price.setStyle("-fx-border-color: red;");
 			}
