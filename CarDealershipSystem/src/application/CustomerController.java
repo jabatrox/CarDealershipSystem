@@ -34,6 +34,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -79,7 +80,7 @@ public class CustomerController implements Initializable{
 	private TextField updateFirstName, updateLastName, updateAddress, updateEmail, updatePhone;
 	
 	@FXML
-	private TextField oldPass, newPass1, newPass2;
+	private PasswordField oldPass, newPass1, newPass2;
 	
 	@FXML
 	private Text newPassField;
