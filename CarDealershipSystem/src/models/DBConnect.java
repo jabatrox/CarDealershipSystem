@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class DBConnect {
 
 	// Code database URL
-	static final String DB_URL = "jdbc:sqlserver://dealershipserver.database.windows.net:1433;database=DealershipDB;user=root123;password={ContraseÃ±a123};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30";
+	static final String DB_URL = "jdbc:sqlserver://dealershipserver.database.windows.net:1433;database=DealershipDB;user=root123;password={Contraseña123};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30";;
 	// Database credentials
-	static final String USER = "root123", PASS = "ContraseÃ±a123";
+	static final String USER = "root123", PASS = "Contraseña123";
 
 	public Connection connect() throws SQLException {
 

@@ -11,6 +11,7 @@ import java.util.Optional;
 import classes.CarDetails.EngineType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.TextField;
 import models.DBConnect;
 
 /**
@@ -36,7 +37,30 @@ public class Admin extends Agent implements AdminOperations {
 	}
 	
 	@Override
-	public ArrayList<AllFactoryDepositsInfoRow> getAllFactoryDeposits() {
+	public ArrayList<FactoryDeposit> getAllFactoryDeposits() {
+		// TODO Auto-generated method stub
+		ArrayList<FactoryDeposit> allFactoryDeposits = new ArrayList<>();
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			String sql_factoryDeposits = "SELECT * FROM factoryDeposit";
+			ResultSet rs_factoryDeposits = stmt.executeQuery(sql_factoryDeposits);
+			
+			while(rs_factoryDeposits.next()) {
+				allFactoryDeposits.add(new FactoryDeposit(rs_factoryDeposits.getInt("factID"),
+						rs_factoryDeposits.getInt("carCapacity")));
+			}
+			conn.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allFactoryDeposits;
+	}
+	
+	@Override
+	public ArrayList<AllFactoryDepositsInfoRow> getAllFactoryDepositsRow() {
 		// TODO Auto-generated method stub
 		ArrayList<AllFactoryDepositsInfoRow> allFactoryDeposits = new ArrayList<>();
 		try {
@@ -74,7 +98,6 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void createFactory(int carCapacity) {
 		// TODO Auto-generated method stub
-		// ID por autoincrement y elegir carCapacity
 		System.out.println("Adding new factory with carCapacity="+carCapacity);
 		try {
 			conn = openDBconn.connect();
@@ -141,6 +164,30 @@ public class Admin extends Agent implements AdminOperations {
 	}
 	
 	@Override
+	public ArrayList<Concessionaire> getAllConcessionaires() {
+		// TODO Auto-generated method stub
+		ArrayList<Concessionaire> allConcessionaires = new ArrayList<>();
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			String sql_concessionaires = "SELECT * FROM concessionaire";
+			ResultSet rs_concessionaires = stmt.executeQuery(sql_concessionaires);
+			
+			while(rs_concessionaires.next()) {
+				allConcessionaires.add(new Concessionaire(rs_concessionaires.getInt("conID"),
+						rs_concessionaires.getInt("carCapacity"),
+						rs_concessionaires.getInt("factID")));
+			}
+			conn.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return allConcessionaires;
+	}
+	
+	@Override
 	public ArrayList<ConcessionairesFromFactoriesRow> getAllConcessionairesFromFactory(int factID) {
 		// TODO Auto-generated method stub
 		ArrayList<ConcessionairesFromFactoriesRow> allConcessionairesFromFactory = new ArrayList<>();
@@ -159,7 +206,7 @@ public class Admin extends Agent implements AdminOperations {
 			}
 			for (ConcessionairesFromFactoriesRow concessionaireFromFactory : allConcessionairesFromFactory) {
 				String sql_concessionaireFromFactoryInfo = "SELECT COUNT(*) AS totalSellersInConcessionaire "
-						+ "FROM seller, concessionaire "
+						+ "FROM seller "
 						+ "WHERE seller.conID='"+concessionaireFromFactory.getConID()+"'";
 				ResultSet rs_concessionaireFromFactoryInfo = stmt.executeQuery(sql_concessionaireFromFactoryInfo);
 				int numberOfSellers = 0;
@@ -180,8 +227,19 @@ public class Admin extends Agent implements AdminOperations {
 	@Override
 	public void createConcessionaire(int carCapacity, int factID) {
 		// TODO Auto-generated method stub
-		Concessionaire con = new Concessionaire(0, carCapacity, factID);
-		addSeller(con.getConID());
+		System.out.println("Adding new concessionaire with carCapacity="+carCapacity+" and factID="+factID);
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_newFactoryDeposit = "INSERT INTO concessionaire (carCapacity, factID) "
+					+ "VALUES ('"+carCapacity+"', '"+factID+"')";
+			stmt.executeUpdate(sql_newFactoryDeposit);
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("\\___Added");
 		
 	}
 
@@ -192,10 +250,36 @@ public class Admin extends Agent implements AdminOperations {
 	}
 
 	@Override
-	public void addSeller(int conID) {
+	public void addSeller(int conID, String newSellerFirstNameString, String newSellerLastNameString,
+			String newSellerUsernameString, String passwordHash) {
 		// TODO Auto-generated method stub
-		// Elegir ID, nombre y apellido por la interfaz
-		Seller seller = new Seller(0, null, null, conID);
+		System.out.println("Adding new seller to concessionaire with conID="+conID);
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			String sql_newSellerToUsersDB = "INSERT INTO usersDB (username, userType, hashPass) "
+					+ "VALUES ('"+newSellerUsernameString+"', 'S', '"+passwordHash+"')";
+			stmt.executeUpdate(sql_newSellerToUsersDB);
+			
+			String sql_newSellerUsersDB_ID = "SELECT usersDB.userID FROM usersDB WHERE username='"+newSellerUsernameString+"'";
+			ResultSet rs_newSellerUsersDB_ID = stmt.executeQuery(sql_newSellerUsersDB_ID);
+			if (!rs_newSellerUsersDB_ID.next()) {
+				System.out.println("No data");
+				return;
+			}
+			String sql_newSellerToTable = "INSERT INTO seller (firstname, lastname, conID, userDB_ID) "
+					+ "VALUES ('"+newSellerFirstNameString+"', "
+						+ "'"+newSellerLastNameString+"',"
+						+ "'"+conID+"',"
+						+ "'"+rs_newSellerUsersDB_ID.getInt("userID")+"')";
+			stmt.executeUpdate(sql_newSellerToTable);
+			
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("\\___Added");
 	}
 
 	@Override

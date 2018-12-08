@@ -1,10 +1,13 @@
 package application;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -15,11 +18,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -28,6 +32,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import models.DBConnect;
@@ -45,9 +50,17 @@ public class AdminController implements Initializable {
 	private Label adminWelcomeID, adminWelcomeName;
 	
 	@FXML
-	private TextField factoryCapacity, concessionaireCapacity, concessionaireFactoryID;
+	private TextField factoryCapacity, concessionaireCapacity, newSellerFirstName, newSellerLastName, newSellerUsername;
 	@FXML
-	private ImageView addFactory, addConcessionaire;
+	private PasswordField newSellerPassword;
+	@FXML
+	private ImageView addFactory, addConcessionaire, addSeller;
+	
+	@FXML
+	private Text newSellerFirstNameLabel, newSellerLastNameLabel, newSellerUsernameLabel, newSellerPasswordLabel;
+	
+	@FXML
+	private ComboBox<Integer> selectNewConcessionaireFactoryID, selectNewSellerConcessionaireID;
 	
 	@FXML
 	private Button closeButton;
@@ -89,13 +102,32 @@ public class AdminController implements Initializable {
 		adminWelcomeName.setText(admin_name.toUpperCase());
 		adminWelcomeID.setText("ADMIN ID: "+admin_ID);
 		
+		List<FactoryDeposit> allFactoryDeposits = admin.getAllFactoryDeposits();
+		List<Integer> factoryDepositsID = new ArrayList<>();
+		for (FactoryDeposit factoryDeposit : allFactoryDeposits) {
+			factoryDepositsID.add(factoryDeposit.getFactID());
+		}
+		ObservableList<Integer> observableListOfFactoryDeposits = FXCollections.observableList(factoryDepositsID);
+		selectNewConcessionaireFactoryID.setItems(observableListOfFactoryDeposits);
+		selectNewConcessionaireFactoryID.getSelectionModel().selectFirst();
+		selectNewConcessionaireFactoryID.setStyle("-fx-font: 12px \"Lucida Sans Unicode\";");
+		
+		List<Concessionaire> allConcessionaires = admin.getAllConcessionaires();
+		List<Integer> concessionairesID = new ArrayList<>();
+		for (Concessionaire concessionaire : allConcessionaires) {
+			concessionairesID.add(concessionaire.getConID());
+		}
+		ObservableList<Integer> observableListOfConcessionaires = FXCollections.observableList(concessionairesID);
+		selectNewSellerConcessionaireID.setItems(observableListOfConcessionaires);
+		selectNewSellerConcessionaireID.getSelectionModel().selectFirst();
+		selectNewSellerConcessionaireID.setStyle("-fx-font: 12px \"Lucida Sans Unicode\";");
+		
 		fillFactoryDepositsTable();
-//		fillConcessionairesFromFactoriesTable(1);
 	}
 	
 	private void fillFactoryDepositsTable() {
 		factoryDepositsTable.getItems().clear();
-		ArrayList<AllFactoryDepositsInfoRow> allFactoryDeposits = admin.getAllFactoryDeposits();
+		ArrayList<AllFactoryDepositsInfoRow> allFactoryDeposits = admin.getAllFactoryDepositsRow();
 		for (AllFactoryDepositsInfoRow factoryDeposit : allFactoryDeposits) {
 			factoryDepositsTable_data.add(factoryDeposit);
 		}
@@ -211,96 +243,59 @@ public class AdminController implements Initializable {
 	}
 	
 	@FXML
-	public void addNewConcessionaire(ActionEvent event) {
-		
+	public void addNewConcessionaire() {
+		int newConcessionaireFactoryID = selectNewConcessionaireFactoryID.getSelectionModel().getSelectedItem();
 		try {
-			if (concessionaireFactoryID.getText().isEmpty()) {
-		    	factoryCapacity.setStyle("-fx-border-color: red;");
-//				new Alert(Alert.AlertType.ERROR, "Missing car capacity! Please select a car capacity.").show();
-//				throw new IllegalArgumentException(" ---> Missing car capacity! Please select a car capacity.");
-			}
-			if (factoryCapacity.getText().matches("\\d{1,}")) {
-				int newFactoryCapacity = Integer.parseInt(factoryCapacity.getText());
-				if (newFactoryCapacity <= 0) {
-					factoryCapacity.setStyle("-fx-border-color: red;");
-					new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
-					throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
-				}
-			} else {
-				factoryCapacity.setStyle("-fx-border-color: red;");
-				new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
-				throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
-			}
-			factoryCapacity.setStyle(null);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return;
-		}
-		
-		
-		try {
-			if (factoryCapacity.getText().isEmpty()) {
-		    	factoryCapacity.setStyle("-fx-border-color: red;");
+			if (concessionaireCapacity.getText().isEmpty()) {
+				concessionaireCapacity.setStyle("-fx-border-color: red;");
 				new Alert(Alert.AlertType.ERROR, "Missing car capacity! Please select a car capacity.").show();
 				throw new IllegalArgumentException(" ---> Missing car capacity! Please select a car capacity.");
 			}
-			if (factoryCapacity.getText().matches("\\d{1,}")) {
-				int newFactoryCapacity = Integer.parseInt(factoryCapacity.getText());
+			if (concessionaireCapacity.getText().matches("\\d{1,}")) {
+				int newFactoryCapacity = Integer.parseInt(concessionaireCapacity.getText());
 				if (newFactoryCapacity <= 0) {
-					factoryCapacity.setStyle("-fx-border-color: red;");
+					concessionaireCapacity.setStyle("-fx-border-color: red;");
 					new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
 					throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
 				}
 			} else {
-				factoryCapacity.setStyle("-fx-border-color: red;");
+				concessionaireCapacity.setStyle("-fx-border-color: red;");
 				new Alert(Alert.AlertType.ERROR, "Car capacity must be an integer greater that 0").show();
 				throw new IllegalArgumentException(" ---> Car capacity must be an integer greater that 0.");
 			}
-			factoryCapacity.setStyle(null);
+			concessionaireCapacity.setStyle(null);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
 		}
-		admin.createFactory(Integer.parseInt(factoryCapacity.getText()));
-/*		try {
-			conn = openDBconn.connect();
-			stmt = conn.createStatement();
-
-			String chassisId = chassis.getText();
-
-			System.out.println(chassisId);
-			
-			int carId = Integer.parseInt(chassisId);
-
-			if (chassisId.isEmpty()) {
-				new Alert(Alert.AlertType.WARNING, "Please input your Chassis Id").show();
-				return;
-			}
-			else {
-				String sql = "SELECT * FROM carDetails WHERE carID='"+carId+"' AND sold='1'";
+		admin.createConcessionaire(Integer.parseInt(concessionaireCapacity.getText()), newConcessionaireFactoryID);
+		initData(admin);
+	}
 	
-				rs_carFound = stmt.executeQuery(sql);
-	
-				if (rs_carFound.next()) {
-					carFound = true;
-					
-					brand.setText(rs_carFound.getString("carBrand"));
-					model.setText(rs_carFound.getString("carModel"));
-					color.setText(rs_carFound.getString("carColor"));
-					engineTypes.setText(rs_carFound.getString("engineType"));
-					horsePower.setText(rs_carFound.getString("horsePower"));
-					year.setText(rs_carFound.getString("year"));
-					conID.setText(rs_carFound.getString("conID"));
-					factID.setText(rs_carFound.getString("factID"));
-				} else {
-					new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
-							+ "is incorrect. Only cars that were previously in our dealership are eligible").show();
-				}
-			}
-		} catch (SQLException e) {
+	@FXML
+	public void addNewSeller() {
+		int newSellerConID = selectNewSellerConcessionaireID.getSelectionModel().getSelectedItem();
+		try {
+			MainController.checkNamesAddress(newSellerFirstName, newSellerFirstNameLabel);
+			MainController.checkNamesAddress(newSellerLastName, newSellerLastNameLabel);
+			MainController.CheckUserName(newSellerUsername, newSellerUsernameLabel);
+			MainController.checkPassword(newSellerPassword, newSellerPasswordLabel);
+		} catch (IllegalArgumentException e1) {
+			// TODO Auto-generated catch block
+			System.out.println(e1.getMessage());
+			return;
+		}
+		try {
+			admin.addSeller(newSellerConID,
+					newSellerUsername.getText(),
+					newSellerLastName.getText(),
+					newSellerUsername.getText(),
+					MainController.get_SecurePassword(newSellerPassword.getText()));
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
+		initData(admin);
 	}
 	
 	@FXML
