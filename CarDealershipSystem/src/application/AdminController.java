@@ -15,7 +15,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -30,6 +33,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -295,8 +299,20 @@ public class AdminController implements Initializable {
 	
 	@FXML
 	public void logoutCloseWindowAction(ActionEvent event) {
-	    Stage stage = (Stage) closeButton.getScene().getWindow();
+		Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
+	    
+	    try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Login.fxml"));
+			Stage stage_login = new Stage();
+			Region root = (Region) loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage_login.setScene(scene);
+			stage_login.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

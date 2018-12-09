@@ -34,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -479,8 +480,20 @@ public class CustomerController implements Initializable{
 	
 	@FXML
 	public void logoutCloseWindowAction(ActionEvent event) {
-	    Stage stage = (Stage) closeButton.getScene().getWindow();
+		Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
+	    
+	    try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Login.fxml"));
+			Stage stage_login = new Stage();
+			Region root = (Region) loader.load();
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage_login.setScene(scene);
+			stage_login.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

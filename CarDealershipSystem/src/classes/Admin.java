@@ -75,7 +75,7 @@ public class Admin extends Agent implements AdminOperations {
 			}
 			for (AllFactoryDepositsInfoRow factoryDepositInfo : allFactoryDeposits) {
 				String sql_factoryDepositsInfo = "SELECT COUNT(*) AS totalCarsProduced "
-						+ "FROM factoryDeposit, carDetails "
+						+ "FROM carDetails "
 						+ "WHERE carDetails.factID='"+factoryDepositInfo.getFactID()+"'";
 				ResultSet rs_factoryDepositsInfo = stmt.executeQuery(sql_factoryDepositsInfo);
 				int carsProduced = 0;
