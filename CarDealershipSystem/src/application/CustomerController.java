@@ -2,19 +2,13 @@ package application;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import classes.*;
 import classes.CarDetails.EngineType;
 import javafx.collections.FXCollections;
@@ -30,8 +24,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -42,7 +34,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -60,9 +51,6 @@ public class CustomerController implements Initializable{
 
 	@FXML
 	private Label customerWelcomeName, customerWelcomeID;
-
-//	@FXML
-//	private String userID;
 
 	@FXML
 	private TextField brand, model, color, horsePower, price, miles, year, conID, factID, chassis;
@@ -204,17 +192,6 @@ public class CustomerController implements Initializable{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
-	/*public void SellCar(ActionEvent event) throws Exception{
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/application/Customer_Sell_Car.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
-		//try {String cLV = sellCarOptions.getSelectionModel().getSelectedItem();} catch (Exception e) {};
-	}*/
 
 	public void CustomerPage (ActionEvent event) throws Exception {
 		Stage primaryStage = new Stage();
@@ -505,22 +482,5 @@ public class CustomerController implements Initializable{
 	    Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
 	}
-	
-
-
-//	/**
-//	 * @return the userName
-//	 */
-//	public String getUserID() {
-//		return userID;
-//	}
-//
-//
-//	/**
-//	 * @param userName the userName to set
-//	 */
-//	public void setUserID(String userID) {
-//		this.userID = userID;
-//	}
 
 }

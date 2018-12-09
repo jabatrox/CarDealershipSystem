@@ -2,8 +2,6 @@ package classes;
 
 import java.util.ArrayList;
 
-import javafx.scene.control.TextField;
-
 /**
  * --------------------------------------------------
  * @author Javier Soler, Borja González

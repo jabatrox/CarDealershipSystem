@@ -14,7 +14,6 @@ import java.util.Optional;
 import classes.CarDetails.EngineType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import models.DBConnect;

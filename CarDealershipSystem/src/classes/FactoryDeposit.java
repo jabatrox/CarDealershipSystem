@@ -5,14 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
-import java.util.Random;
-
 import classes.CarDetails.EngineType;
 import models.DBConnect;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: FactoryDeposit.java
@@ -36,8 +34,6 @@ public class FactoryDeposit {
 	}
 	
 	public static CarDetails produceCar(CarDetails bookingCarDetail) {
-		/*INSERT INTO carDetails (conID, factID, carBrand, carModel, carColor, engineType, horsePower, price, kilometers, sold, exposed, carCondition, year)
-	    VALUES ('1', '1', 'Citroën', 'C-Zero', 'Black', 'ELECTRIC', '67', '2000', '50000', '0', '0', '0', '2018');*/
 		CarDetails newBookingCarDetail = null;
 		try {
 			conn = openDBconn.connect();

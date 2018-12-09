@@ -22,10 +22,8 @@ public interface SellerOperations {
 	 */
 	public abstract void buyCar(int bookingID);
 	/**
-	 * @param carId
-	 * @param statusCar
+	 * @param bookingID
 	 */
-//	public abstract void sellCar(int carID, boolean statusCar);
 	public abstract void sellCar(int bookingID);
 	/**
 	 * @param bookingId
