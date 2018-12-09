@@ -10,11 +10,9 @@ final public class ResourceLoader {
 	
 	public static InputStream load(String path) {
 		InputStream input = ResourceLoader.class.getResourceAsStream(path);
-		System.out.println(path);
 		if (input == null) {
 			input = ResourceLoader.class.getResourceAsStream("/"+path);
 		}
-		System.out.println(path);
 		return input;
 	}
 

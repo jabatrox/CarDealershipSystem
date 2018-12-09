@@ -164,7 +164,7 @@ public class AdminController implements Initializable {
 	
 	private void addButtonToFactoryDepositTable() {
 //		final Image imageButton = new Image(getClass().getResourceAsStream("../../resources/Deny.png"),15,15,false,false);
-		final Image imageButton = new Image(ResourceLoader.load("../../resouces/Deny.png"),15,15,false,false);
+		final Image imageButton = new Image(ResourceLoader.load("Deny.png"),15,15,false,false);
 
 
 		TableColumn<AllFactoryDepositsInfoRow, Void> deleteFactoryDepositColBtn = new TableColumn<AllFactoryDepositsInfoRow, Void>("");

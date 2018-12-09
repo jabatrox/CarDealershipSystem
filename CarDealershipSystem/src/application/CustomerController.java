@@ -152,7 +152,7 @@ public class CustomerController implements Initializable{
 	}
 	private void addBuyButtonToTable() {
 //		buyButton = new Image(getClass().getResourceAsStream("../../resources/buy_round.png"),30,30,false,false);
-		buyButton = new Image(ResourceLoader.load("../../resources/buy_round.png"),30,30,false,false);
+		buyButton = new Image(ResourceLoader.load("buy_round.png"),30,30,false,false);
 		TableColumn<CarDetails, Void> buyColBtn = new TableColumn<CarDetails, Void>("");
 		Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>> cellFactory = 
 				new Callback<TableColumn<CarDetails, Void>, TableCell<CarDetails, Void>>() {
