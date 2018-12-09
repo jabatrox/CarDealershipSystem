@@ -85,7 +85,6 @@
                                     <PropertyValueFactory property="numberOfSellers" />
                                  </cellValueFactory>
                               </TableColumn>
-                              <TableColumn prefWidth="75.0" text="Column X" />
                           </columns>
                         </TableView>
                         <Separator layoutX="346.0" layoutY="1.0" orientation="VERTICAL" prefHeight="503.0" prefWidth="23.0" />
