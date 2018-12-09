@@ -45,7 +45,7 @@
       </Label>
       <Label fx:id="statusLoginID" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="66.0" prefHeight="17.0" prefWidth="224.0" textAlignment="CENTER" textFill="#d71010">
          <font>
-            <Font name="Lucida Sans Unicode" size="12.0" />
+            <Font name="Lucida Sans Unicode" size="11.0" />
          </font>
       </Label>
    </children>
