@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.2" icons="true" automaticImage="JPEG" always-add-relationships="false" 
-  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
-  router="FAN">  
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="classes.Agent" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Agent.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="870" y="-101"/>    
+    <position height="-1" width="-1" x="923" y="-164"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="classes.BookingDetails" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/BookingDetails.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="194" y="34"/>    
+    <position height="-1" width="-1" x="193" y="-2"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="classes.Customer" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Customer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="519" y="243"/>    
+    <position height="-1" width="-1" x="519" y="245"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="classes.Admin" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Admin.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="869" y="198"/>    
+    <position height="-1" width="-1" x="920" y="200"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +39,7 @@
   </class>  
   <interface id="5" language="java" name="classes.CustomerOperations" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/CustomerOperations.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="518" y="482"/>    
+    <position height="-1" width="-1" x="517" y="557"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +48,7 @@
   </interface>  
   <interface id="6" language="java" name="classes.SellerOperations" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/SellerOperations.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1171" y="509"/>    
+    <position height="-1" width="-1" x="1365" y="584"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +57,7 @@
   </interface>  
   <class id="7" language="java" name="classes.FactoryDeposit" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/FactoryDeposit.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="545" y="-119"/>    
+    <position height="-1" width="-1" x="544" y="-155"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +66,7 @@
   </class>  
   <enumeration id="8" language="java" name="classes.CarDetails.EngineType" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/CarDetails.java" binary="false" corner="BOTTOM_LEFT">    
-    <position height="-1" width="-1" x="1288" y="-146"/>    
+    <position height="-1" width="-1" x="1449" y="-209"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -76,7 +75,7 @@
   </enumeration>  
   <interface id="9" language="java" name="classes.AdminOperations" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/AdminOperations.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="869" y="518"/>    
+    <position height="-1" width="-1" x="920" y="620"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +84,7 @@
   </interface>  
   <class id="10" language="java" name="classes.CarDetails" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/CarDetails.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1666" y="160"/>    
+    <position height="-1" width="-1" x="1827" y="160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="classes.Concessionaire" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Concessionaire.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1076" y="-101"/>    
+    <position height="-1" width="-1" x="1223" y="-164"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -103,22 +102,23 @@
   </class>  
   <class id="12" language="java" name="classes.Seller" project="CarDealershipSystem" 
     file="/CarDealershipSystem/src/classes/Seller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1171" y="216"/>    
+    <position height="-1" width="-1" x="1365" y="191"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="13">    
+  <realization id="13">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="14">    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="14">    
     <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
+    <end type="TARGET" refId="6"/>  
+  </realization>  
   <generalization id="15">    
+    <bendpoint x="650" y="49"/>    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
@@ -129,23 +129,27 @@
   <association id="17">    
     <end type="SOURCE" refId="10" navigable="false">      
       <attribute id="18" name="engineType">        
-        <position height="0" width="0" x="-120" y="-762"/>      
+        <position height="0" width="0" x="41" y="-826"/>      
       </attribute>      
       <multiplicity id="19" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-120" y="-762"/>      
+        <position height="0" width="0" x="41" y="-826"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <realization id="20">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
   </realization>  
-  <realization id="21">    
+  <generalization id="21">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="9"/>  
-  </realization>  
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
