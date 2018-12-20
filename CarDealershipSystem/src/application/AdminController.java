@@ -45,6 +45,8 @@ public class AdminController implements Initializable {
 	Statement stmt = null;
 	
 	private Admin admin;
+	// boolean to fill the FactoryDeposit table the first time the windows shows and add the delete 
+	// button to the FactoryDeposit table only one time (not every time an item is clicked).
 	private boolean firstTimeRun = true;
 	
 	@FXML
@@ -76,11 +78,11 @@ public class AdminController implements Initializable {
 	
 	@FXML
 	private TableView<Concessionaire> concessionairesSalesHistoryTable;
-	private ObservableList<FactoryDeposit> concessionairesSalesHistoryTable_data = FXCollections.observableArrayList();
+	private ObservableList<Concessionaire> concessionairesSalesHistoryTable_data = FXCollections.observableArrayList();
 	
 	@FXML
-	private TableView<PendingBookingRow> bookingsHistoryFromConcessionaireTable;
-	private ObservableList<PendingBookingRow> bookingsHistoryFromConcessionaireTable_data = FXCollections.observableArrayList();
+	private TableView<SalesHistoryBookingRow> bookingsHistoryFromConcessionaireTable;
+	private ObservableList<SalesHistoryBookingRow> bookingsHistoryFromConcessionaireTable_data = FXCollections.observableArrayList();
 	
 	
 	public AdminController() {
@@ -103,6 +105,7 @@ public class AdminController implements Initializable {
 		adminWelcomeName.setText(admin_name.toUpperCase());
 		adminWelcomeID.setText("ADMIN ID: "+admin_ID);
 		
+		// Get all FactoryDeposits and add them to the combo box (choice box) in "Add new concessionaire".
 		List<FactoryDeposit> allFactoryDeposits = admin.getAllFactoryDeposits();
 		List<Integer> factoryDepositsID = new ArrayList<>();
 		for (FactoryDeposit factoryDeposit : allFactoryDeposits) {
@@ -113,6 +116,7 @@ public class AdminController implements Initializable {
 		selectNewConcessionaireFactoryID.getSelectionModel().selectFirst();
 		selectNewConcessionaireFactoryID.setStyle("-fx-font: 12px \"Lucida Sans Unicode\";");
 		
+		// Get all Concessionaires and add them to the combo box (choice box) in "Add new seller".
 		List<Concessionaire> allConcessionaires = admin.getAllConcessionaires();
 		List<Integer> concessionairesID = new ArrayList<>();
 		for (Concessionaire concessionaire : allConcessionaires) {
@@ -123,24 +127,31 @@ public class AdminController implements Initializable {
 		selectNewSellerConcessionaireID.getSelectionModel().selectFirst();
 		selectNewSellerConcessionaireID.setStyle("-fx-font: 12px \"Lucida Sans Unicode\";");
 		
+		// Fill the table of FactoryDeposits in the "factories and concessionaires" tab.
 		fillFactoryDepositsTable();
+		// Fill the table of Concessionaires in the "sales history" tab.
+		fillConcessionairesSalesHistoryTable();
 	}
 	
 	private void fillFactoryDepositsTable() {
+		// Clear the table to avoid duplicates on update.
 		factoryDepositsTable.getItems().clear();
+		
+		// Get the list of all FactoryDeposits, their capacity and the cars the have produced.
 		ArrayList<AllFactoryDepositsInfoRow> allFactoryDeposits = admin.getAllFactoryDepositsRow();
 		for (AllFactoryDepositsInfoRow factoryDeposit : allFactoryDeposits) {
 			factoryDepositsTable_data.add(factoryDeposit);
 		}
 		factoryDepositsTable.setItems(factoryDepositsTable_data);
 		
+		// When a FactoryDeposit is selected, show the concessionaires it has on the table for it.
 		if (!factoryDepositsTable.getItems().isEmpty() && firstTimeRun) {
 			factoryDepositsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			    if (newSelection != null) {
 			    	fillConcessionairesFromFactoriesTable(newSelection.getFactID());
 			    }
 			});
-//			fillConcessionairesFromFactoriesTable();
+			// Add button to delete FactoryDeposit in an extra column.
 			addButtonToFactoryDepositTable();
 		}
 		
@@ -148,12 +159,54 @@ public class AdminController implements Initializable {
 	}
 	
 	private void fillConcessionairesFromFactoriesTable(int factID) {
+		// Clear the table to avoid duplicates on update.
 		concessionairesFromFactoriesTable.getItems().clear();
+		
+		// Get the list of all Concessionaires, their capacity and the number of sellers they have, for the selected FactoryDeposit.
 		ArrayList<ConcessionairesFromFactoriesRow> allConcessionairesFromFactory = admin.getAllConcessionairesFromFactory(factID);
 		for (ConcessionairesFromFactoriesRow concessionaireFromFactory : allConcessionairesFromFactory) {
 			concessionairesFromFactoriesTable_data.add(concessionaireFromFactory);
 		}
 		concessionairesFromFactoriesTable.setItems(concessionairesFromFactoriesTable_data);
+		
+		firstTimeRun = false;
+	}
+	
+	private void fillConcessionairesSalesHistoryTable() {
+		// Clear the table to avoid duplicates on update.
+		concessionairesSalesHistoryTable.getItems().clear();
+		
+		// Get the list of all Concessionaires (from all FactoryDeposits), their capacity and the number of sellers they have.
+		ArrayList<Concessionaire> allConcessionaires = admin.getAllConcessionaires();
+		for (Concessionaire concessionaire : allConcessionaires) {
+			concessionairesSalesHistoryTable_data.add(concessionaire);
+		}
+		concessionairesSalesHistoryTable.setItems(concessionairesSalesHistoryTable_data);
+		
+		// When a Concessionaire is selected, show the bookingDetails it has on the table for it.
+		if (!concessionairesSalesHistoryTable.getItems().isEmpty()) {
+			concessionairesSalesHistoryTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			    if (newSelection != null) {
+			    	fillBookingsHistoryFromConcessionairesSalesHistoryTable(newSelection.getConID());
+			    }
+			});
+		}
+		
+		firstTimeRun = false;
+	}
+	
+	private void fillBookingsHistoryFromConcessionairesSalesHistoryTable(int conID) {
+		// Clear the table to avoid duplicates on update.
+		bookingsHistoryFromConcessionaireTable.getItems().clear();
+		
+		// Get the list of all BookingDetails for the selected concessionaire.
+		ArrayList<SalesHistoryBookingRow> allBookingsFromConcessionaires = admin.getSalesHistory(conID);
+		for (SalesHistoryBookingRow concessionaireFromFactory : allBookingsFromConcessionaires) {
+			bookingsHistoryFromConcessionaireTable_data.add(concessionaireFromFactory);
+		}
+		bookingsHistoryFromConcessionaireTable.setItems(bookingsHistoryFromConcessionaireTable_data);
+		System.out.println("Concessionaire with conID="+conID+" has "+allBookingsFromConcessionaires.size()+" booking(s) in "
+				+ "its sales' history.");
 		
 		firstTimeRun = false;
 	}

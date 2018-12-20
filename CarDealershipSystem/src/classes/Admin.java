@@ -80,7 +80,8 @@ public class Admin extends Agent implements AdminOperations {
 				ResultSet rs_factoryDepositsInfo = stmt.executeQuery(sql_factoryDepositsInfo);
 				int carsProduced = 0;
 				while (rs_factoryDepositsInfo.next()) {
-					System.out.println("\\___having produced "+rs_factoryDepositsInfo.getString("totalCarsProduced")+" cars.");
+					System.out.println("\\___FactoryDeposit with factID="+factoryDepositInfo.getFactID()
+						+" has produced "+rs_factoryDepositsInfo.getString("totalCarsProduced")+" cars.");
 					carsProduced = rs_factoryDepositsInfo.getInt("totalCarsProduced");
 				}
 				factoryDepositInfo.setCarsProduced(carsProduced);
@@ -287,9 +288,57 @@ public class Admin extends Agent implements AdminOperations {
 	}
 
 	@Override
-	public BookingDetails getSalesHistory(int sellerID) {
+	public ArrayList<SalesHistoryBookingRow> getSalesHistory(int conID) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<SalesHistoryBookingRow> conAllBookingDetails = new ArrayList<>();
+		try {
+			conn = openDBconn.connect();
+			stmt = conn.createStatement();
+			
+			
+			String sql_allBookingDetails = "SELECT bookingDetails.bookingID, bookingDetails.bookingType, "
+					+ "carDetails.carBrand, carDetails.carModel, carDetails.year, "
+					+ "carDetails.kilometers, bookingDetails.paymentType, "
+					+ "bookingDetails.amount, bookingDetails.bookingCompleted "
+					+ "FROM bookingDetails, carDetails "
+					+ "WHERE bookingDetails.conID='"+conID+"' "
+					+ "AND bookingDetails.carID=carDetails.carID";
+			ResultSet rs_allBookingDetails = stmt.executeQuery(sql_allBookingDetails);
+			while (rs_allBookingDetails.next()) {
+				System.out.println("Booking history "+rs_allBookingDetails.getInt("bookingID")+" found!");
+				String bookingType = "";
+				if (rs_allBookingDetails.getInt("bookingType") == 0) {
+					bookingType = "SELLING";
+				} else {
+					bookingType = "BUYING";
+				}
+				String paymentType = "";
+				if (rs_allBookingDetails.getInt("paymentType") == 0) {
+					paymentType = "UNIQUE";
+				} else {
+					paymentType = "INSTALLMENTS\n  (24 MONTHS)";
+				}
+				String bookingCompleted = "";
+				if (rs_allBookingDetails.getInt("bookingCompleted") == 0) {
+					bookingCompleted = "NO";
+				} else {
+					bookingCompleted = "YES";
+				}
+				conAllBookingDetails.add(new SalesHistoryBookingRow(rs_allBookingDetails.getInt("bookingID"),
+						bookingType,
+						rs_allBookingDetails.getString("carBrand")+" / "+rs_allBookingDetails.getString("carModel"),
+						rs_allBookingDetails.getInt("year"),
+						rs_allBookingDetails.getInt("kilometers"),
+						paymentType,
+						rs_allBookingDetails.getInt("amount"),
+						bookingCompleted));
+			}
+			conn.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return conAllBookingDetails;
 	}
 
 }

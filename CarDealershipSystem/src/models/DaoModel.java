@@ -132,6 +132,7 @@ public class DaoModel {
 			    					"  bookingType INTEGER NOT NULL,\n" + 
 			    					"  custID INTEGER NOT NULL REFERENCES customer(custID),\n" + 
 			    					"  sellerID INTEGER NOT NULL REFERENCES seller(sellerID),\n" + 
+			    					"  conID INTEGER NOT NULL REFERENCES concessionaire(conID),\n" + 
 			    					"  carID INTEGER NOT NULL REFERENCES carDetails(carID),\n" + 
 			    					"  bookingCompleted TINYINT NOT NULL,\n" + 
 			    					"  paymentType INTEGER NOT NULL,\n" + 

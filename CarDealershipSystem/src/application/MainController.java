@@ -79,7 +79,7 @@ public class MainController extends Application {
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			System.out.println("Checking for user in the database...");
+			System.out.println("\nChecking for user in the database...");
 
 			String sql_login = "SELECT * FROM usersDB WHERE userName='"+usernameLoginID.getText()+"' "
 					+ "COLLATE SQL_Latin1_General_CP1_CS_AS "
@@ -93,7 +93,7 @@ public class MainController extends Application {
 				statusLoginID.setText("Login failed: wrong username/password");
 			}
 			else {
-				System.out.println("User \""+rs_login.getString("username")+"\" (ID: "+rs_login.getString("userID")+") found!");
+				System.out.println("User \""+rs_login.getString("username")+"\" (ID: "+rs_login.getString("userID")+") found!\n");
 				String response = rs_login.getString("userType");
 								
 				switch(response) {

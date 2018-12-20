@@ -61,9 +61,9 @@ public interface AdminOperations {
 	 */
 	public abstract void deleteSeller(int sellerID);
 	/**
-	 * @param sellerID
+	 * @param conID
 	 * @return
 	 */
-	public abstract BookingDetails getSalesHistory(int sellerID);
+	public abstract ArrayList<SalesHistoryBookingRow> getSalesHistory(int conID);
 
 }

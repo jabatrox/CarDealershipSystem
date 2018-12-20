@@ -20,7 +20,7 @@ import models.DBConnect;
 
 /**
  * --------------------------------------------------
- * @author Javier Soler, Borja Gonzï¿½lez
+ * @author Javier Soler, Borja González
  * Date: 11/09/2018
  * Lab: Final Project
  * File name: Customer.java
@@ -135,15 +135,16 @@ public class Customer extends Agent implements CustomerOperations {
 			
 		
 			String sql = "INSERT INTO bookingDetails (bookingType, custID, "
-					+ "sellerID, carID, bookingCompleted, paymentType, amount, bookingTime) VALUES "
+					+ "sellerID, conID, carID, bookingCompleted, paymentType, amount, bookingTime) VALUES "
 				+ "('0',"
 				+ "'"+customerID+"',"
+				+ "'"+car.getConID()+"',"
 				+ "'"+car.getConID()+"',"
 				+ "'"+new_car_id+"',"
 				+ "'0',"
 				+ "'"+paymentType+"',"
 				+ "'"+(int) car.getPrice()+"',"
-						+ "'"+bookingTime+"')";
+				+ "'"+bookingTime+"')";
 
 		
 			if(0==stmt.executeUpdate(sql)) {
@@ -178,10 +179,11 @@ public class Customer extends Agent implements CustomerOperations {
 			String bookingTime = sdf.format(resultdate);
 		
 			String sql = "INSERT INTO bookingDetails (bookingType, "
-					+ "custID, sellerID, carID, bookingCompleted, "
+					+ "custID, sellerID, conID, carID, bookingCompleted, "
 					+ "paymentType, amount, bookingTime) VALUES "
 				+ "('1',"
 				+ "'"+this.getAgentID()+"',"
+				+ "'"+car.getConID()+"',"
 				+ "'"+car.getConID()+"',"
 				+ "'"+car.getCarID()+"',"
 				+ "'0',"

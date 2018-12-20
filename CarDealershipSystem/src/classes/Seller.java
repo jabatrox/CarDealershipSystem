@@ -48,13 +48,12 @@ public class Seller extends Agent implements SellerOperations{
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
 			
-			
 			String sql_pendingBookings = "SELECT bookingDetails.bookingID, bookingDetails.bookingType, customer.firstName, "
 					+ "customer.lastName, carDetails.carBrand, carDetails.carModel, carDetails.carColor, carDetails.year, "
 					+ "carDetails.kilometers, carDetails.engineType, carDetails.horsePower, bookingDetails.paymentType, "
 					+ "bookingDetails.amount "
-					+ "FROM bookingDetails, customer, carDetails, seller "
-					+ "WHERE bookingDetails.sellerID=seller.conID "
+					+ "FROM bookingDetails, customer, carDetails "
+					+ "WHERE bookingDetails.conID='"+conID+"' "
 					+ "AND bookingDetails.bookingCompleted='0' "
 					+ "AND bookingDetails.custID=customer.custID "
 					+ "AND bookingDetails.carID=carDetails.carID";
@@ -104,8 +103,9 @@ public class Seller extends Agent implements SellerOperations{
 		try {
 			conn = openDBconn.connect();
 			stmt = conn.createStatement();
-			String sql_acceptBookingBuyCar = "UPDATE bookingDetails SET bookingCompleted='1', bookingTime='"+bookingTime+"' "
-					+  "WHERE bookingID='"+bookingID+"'";
+			String sql_acceptBookingBuyCar = "UPDATE bookingDetails SET bookingCompleted='1', bookingTime='"+bookingTime+"', "
+					+ "sellerID='"+this.getAgentID()+"' "
+					+ "WHERE bookingID='"+bookingID+"'";
 			stmt.executeUpdate(sql_acceptBookingBuyCar);
 			String sql_getBookingCarID = "SELECT bookingDetails.carID FROM bookingDetails WHERE bookingID='"+bookingID+"'";
 			ResultSet rs_getBookingCarID = stmt.executeQuery(sql_getBookingCarID);
@@ -176,15 +176,18 @@ public class Seller extends Agent implements SellerOperations{
 				System.out.println("NEW CAR PRODUCED "+newProducedCar.getCarID());
 				newProducedCar.setSold(true);
 				newProducedCar.setCarCondition(false);
+				System.out.println(this.getAgentID());
 				String sql_updateNewCarBookingSellCar = "UPDATE bookingDetails SET carID='"+newProducedCar.getCarID()+"', "
-						+ "bookingTime='"+bookingTime+"' "
-						+  "WHERE bookingID='"+bookingID+"'";
+						+ "bookingTime='"+bookingTime+"', "
+						+ "sellerID='"+this.getAgentID()+"' "
+						+ "WHERE bookingID='"+bookingID+"'";
 				stmt.executeUpdate(sql_updateNewCarBookingSellCar);
 			} else {
 				bookingCarDetail.setSold(true);
 				bookingCarDetail.setExposed(false);
-				String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted='1', bookingTime='"+bookingTime+"' "
-						+  "WHERE bookingID='"+bookingID+"'";
+				String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted='1', bookingTime='"+bookingTime+"', "
+						+ "sellerID='"+this.getAgentID()+"' "
+						+ "WHERE bookingID='"+bookingID+"'";
 				stmt.executeUpdate(sql_acceptBookingSellCar);
 			}
 			String sql_acceptBookingSellCar = "UPDATE bookingDetails SET bookingCompleted ='1' WHERE bookingID='"+bookingID+"'";

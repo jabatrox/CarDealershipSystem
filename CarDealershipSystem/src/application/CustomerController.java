@@ -102,7 +102,7 @@ public class CustomerController implements Initializable{
 		customerWelcomeID.setText("CUSTOMER ID: "+cust_id);
 		
 		String option = buyCarOptions.getSelectionModel().getSelectedItem();
-		System.out.println("Showing "+option);
+		System.out.println("Showing "+option.toLowerCase());
 		carsExposedCustomerTable.getItems().clear();
 		ArrayList<CarDetails> conCars = customer.checkCars(option);
 		for (CarDetails conCar : conCars) {
