@@ -210,7 +210,7 @@ public class CustomerController implements Initializable{
 
 			String chassisId = chassis.getText();
 
-			System.out.println(chassisId);
+			System.out.println("Looking for car with carID="+chassisId);
 			
 			int carId = Integer.parseInt(chassisId);
 
@@ -224,17 +224,19 @@ public class CustomerController implements Initializable{
 				rs_carFound = stmt.executeQuery(sql);
 	
 				if (rs_carFound.next()) {
+					System.out.println("\\___Car found!");
 					carFound = true;
 					
 					brand.setText(rs_carFound.getString("carBrand"));
 					model.setText(rs_carFound.getString("carModel"));
-					color.setText(rs_carFound.getString("carColor"));
+//					color.setText(rs_carFound.getString("carColor"));
 					engineTypes.setText(rs_carFound.getString("engineType"));
 					horsePower.setText(rs_carFound.getString("horsePower"));
 					year.setText(rs_carFound.getString("year"));
 					conID.setText(rs_carFound.getString("conID"));
 					factID.setText(rs_carFound.getString("factID"));
 				} else {
+					System.out.println("\\___Car not found!");
 					new Alert(Alert.AlertType.ERROR, "The Chassis ID "+carId+" "
 							+ "is incorrect. Only cars that were previously in our dealership are eligible").show();
 				}
